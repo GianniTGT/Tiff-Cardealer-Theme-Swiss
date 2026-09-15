@@ -4,7 +4,7 @@ Theme URI: https://downtownautosale.com/
 Author: Tiff - Kani Tifeki
 Author URI: https://downtownautosale.com/
 Description: A dealership theme for small, independent used-car lots. Vehicle inventory with body-type filtering, a financing estimator, lead capture straight into wp-admin, and a mobile-first layout. Ships with its own vehicle and staff post types, so it carries no plugin dependencies.
-Version: 1.3.0
+Version: 1.3.1
 Requires at least: 5.9
 Tested up to: 6.8
 Requires PHP: 8.0
@@ -1378,11 +1378,29 @@ body.lb-open{overflow:hidden}
 .look-refined .cookie-note .btn{white-space:nowrap;flex:none}
 
 /* --- the bar: translucent and blurred ------------------------------------ */
-/* Static, not sticky — the header stays exactly where §9 put it. Only its material changes. */
-.look-refined header.site{background:var(--glass);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(16,48,113,.08)}
+/* Static, not sticky — the header stays exactly where §9 put it. Only its material changes.
+
+   `position:relative` + `z-index` are NOT a step towards sticky, they are the price of the
+   blur: backdrop-filter makes this header a stacking context, which traps the submenu's
+   z-index:60 inside it. `.hero` is position:relative and comes later in the document, so it
+   painted straight over the open dropdown — the submenu was visible, and covered by navy
+   from the header's bottom edge down. Relative keeps the header in normal flow at exactly
+   the same place; it only lifts the context it now owns above the hero. */
+.look-refined header.site{
+  position:relative;z-index:50;
+  background:var(--glass);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(16,48,113,.08);
+}
 .look-refined .topbar{background:linear-gradient(180deg,var(--night),#0D2A63)}
 .look-refined nav.menu a{border-radius:var(--r-cap)}
-.look-refined nav.menu .sub-menu{border-radius:18px;box-shadow:var(--sh-soft-2);background:var(--glass);backdrop-filter:saturate(180%) blur(20px)}
+/* Denser than --glass: this panel hangs over the navy hero, and at 72% the navy came
+   through and turned it into a grey smudge. The header itself sits over the light page and
+   stays at --glass. */
+.look-refined nav.menu .sub-menu{
+  border-radius:18px;box-shadow:var(--sh-soft-2);
+  background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(20px);
+  border-color:rgba(16,48,113,.08);
+}
 
 /* --- fields: capsule-ish, quiet focus halo ------------------------------- */
 /* The 3px accessibility outline in §2 is untouched; this is the resting and focus fill. */
