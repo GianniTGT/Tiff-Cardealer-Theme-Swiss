@@ -22,6 +22,54 @@ function das_logo_img() {
 	}
 }
 
+/**
+ * The makes on the lot, running in a loop under the hero, on the lane marking.
+ *
+ * Set as WORDMARKS in the display face, never as manufacturer logos: a car maker's mark is
+ * its trademark and this theme ships no licensed files for any of them. Drawing one from
+ * memory would be both wrong and legally careless. Filter `das_make_logos` with a
+ * make => URL map when you hold the licensed files and the lane renders images instead.
+ *
+ * Falls back to nothing below three makes — a two-item loop is not a lane, it is a stutter.
+ * The caller draws the plain roadline in that case.
+ *
+ * @param array $cars Cars as returned by das_get_cars().
+ * @return bool True when a lane was printed.
+ */
+function das_make_lane( $cars ) {
+	$makes = array();
+	foreach ( $cars as $c ) {
+		$m = isset( $c['make'] ) ? trim( (string) $c['make'] ) : '';
+		if ( '' === $m || '—' === $m ) { continue; }
+		$makes[ $m ] = true;
+	}
+	$makes = array_keys( $makes );
+	sort( $makes );
+	if ( count( $makes ) < 3 ) { return false; }
+
+	$logos = (array) apply_filters( 'das_make_logos', array() );
+	// The list is printed twice so the -50% translate in §25 loops without a seam. The
+	// second pass is the same content, so it is hidden from assistive technology.
+	?>
+	<div class="mk-lane" role="group" aria-label="Makes on the lot">
+		<div class="mk-track">
+			<?php for ( $pass = 0; $pass < 2; $pass++ ) : ?>
+				<?php foreach ( $makes as $m ) : ?>
+					<span class="mk-item"<?php echo $pass ? ' aria-hidden="true"' : ''; ?>>
+						<?php if ( isset( $logos[ $m ] ) ) : ?>
+							<img src="<?php echo esc_url( $logos[ $m ] ); ?>" alt="<?php echo esc_attr( $m ); ?>" height="26" loading="lazy">
+						<?php else : ?>
+							<b><?php echo esc_html( $m ); ?></b>
+						<?php endif; ?>
+					</span>
+				<?php endforeach; ?>
+			<?php endfor; ?>
+		</div>
+	</div>
+	<?php
+	return true;
+}
+
 /** Nav used until a menu is assigned to the "primary" location. */
 function das_fallback_menu() {
 	$items = array(
@@ -162,9 +210,9 @@ function das_team_section( $with_heading = true ) {
 		<p style="margin-top:12px;color:var(--steel)">Four of us, one promise: you'll always deal with a person who cares &mdash; never a script.</p>
 	</div>
 	<?php endif; ?>
-	<div class="team-grid">
+	<div class="team-grid rv-stagger">
 		<?php foreach ( das_team() as $m ) : ?>
-			<div class="tm rv">
+			<div class="tm">
 				<div class="tm-img">
 					<?php
 					$photo = '';
@@ -335,9 +383,9 @@ function das_reviews_section() {
 			   that goes stale the first time the list changes. */ ?>
 			<details class="rev-more" open>
 				<summary><span>Read <?php echo (int) count( $quotes ); ?> of them</span></summary>
-				<div class="rev-grid">
+				<div class="rev-grid rv-stagger">
 					<?php foreach ( $quotes as $q ) : ?>
-						<figure class="rev-card rv">
+						<figure class="rev-card">
 							<div class="rev-card-stars" aria-label="<?php echo esc_attr( $q['stars'] ); ?> out of 5"><?php echo str_repeat( '&#9733;', (int) $q['stars'] ); ?></div>
 							<blockquote><?php echo esc_html( $q['text'] ); ?></blockquote>
 							<figcaption>&mdash; <?php echo esc_html( $q['name'] ); ?></figcaption>

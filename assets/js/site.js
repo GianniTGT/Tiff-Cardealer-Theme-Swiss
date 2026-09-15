@@ -344,8 +344,11 @@
 		if (parseInt(tr.getAttribute('data-day'), 10) === today) { tr.classList.add('today'); }
 	});
 
-	/* ---------- reveal on scroll ---------- */
-	var reveals = $$('.rv');
+	/* ---------- reveal on scroll ----------
+	   One observer for both entrances. `.rv` moves itself; `.rv-stagger` moves its children
+	   one after another, which is the same animation given a delay — not a second vocabulary.
+	   A group only ever gets `in` added once, so nothing replays on the way back up. */
+	var reveals = $$('.rv, .rv-stagger');
 	if ('IntersectionObserver' in window && reveals.length) {
 		var io = new IntersectionObserver(function (entries) {
 			entries.forEach(function (e) {
@@ -358,5 +361,44 @@
 		reveals.forEach(function (el) { io.observe(el); });
 	} else {
 		reveals.forEach(function (el) { el.classList.add('in'); });
+	}
+
+	/* ---------- counting stat numbers ----------
+	   The markup already carries the final value, so a page without scripting — or with
+	   reduced motion asked for — shows the right number and this never touches it. The
+	   prefix and suffix around the digits ("100%", "6") are preserved verbatim. */
+	var ticks = $$('.num-tick');
+	var calm = document.body.classList.contains('motion-still');
+	var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	if (ticks.length && !calm && !reduced && 'IntersectionObserver' in window) {
+		var tio = new IntersectionObserver(function (entries) {
+			entries.forEach(function (e) {
+				if (!e.isIntersecting) { return; }
+				tio.unobserve(e.target);
+				countUp(e.target);
+			});
+		}, { threshold: 0.4 });
+		ticks.forEach(function (el) { tio.observe(el); });
+	}
+
+	function countUp(el) {
+		var parts = /^(\D*)([\d.,]+)(\D*)$/.exec(el.textContent.trim());
+		if (!parts) { return; }
+		var target = parseFloat(parts[2].replace(/,/g, ''));
+		if (!isFinite(target)) { return; }
+		// A year counts from within living memory rather than from zero: 0 → 2016 spends most
+		// of its run on digits nobody is reading.
+		var from = target > 1900 ? target - 24 : 0;
+		var started = 0;
+		var dur = 1100;
+		function frame(now) {
+			if (!started) { started = now; }
+			var p = Math.min(1, (now - started) / dur);
+			var eased = 1 - Math.pow(1 - p, 3);
+			var value = Math.round(from + (target - from) * eased);
+			el.textContent = parts[1] + value + parts[3];
+			if (p < 1) { requestAnimationFrame(frame); }
+		}
+		requestAnimationFrame(frame);
 	}
 })();

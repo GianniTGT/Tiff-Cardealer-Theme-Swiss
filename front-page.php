@@ -17,10 +17,13 @@ $featured = array_values( array_filter( $all, function ( $c ) { return $c['featu
 if ( ! $featured ) { $featured = array_slice( $all, 0, 4 ); }
 ?>
 
-<section class="hero">
+<section class="hero hero-drift">
 	<div class="wrap hero-grid">
-		<div class="hero-copy">
-			<span class="kicker">Dependable. Alaskan. Straightforward.</span>
+		<?php /* `hero-in` plays the children in DOM order at paint — headline, then the meta
+		   row. The kicker that used to sit above the headline carried the tagline
+		   "Dependable. Alaskan. Straightforward.", removed on the owner's instruction
+		   (15 Sep 2026) along with its counterpart in the footer. */ ?>
+		<div class="hero-copy hero-in">
 			<h1>Cars built for <em>Alaska roads.</em><br>Prices built for everyone.</h1>
 			<div class="hero-meta">
 				<div><b>Since <?php echo esc_html( das_info( 'founded' ) ); ?></b>Serving the Anchorage community</div>
@@ -30,7 +33,7 @@ if ( ! $featured ) { $featured = array_slice( $all, 0, 4 ); }
 		</div>
 
 		<?php if ( $featured ) : ?>
-		<div class="hero-right">
+		<div class="hero-right hero-in-right">
 		<div class="showcase" id="showcase" aria-live="polite">
 			<div class="sc-stage" id="scStage">
 				<?php if ( $featured[0]['thumb_big'] ) : ?>
@@ -57,13 +60,18 @@ if ( ! $featured ) { $featured = array_slice( $all, 0, 4 ); }
 		<?php endif; ?>
 	</div>
 </section>
-<hr class="roadline" aria-hidden="true">
+<?php
+// The lane of makes replaces the plain marking under the hero (owner's request,
+// 15 Sep 2026). Below three makes it declines to render and the marking stands as before.
+if ( ! das_make_lane( $all ) ) : ?>
+	<hr class="roadline roadline-rolling" aria-hidden="true">
+<?php endif; ?>
 
 <section id="inventory">
 	<div class="wrap">
 		<?php das_sec_head( 'Current inventory', 'On the lot right now', 'Every vehicle is inspected before it goes on sale. What you see is what you pay. Call to confirm availability.' ); ?>
 
-		<div class="grid" id="carGrid">
+		<div class="grid rv-stagger" id="carGrid">
 			<?php
 			if ( $preview ) {
 				foreach ( $preview as $c ) { echo das_car_card( $c ); }
@@ -93,10 +101,13 @@ if ( ! $featured ) { $featured = array_slice( $all, 0, 4 ); }
 			<h2>Started from scratch.<br>Built with Anchorage.</h2>
 			<p>We're a <strong>small Alaskan family business</strong> with one goal: helping our neighbors find the vehicle that fits &mdash; a family car, a first car, a work truck, or a weekend rig for the backcountry.</p>
 		</div>
-		<div class="stats rv">
-			<div class="stat"><b><?php echo esc_html( das_info( 'founded' ) ); ?></b><span>Established</span></div>
-			<div class="stat"><b>100%</b><span>Inspected before sale</span></div>
-			<div class="stat"><b>6</b><span>Days a week</span></div>
+		<?php /* `num-tick` marks a number that counts up once when its tile arrives; site.js
+		   reads the printed value, so the markup stays the source of truth and the page
+		   without scripting shows the final figure straight away. */ ?>
+		<div class="stats rv-stagger">
+			<div class="stat"><b class="num-tick"><?php echo esc_html( das_info( 'founded' ) ); ?></b><span>Established</span></div>
+			<div class="stat"><b class="num-tick">100%</b><span>Inspected before sale</span></div>
+			<div class="stat"><b class="num-tick">6</b><span>Days a week</span></div>
 		</div>
 		<p class="sec-more"><a class="btn btn-quiet" href="<?php echo esc_url( das_about_url() ); ?>">More about us &rarr;</a></p>
 	</div>
@@ -105,10 +116,10 @@ if ( ! $featured ) { $featured = array_slice( $all, 0, 4 ); }
 <section class="dark" id="why">
 	<div class="wrap">
 		<?php das_sec_head( 'Why Downtown Auto Sales', 'An Alaskan family business, not a sales floor' ); ?>
-		<div class="vals">
-			<div class="val rv"><div class="ico">&#129309;</div><h3>Honest by default</h3><p>Straight answers about every vehicle's history and condition &mdash; because in a town like ours, reputation is everything.</p></div>
-			<div class="val rv"><div class="ico">&#10052;&#65039;</div><h3>Alaska-ready picks</h3><p>We stock what works up here: AWD Subarus, 4x4 Toyotas, dependable trucks. Chosen for our roads and our winters.</p></div>
-			<div class="val rv"><div class="ico">&#127968;</div><h3>One stop, no pressure</h3><p>Tell us what you need and we'll help you find it. Warm welcome, zero pressure, coffee's on us.</p></div>
+		<div class="vals rv-stagger">
+			<div class="val"><div class="ico">&#129309;</div><h3>Honest by default</h3><p>Straight answers about every vehicle's history and condition &mdash; because in a town like ours, reputation is everything.</p></div>
+			<div class="val"><div class="ico">&#10052;&#65039;</div><h3>Alaska-ready picks</h3><p>We stock what works up here: AWD Subarus, 4x4 Toyotas, dependable trucks. Chosen for our roads and our winters.</p></div>
+			<div class="val"><div class="ico">&#127968;</div><h3>One stop, no pressure</h3><p>Tell us what you need and we'll help you find it. Warm welcome, zero pressure, coffee's on us.</p></div>
 		</div>
 	</div>
 </section>
@@ -119,7 +130,7 @@ if ( ! $featured ) { $featured = array_slice( $all, 0, 4 ); }
 	<div class="wrap">
 		<?php das_sec_head( 'Financing', 'Estimate your monthly payment', 'An estimate only, not a credit offer. Talk to us and we will walk you through the real numbers with no obligation.' ); ?>
 		<?php das_finance_estimator(); ?>
-		<p class="sec-more"><a class="btn btn-quiet" href="<?php echo esc_url( das_financing_url() ); ?>">How financing works &rarr;</a></p>
+		<p class="sec-more ruled"><a class="btn btn-quiet" href="<?php echo esc_url( das_financing_url() ); ?>">How financing works &rarr;</a></p>
 	</div>
 </section>
 
