@@ -1,5 +1,30 @@
 # Tiff Cardealer — the WordPress theme
 
+> ## ⛔ Dieses Repository ist nicht mehr die Quelle
+>
+> **Seit 15. September 2026 lebt das Theme im Manager-Repository**, als Unterordner:
+> [`GianniTGT/Tiff-Cardealer-Manager` → `theme/`](https://github.com/GianniTGT/Tiff-Cardealer-Manager/tree/main/theme).
+> So hat es der Inhaber entschieden. Was hier liegt, ist eine eingefrorene Kopie —
+> **jede Änderung gehört dorthin**, nicht hierher.
+>
+> **Verloren ist nichts.** Beim Umzug geprüft: 35 Dateien auf beiden Seiten, alle Blob-Hashes
+> identisch bis auf diese `README.md`. Die Historie dieses Repos und die beiden Pull Requests
+> bleiben hier lesbar:
+>
+> | | |
+> |---|---|
+> | [#1](https://github.com/GianniTGT/Tiff-Cardealer-Theme-Swiss/pull/1) | Design-Session vom 15.09. — Motion-Ebene, Refined-Look, Markenspur, Kontrast, der Seitenrand-Fehler auf dem Handy |
+> | [#2](https://github.com/GianniTGT/Tiff-Cardealer-Theme-Swiss/pull/2) | Submenü verschwand hinter dem Hero im Refined-Look |
+>
+> **Zum Namen, weil er die Verwirrung ausgelöst hat:** trotz „Swiss" enthielt dieses
+> Repository nie eine Schweizer Variante. Es war von Anfang an das Theme, das
+> `downtownautosale.com` in Anchorage rendert — am 15.09. gemessen, byte-identisch mit
+> `wp-content/themes/das-v4/` auf dem Server. Die Schweizer Hälfte ist laut `DESIGN-SYSTEM.md`
+> noch nicht gebaut.
+>
+> **Live zum Zeitpunkt des Umzugs: Version 1.3.1.**
+
+
 The website half of the Tiff Cardealer product line. The desktop half is
 [`Tiff-Cardealer-Manager`](https://github.com/GianniTGT/Tiff-Cardealer-Manager), and its
 `CLAUDE.md` is the shared memory for both — every `§` reference below points there.
