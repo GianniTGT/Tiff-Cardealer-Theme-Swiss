@@ -49,9 +49,9 @@ Alle Werte stehen in `:root` in `style.css`, Abschnitt 1. **Keine losen Hex-Wert
 ```css
 --night:#103071;  --night-2:#15418D;  --night-3:#1A4EA8;
 --brand:#08318B;  --brand-hover:#0B3EAF;  --brand-wash:#E9EEFA;
---snow:#F7F9FC;   --white:#FFFFFF;
---sky:#8FB3FF;    --aurora:#AFC6F2;   --mist:#AAB8D9;
---steel:#5A6785;
+--snow:#F7F9FC;   --white:#F9FAFC;    --white-pure:#FFFFFF;
+--sky:#8FB3FF;    --aurora:#AFC6F2;   --mist:#C2CEE6;
+--steel:#47536E;
 --line:#E4E9F4;   --line-strong:#D3DBEC;
 --accent:#FFB020; --danger:#B3261E;   --ok:#1B5E33;
 ```
@@ -191,6 +191,45 @@ Hover: `translateY(-3px)` + `--sh-2`. Das ist die einzige Karten-Bewegung im The
 ### Bewegung
 Genau zwei Muster: `.rv` → `.rv.in` (Scroll-Reveal, 16px hoch, 0.5s) und `@keyframes fadeSwap` (0.4s) beim Bildwechsel im Showcase. `prefers-reduced-motion` schaltet global alles ab – das steht bereits in Abschnitt 2 von `style.css` und bleibt.
 
+Seit 15.09.2026 liegt darauf die **Motion-Ebene** (`style.css` §24). Sie fügt *kein* drittes
+Muster hinzu: alles darin ist `.rv` oder `fadeSwap`, versehen mit einer Verzögerung, einer
+Richtung oder einem Transform. Eine Kurve für alles, `cubic-bezier(.22,.68,.24,1)` über 0.62s.
+Jede Regel ist per Klasse opt-in – ein Template, das keine Klasse setzt, rendert exakt wie
+vorher. `prefers-reduced-motion` schaltet weiterhin alles ab.
+
+| Klasse | Was sie tut |
+|---|---|
+| `.rv-left` / `.rv-right` / `.rv-scale` | dieselbe Einblendung, mit Richtung |
+| `.rv-stagger` | Kinder kommen 70ms versetzt, gedeckelt bei 8 Stufen |
+| `.hero-in` / `.hero-in-right` | Hero spielt beim Paint einmal, Verzögerung folgt der DOM-Reihenfolge |
+| `.hero-drift` | die Radial-Washes driften 14px über 28s |
+| `.roadline-rolling` | die Fahrbahnmarkierung rollt einen Strich plus Lücke (54px) pro 1.6s |
+| `.mk-lane` / `.mk-track` | die Markenspur unter dem Hero (§25), 34s nahtlos, Pause beim Hover |
+| `.num-tick` | Statistik-Zahlen zählen einmal hoch, wenn die Kachel ins Bild kommt |
+| `.motion-calm` / `.motion-still` | zwei Stufen, die von der Ebene abziehen – gesetzt über `body_class` |
+
+### Refined-Look – opt-in (`style.css` §26)
+Auf Wunsch des Inhabers, 15.09.2026 („Apple Look“). Alles hängt an `.look-refined` auf `<body>`,
+also bleibt der eigene Look des Themes unberührt und beide sind durch eine Klasse vergleichbar.
+Geändert wird **nur die Oberflächenbehandlung** – kein Token-Wert, keine Typo-Stufe, keine
+Layout-Regel. Kapsel-Controls (`--r-cap` 980px), Füllung mit Oberlicht statt Flachfarbe,
+kürzere weiche Schatten, `scale(.97)` beim Drücken statt 1px Weg, und `--edge #5AC8FA` als
+einzige neue Farbe (bewegte Linie + aktiver Showcase-Punkt).
+
+**Hier – und nur hier – benutzt das Produkt `backdrop-filter`.** Header, Hero-Suche, Submenüs und
+der Cookie-Hinweis werden zu Milchglas. Genau deshalb ist die Ebene opt-in; ausserhalb von
+`.look-refined` gilt „kein Blur“ unverändert weiter.
+
+### Die drei Schalter
+`functions.php` setzt die drei Entscheidungen der Design-Session als Default und hängt jede an
+einen eigenen Filter – eine Zeile im Child-Theme stellt sie zurück, ohne CSS anzufassen:
+
+| Filter | Default | Alternativen |
+|---|---|---|
+| `das_look` | `refined` | `theme` (flach, wie vorher) |
+| `das_motion_level` | `calm` | `alive` (alles aus §24), `still` (nur der Hover-Lift) |
+| `das_shelf` | `roomy` (330px / 30px) | `regular` (268/20, die alten Werte), `dense` (236/14) |
+
 ---
 
 ## 6. Fahrzeugdaten
@@ -264,7 +303,13 @@ Er steht bereits im Code und wird nicht unterschritten:
 - Pfeile in `.car-nav` auf Touchgeräten einblenden
 - `car_interrior_color` umbenennen
 - Die Verbotsmuster in `inc/privacy-boundary.php` lockern
-- Zusätzliche Scroll-Animationen neben `.rv`
+- Zusätzliche Scroll-Animationen neben `.rv` – §24 hält die Regel ein, statt sie zu brechen:
+  es gibt dort keine neue Vokabel, nur Verzögerung und Richtung von `.rv`
+- `backdrop-filter` ausserhalb von `.look-refined`
+- Herstellerlogos nachzeichnen. Die Markenspur setzt Wortmarken in Barlow Condensed;
+  lizenzierte SVGs kommen über den Filter `das_make_logos` herein oder gar nicht
+- Eine Einblendung auf ein Bedienelement legen, das ein Käufer braucht –
+  `.car-aside` bekommt deshalb bewusst kein `.rv`
 - Ein zweiter CSS- oder JS-Build. Eine `style.css`, eine `site.js`.
 
 ---

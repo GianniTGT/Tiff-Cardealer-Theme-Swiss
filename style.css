@@ -4,7 +4,7 @@ Theme URI: https://downtownautosale.com/
 Author: Tiff - Kani Tifeki
 Author URI: https://downtownautosale.com/
 Description: A dealership theme for small, independent used-car lots. Vehicle inventory with body-type filtering, a financing estimator, lead capture straight into wp-admin, and a mobile-first layout. Ships with its own vehicle and staff post types, so it carries no plugin dependencies.
-Version: 1.2.0
+Version: 1.3.0
 Requires at least: 5.9
 Tested up to: 6.8
 Requires PHP: 8.0
@@ -26,11 +26,17 @@ Tags: custom-theme, car-dealer, mobile-first
   --brand:#08318B;
   --brand-hover:#0B3EAF;
   --snow:#F7F9FC;
-  --white:#FFFFFF;
+  /* The product's "white" surface: 2% off pure, so it keeps the navy tint of the page
+     instead of punching a hole in it. Owner's call, 15 Sep 2026. `--white-pure` is kept
+     for anything that genuinely needs paper white; nothing does yet. */
+  --white:#F9FAFC;
+  --white-pure:#FFFFFF;
   --sky:#8FB3FF;
   --aurora:#AFC6F2;
-  --steel:#5A6785;
-  --mist:#AAB8D9;
+  /* Contrast pass, 15 Sep 2026. Body copy on --snow was 4.9:1 and read as washed out;
+     secondary text on navy was 5.3:1. Now 6.9:1 and 7.4:1. Sizes and weights untouched. */
+  --steel:#47536E;
+  --mist:#C2CEE6;
   --line:#E4E9F4;
   --brand-wash:#E9EEFA;
   --line-strong:#D3DBEC;
@@ -53,6 +59,14 @@ Tags: custom-theme, car-dealer, mobile-first
   --sp-section:52px;   /* 72px was a desktop rhythm on a 390px screen: seven sections of it is over 1000px of nothing. Desktop keeps 104px below. */
   --maxw:1180px;
   --tap:48px;
+
+  /* The vehicle grid's two numbers, as properties rather than literals: the shelf
+     density is a dealership-level decision, not a per-template one. */
+  --card-min:268px;
+  --gap-grid:20px;
+
+  --t-fast:.16s ease;  /* colour, background, border, shadow */
+  --t-card:.18s ease;  /* the card lift */
 
   --radius:16px;
   --amber:#8FB3FF;
@@ -101,7 +115,10 @@ h2{font-size:clamp(28px,4vw,42px)}
   border-radius:var(--r-btn);
   border:1.5px solid transparent;
   cursor:pointer;text-align:center;
-  transition:background .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease;
+  /* A phone number and "Browse all inventory" are one thing each; wrapping them mid-label
+     turned a button into two stacked fragments on a narrow screen. */
+  white-space:nowrap;
+  transition:background var(--t-fast),color var(--t-fast),border-color var(--t-fast),box-shadow var(--t-fast);
 }
 .btn svg{width:18px;height:18px;flex:none;fill:currentColor}
 
@@ -148,7 +165,10 @@ header.site{
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
 
 .logo{display:flex;align-items:center;gap:12px}
-.logo img.mark-img{height:48px;width:auto;flex:none;border-radius:10px}
+/* The mark is wider than it is tall and its wings run to the edge of the artwork, so a
+   10-11px radius was clipping them. Taken down to 5-6px rather than removed: still visibly
+   soft, nothing cut off. `contain` keeps a differently-proportioned mark from being cropped. */
+.logo img.mark-img{height:53px;max-width:200px;width:auto;flex:none;object-fit:contain;border-radius:5px}
 .logo-text{display:flex;flex-direction:column;line-height:1.05}
 .logo-text b{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.6px;text-transform:uppercase}
 .logo-text small{font-size:10.5px;color:var(--steel);letter-spacing:2.6px;text-transform:uppercase;margin-top:3px}
@@ -192,7 +212,11 @@ nav.menu a.btn-light{color:var(--brand);background:var(--white)}
   nav.menu a{display:flex;align-items:center;min-height:var(--tap);padding:12px 14px;width:100%}
   nav.menu a.btn{justify-content:center;margin-top:8px}
   .hamb{display:inline-flex}
-  .nav{flex-wrap:wrap;padding:12px 0}
+  /* `padding-block`, not the shorthand. `.nav` and `.wrap` have the same specificity and
+     this rule comes later, so `padding:12px 0` was resetting `.wrap`'s 20px side gutter to
+     zero and the logo sat flush against the screen edge — on the layout 80% of visitors
+     get. The rest of the theme uses longhand for exactly this reason. */
+  .nav{flex-wrap:wrap;padding-block:12px}
 }
 
 /* ==========================================================================
@@ -206,9 +230,10 @@ nav.menu a.btn-light{color:var(--brand);background:var(--white)}
     var(--night);
   color:var(--white);position:relative;overflow:hidden;
 }
-.hero-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:44px;align-items:start;padding:28px 0 64px;position:relative;z-index:1}
+/* padding-block for the same reason as `.nav` above: the shorthand wiped `.wrap`'s gutter. */
+.hero-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:44px;align-items:start;padding-block:28px 64px;position:relative;z-index:1}
 @media(max-width:940px){
-  .hero-grid{grid-template-columns:1fr;gap:26px;padding:0 0 48px}
+  .hero-grid{grid-template-columns:1fr;gap:26px;padding-block:0 48px}
   /* No `order` overrides on purpose. They used to put the showcase and the search
      above the copy, so a phone landed on a photograph and a four-field form and met
      the one sentence this business has to say third. Gianni, 24 Aug 2026:
@@ -289,11 +314,11 @@ nav.menu a.btn-light{color:var(--brand);background:var(--white)}
 .chip:hover{border-color:var(--brand);color:var(--brand)}
 .chip.active{background:var(--brand);color:var(--white);border-color:var(--brand)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--card-min,268px),1fr));gap:var(--gap-grid,20px)}
 .card{
   background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);
   overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh-1);
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  transition:transform var(--t-card),box-shadow var(--t-card),border-color var(--t-card);
 }
 .card:hover{transform:translateY(-3px);box-shadow:var(--sh-2);border-color:var(--line-strong)}
 .card-img{aspect-ratio:16/10;background:linear-gradient(135deg,#14307C,#103071);display:grid;place-items:center;position:relative;overflow:hidden}
@@ -392,9 +417,13 @@ nav.menu a.btn-light{color:var(--brand);background:var(--white)}
 .fin-result .fr-amount small{font-size:22px;color:var(--mist)}
 .fin-result .fr-sub{color:var(--mist);font-size:14px}
 .fin-result hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:20px 0}
-.fin-break{display:flex;flex-direction:column;gap:10px;text-align:left;font-size:14.5px;color:var(--mist)}
-.fin-break div{display:flex;justify-content:space-between;gap:12px}
-.fin-break b{color:var(--white);font-weight:600}
+/* "Amount financed" and its figure used to run into each other: the label wrapped to two
+   lines while the amount stayed on one, and with no baseline they sat at different heights.
+   Baseline-aligned, the label takes the slack and the amount never breaks. */
+.fin-break{display:flex;flex-direction:column;gap:12px;text-align:left;font-size:14.5px;color:var(--mist)}
+.fin-break div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;line-height:1.35}
+.fin-break div > span{flex:1 1 auto;min-width:0}
+.fin-break b{color:var(--white);font-weight:600;flex:none;white-space:nowrap}
 .fin-note{font-size:12.5px;color:var(--steel);margin-top:16px;line-height:1.5}
 .dark .fin-note{color:var(--mist)}
 
@@ -606,11 +635,11 @@ footer a:hover{color:#9DBBFF}
    19. HEADER LOGO - 30% larger
    ========================================================================== */
 
-header.site .logo img.mark-img{height:57px;border-radius:11px}
+header.site .logo img.mark-img{height:63px;border-radius:6px}
 header.site .logo{gap:14px}
 header.site .logo-text b{font-size:22px}
 @media(max-width:480px){
-  header.site .logo img.mark-img{height:50px}
+  header.site .logo img.mark-img{height:55px}
   header.site .logo-text b{font-size:18px;letter-spacing:.4px}
 }
 
@@ -812,7 +841,12 @@ a.chip{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
 .rev-card-stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px}
 .rev-card blockquote{margin:0 0 12px;font-size:15.5px}
 .rev-card figcaption{color:var(--steel);font-size:14px}
-@media (max-width:560px){#reviews .rev-summary .btn{margin-left:0;flex:1 1 100%}}
+/* Below the main break the Google link stops being pushed to the right and takes a row of
+   its own. At 560px it was still hanging alone in a corner on every tablet width above it. */
+@media (max-width:940px){
+  #reviews .rev-summary{row-gap:12px}
+  #reviews .rev-summary .btn{margin-left:0;flex:1 1 100%}
+}
 
 /* ---------------------------------------------------------------------------
    Vehicle page: highlights, equipment, payment estimate, similar vehicles.
@@ -996,6 +1030,9 @@ body.lb-open{overflow:hidden}
    Full width and back to the left on a phone, where a right-aligned button is
    a small target in a corner. */
 .sec-more{margin-top:24px;text-align:right}
+/* A hairline the link sits on, for a section that ends on a leaving link rather than on
+   its own content. Opt-in: the About block does not take it. */
+.sec-more.ruled{margin-top:28px;padding-top:20px;border-top:1px solid var(--line-strong)}
 @media(max-width:520px){.sec-more{text-align:left}.sec-more .btn{width:100%}}
 
 /* ---------------------------------------------------------------------------
@@ -1101,5 +1138,276 @@ body.lb-open{overflow:hidden}
 /* 860px rather than the full 1180: three tiles across the whole page are wide and
    empty, which is the same fault as the stacked version that was rejected. */
 .stats{max-width:860px;margin-top:30px}
-.sec-more{max-width:860px}
+/* Scoped to the About block. As a bare `.sec-more` the 860px cap leaked into Financing and
+   pulled "How financing works" 320px left of the card it belongs under. */
+#about .sec-more{max-width:860px}
 @media(max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* ==========================================================================
+   24. MOTION LAYER
+   Added 15 September 2026 at the owner's request ("wir haben keine Animationen
+   auf der Seite, sie ist 0815 — diese Wow-Effekt").
+
+   §9 of DESIGN-SYSTEM.md forbids "a second scroll animation beside .rv". This layer
+   keeps that rule rather than breaking it: there is still one entrance (.rv) and one
+   photo swap (fadeSwap), and everything below is a stagger, a delay or a transform of
+   those two. No bounce, no spring, no parallax, no scroll-jacking, and nothing that
+   reveals a control a buyer needs. Every rule is opt-in by class, so any template that
+   adds no class renders exactly as it did before.
+
+   One curve for all of it: cubic-bezier(.22,.68,.24,1) over 0.62s.
+   prefers-reduced-motion switches the whole layer off (§2 does it globally, and the
+   explicit rules at the end of this section cover the animations §2 cannot reach).
+   ========================================================================== */
+
+:root{
+  --t-enter:.62s cubic-bezier(.22,.68,.24,1);
+  --t-stagger:70ms;
+  --mk-speed:34s;       /* one pass of the make lane */
+  --mk-speed-calm:64s;  /* the same lane at the calm motion level */
+}
+
+/* --- the entrance, given a direction ------------------------------------ */
+.rv{opacity:0;transform:translateY(16px);transition:opacity var(--t-enter),transform var(--t-enter)}
+.rv.in{opacity:1;transform:none}
+.rv-left{transform:translateX(-22px)}
+.rv-right{transform:translateX(22px)}
+.rv-scale{transform:translateY(16px) scale(.985)}
+
+/* A group whose children arrive one after another. Capped at 8 steps: past that the last
+   card is still waiting while the first one has finished, and the page feels slow. */
+.rv-stagger > *{opacity:0;transform:translateY(18px);transition:opacity var(--t-enter),transform var(--t-enter)}
+.rv-stagger.in > *{opacity:1;transform:none}
+.rv-stagger.in > *:nth-child(1){transition-delay:0ms}
+.rv-stagger.in > *:nth-child(2){transition-delay:calc(var(--t-stagger) * 1)}
+.rv-stagger.in > *:nth-child(3){transition-delay:calc(var(--t-stagger) * 2)}
+.rv-stagger.in > *:nth-child(4){transition-delay:calc(var(--t-stagger) * 3)}
+.rv-stagger.in > *:nth-child(5){transition-delay:calc(var(--t-stagger) * 4)}
+.rv-stagger.in > *:nth-child(6){transition-delay:calc(var(--t-stagger) * 5)}
+.rv-stagger.in > *:nth-child(7){transition-delay:calc(var(--t-stagger) * 6)}
+.rv-stagger.in > *:nth-child(n+8){transition-delay:calc(var(--t-stagger) * 7)}
+
+/* --- the hero, on load -------------------------------------------------- */
+/* Not a scroll reveal: the hero is already on screen, so it plays once at paint. The DOM
+   order is the reading order (§9 again) and the delays follow it — kicker, headline, meta —
+   so the animation states the same priority the markup does. */
+.hero-in > *{animation:rvUp var(--t-enter) both}
+.hero-in > *:nth-child(1){animation-delay:.04s}
+.hero-in > *:nth-child(2){animation-delay:.12s}
+.hero-in > *:nth-child(3){animation-delay:.2s}
+.hero-in > *:nth-child(4){animation-delay:.28s}
+.hero-right.hero-in-right{animation:rvUp .7s cubic-bezier(.22,.68,.24,1) .18s both}
+@keyframes rvUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* The hero's two radial washes drift, very slowly, so a navy field is not a flat wall.
+   28 seconds and 14px: at a glance it is still, and it never competes with the copy. */
+.hero-drift{background-position:0 0,0 0,0 0;animation:heroDrift 28s ease-in-out infinite alternate}
+@keyframes heroDrift{from{background-position:0 0,0 0,0 0}to{background-position:14px -10px,-12px 8px,0 0}}
+
+/* --- the lane marking rolls --------------------------------------------- */
+/* The roadline is a repeating gradient, so moving it 54px — one dash plus one gap — loops
+   seamlessly. It is the brand device, and the one thing allowed to move by itself. */
+.roadline-rolling{background-size:54px 3px;animation:roadRoll 1.6s linear infinite}
+@keyframes roadRoll{from{background-position:0 0}to{background-position:54px 0}}
+
+/* --- micro-interactions -------------------------------------------------- */
+/* Existing states, sharpened. No new colours; press is 1px of travel and nothing scales. */
+.btn{transition:background var(--t-fast),color var(--t-fast),border-color var(--t-fast),box-shadow var(--t-fast),transform .12s ease}
+.btn:active{transform:translateY(1px)}
+.chip{transition:all var(--t-fast),transform .12s ease}
+.chip:active{transform:translateY(1px)}
+.card .card-img img{transition:transform .6s cubic-bezier(.22,.68,.24,1)}
+.card:hover .card-img img{transform:scale(1.035)}
+.sc-dot{transition:background .2s ease,width .2s ease}
+.sc-dot.on{width:34px}
+
+/* The price is the number a buyer came for, so it arrives a beat after its card. */
+.card.rv.in .price,.rv-stagger.in .price{animation:priceIn .5s cubic-bezier(.22,.68,.24,1) .12s both}
+@keyframes priceIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* The counting stat numbers are driven in site.js; this only softens the swap. */
+.num-tick{transition:opacity .18s ease}
+
+@media (prefers-reduced-motion:reduce){
+  .rv,.rv-stagger > *{opacity:1!important;transform:none!important}
+  .hero-in > *,.hero-right.hero-in-right{animation:none!important;opacity:1!important}
+}
+
+/* --- three levels, set by a class on <body> ------------------------------ */
+/* "alive" is this section's own behaviour; the other two subtract from it. Calm keeps the
+   entrances and drops the ambient loops; still keeps nothing but the hover lift. */
+.motion-still .rv,.motion-still .rv-stagger > *{opacity:1!important;transform:none!important;transition:none!important}
+.motion-still .hero-in > *,.motion-still .hero-right.hero-in-right,.motion-still .hero-drift,
+.motion-still .roadline-rolling,.motion-still .mk-track,.motion-still .card.rv.in .price,
+.motion-still .rv-stagger.in .price{animation:none!important}
+.motion-still .card:hover .card-img img{transform:none}
+.motion-calm .hero-drift{animation:none}
+.motion-calm .roadline-rolling{animation:none}
+.motion-calm .mk-track{animation-duration:var(--mk-speed-calm)}
+.motion-calm .card:hover .card-img img{transform:scale(1.015)}
+.motion-calm .rv-stagger.in > *{transition-delay:0ms!important}
+
+/* ==========================================================================
+   25. MAKE LANE
+   15 September 2026, at the owner's request ("wie wäre unter Hero da wo die Linie
+   ist eine Linie mit Auto-Logos zu laufen, eine Schlaufe"). It replaces the static
+   roadline under the hero: the same lane marking above and below, with the makes
+   walking through it.
+
+   The makes are set as WORDMARKS in Barlow Condensed, never as manufacturer logos.
+   Those are other companies' trademarks and this project holds no licensed files for
+   any of them; a logo redrawn from memory would be both wrong and legally careless.
+   das_make_lane() takes a $logos map and renders images instead when licensed files
+   are supplied.
+   ========================================================================== */
+
+.mk-lane{
+  position:relative;overflow:hidden;
+  background:var(--white);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  /* Both ends fade into the page: a wordmark cut in half at the edge reads as a bug. */
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+/* The marking is drawn on the edges, so the lane reads as a piece of road. */
+.mk-lane::before,.mk-lane::after{
+  content:"";position:absolute;left:0;right:0;height:3px;
+  background:repeating-linear-gradient(90deg,var(--brand) 0 30px,transparent 30px 54px);opacity:.55;
+}
+.mk-lane::before{top:0}
+.mk-lane::after{bottom:0}
+/* The track is duplicated in the markup, so -50% is exactly one seamless pass. The speed is
+   a custom property rather than the animation shorthand, so the motion levels can override
+   it — an inline shorthand could not be beaten. */
+.mk-track{display:flex;align-items:center;gap:0;width:max-content;padding:16px 0;animation:mkRun var(--mk-speed,34s) linear infinite}
+.mk-lane:hover .mk-track{animation-play-state:paused}
+@keyframes mkRun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mk-item{display:inline-flex;align-items:center;padding:0 34px;white-space:nowrap}
+.mk-item b{
+  font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:21px;letter-spacing:1.6px;color:var(--night);
+}
+.mk-item img{display:block;height:26px;width:auto;object-fit:contain}
+@media(max-width:620px){.mk-item{padding:0 20px}.mk-item b{font-size:18px}.mk-track{padding:12px 0}}
+@media (prefers-reduced-motion:reduce){.mk-track{animation:none}}
+
+/* ==========================================================================
+   26. REFINED LOOK - opt-in
+   15 September 2026, at the owner's request ("bringe Apple Look auf die Buttons
+   und sonst der Look").
+
+   Everything is scoped to `.look-refined` on <body>, so the theme's own look survives
+   untouched and the two can be compared by toggling one class. It changes SURFACE
+   TREATMENT only: never a token value, never the type scale, never a layout rule.
+
+   What it borrows from that idiom: capsule controls, a fill with a top highlight instead
+   of a flat colour, shorter and softer shadows, a translucent blurred bar, and a press
+   that scales instead of travelling. What it does NOT borrow: a system typeface (Barlow
+   Condensed stays — it is the brand), grey, or a second accent colour.
+
+   This is also the one place in the product that uses backdrop-filter, and the reason the
+   whole section is opt-in. §9's "no backdrop blur anywhere" still holds outside it.
+   ========================================================================== */
+
+.look-refined{
+  --edge:#5AC8FA;                 /* the moving line and the active showcase dot, nothing else */
+  --edge-2:#7BE0FF;
+  --glass:rgba(255,255,255,.72);
+  --r-cap:980px;
+  --sh-soft:0 1px 2px rgba(16,48,113,.06),0 8px 24px -8px rgba(16,48,113,.18);
+  --sh-soft-2:0 2px 4px rgba(16,48,113,.07),0 18px 40px -12px rgba(16,48,113,.26);
+  --t-spring:.42s cubic-bezier(.32,.72,0,1);
+}
+
+/* --- buttons: capsule, highlight fill, scale on press -------------------- */
+.look-refined .btn{
+  border-radius:var(--r-cap);
+  font-weight:600;letter-spacing:-.01em;
+  padding:13px 24px;
+  transition:background var(--t-spring),box-shadow var(--t-spring),transform .18s cubic-bezier(.32,.72,0,1),color var(--t-fast);
+}
+.look-refined .btn-brand,.look-refined .btn-dark,.look-refined nav.menu a.btn{
+  background:linear-gradient(180deg,var(--night-3),var(--brand));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),var(--sh-soft);
+  border-color:transparent;
+}
+.look-refined .btn-brand:hover,.look-refined .btn-dark:hover,.look-refined nav.menu a.btn:hover{
+  background:linear-gradient(180deg,#2159B9,var(--brand-hover));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26),var(--sh-soft-2);
+}
+.look-refined .btn-light,.look-refined .btn-amber{background:linear-gradient(180deg,#fff,#F1F5FD);box-shadow:inset 0 1px 0 #fff,var(--sh-soft)}
+.look-refined .btn-quiet{background:rgba(255,255,255,.86);border-color:var(--line);box-shadow:var(--sh-soft)}
+.look-refined .btn-quiet:hover{background:#fff;border-color:var(--line-strong);box-shadow:var(--sh-soft-2)}
+.look-refined .btn-ghost{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);backdrop-filter:saturate(140%) blur(8px)}
+.look-refined .btn:active{transform:scale(.97)}
+.look-refined .chip{border-radius:var(--r-cap);box-shadow:var(--sh-soft);letter-spacing:-.005em}
+.look-refined .chip:active{transform:scale(.97)}
+.look-refined .chip.active{background:linear-gradient(180deg,var(--night-3),var(--brand));border-color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),var(--sh-soft)}
+
+/* --- the moving line: cyan, gradient, with a soft glow ------------------- */
+/* It was a dashed navy marking, which on navy read as a grey blur. --edge is the one new
+   colour in this look and it appears here, on the active showcase dot, and nowhere else. */
+.look-refined .roadline{
+  height:2px;opacity:1;border:none;
+  background:linear-gradient(90deg,transparent,var(--edge) 18%,var(--edge-2) 50%,var(--edge) 82%,transparent);
+  background-size:220px 2px;background-repeat:repeat-x;
+  box-shadow:0 0 18px rgba(90,200,250,.45),0 0 3px rgba(123,224,255,.6);
+}
+.look-refined .roadline-rolling{animation:edgeRoll 2.6s linear infinite}
+@keyframes edgeRoll{from{background-position:0 0}to{background-position:220px 0}}
+
+/* In the refined look the lane loses the dashed edges and takes the cyan line instead. */
+.look-refined .mk-lane{background:var(--white);border-color:rgba(16,48,113,.07)}
+.look-refined .mk-lane::before,.look-refined .mk-lane::after{
+  height:2px;opacity:1;
+  background:linear-gradient(90deg,transparent,var(--edge) 18%,var(--edge-2) 50%,var(--edge) 82%,transparent);
+  background-size:220px 2px;background-repeat:repeat-x;animation:edgeRoll 2.6s linear infinite;
+}
+.look-refined .mk-item b{letter-spacing:.4px}
+
+/* --- surfaces: shorter, softer, slightly rounder ------------------------- */
+.look-refined .card,.look-refined .info-card,.look-refined .cform,.look-refined .fin-card,
+.look-refined .entry,.look-refined .rev-card,.look-refined .tm,.look-refined .stat,.look-refined .car-desc{
+  border-radius:20px;box-shadow:var(--sh-soft);border-color:rgba(16,48,113,.07);
+}
+.look-refined .card:hover,.look-refined .tm:hover{box-shadow:var(--sh-soft-2);border-color:rgba(16,48,113,.12)}
+.look-refined .card-img,.look-refined .car-stage,.look-refined .sc-stage,.look-refined .map-shell{border-radius:20px}
+.look-refined .fin-result,.look-refined .about-visual,.look-refined .car-calc{border-radius:22px}
+.look-refined .sec-more.ruled{border-top-color:rgba(16,48,113,.1)}
+.look-refined .cookie-note{border-radius:22px;background:rgba(16,48,113,.82);backdrop-filter:saturate(160%) blur(18px)}
+.look-refined .cookie-note .btn{white-space:nowrap;flex:none}
+
+/* --- the bar: translucent and blurred ------------------------------------ */
+/* Static, not sticky — the header stays exactly where §9 put it. Only its material changes. */
+.look-refined header.site{background:var(--glass);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(16,48,113,.08)}
+.look-refined .topbar{background:linear-gradient(180deg,var(--night),#0D2A63)}
+.look-refined nav.menu a{border-radius:var(--r-cap)}
+.look-refined nav.menu .sub-menu{border-radius:18px;box-shadow:var(--sh-soft-2);background:var(--glass);backdrop-filter:saturate(180%) blur(20px)}
+
+/* --- fields: capsule-ish, quiet focus halo ------------------------------- */
+/* The 3px accessibility outline in §2 is untouched; this is the resting and focus fill. */
+.look-refined .cform input,.look-refined .cform select,.look-refined .fin-card input,
+.look-refined .fin-card select,.look-refined .inv-filter input[type="search"],
+.look-refined .inv-filter select,.look-refined .hero-search input[type="search"],
+.look-refined .hero-search select,.look-refined .inv-sort select,.look-refined .das-search input[type=search]{
+  border-radius:14px;border-width:1px;background:#FBFCFE;
+  transition:border-color var(--t-fast),box-shadow var(--t-fast),background var(--t-fast);
+}
+.look-refined .cform input:focus,.look-refined .fin-card input:focus,
+.look-refined .cform select:focus,.look-refined .fin-card select:focus{
+  background:#fff;box-shadow:0 0 0 4px rgba(8,49,139,.12);
+}
+.look-refined .cform textarea{border-radius:16px}
+.look-refined .hero-search{border-radius:22px;background:rgba(255,255,255,.9);backdrop-filter:saturate(160%) blur(14px);box-shadow:var(--sh-soft-2)}
+
+/* --- accents ------------------------------------------------------------- */
+.look-refined .badge{border-radius:var(--r-cap);box-shadow:0 2px 10px rgba(0,0,0,.24)}
+.look-refined .sc-dot.on{background:var(--edge);box-shadow:0 0 12px rgba(90,200,250,.6)}
+.look-refined .kicker{background:rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+.look-refined .car-highlights li{border-radius:var(--r-cap);box-shadow:var(--sh-soft)}
+.look-refined .socials a{border-radius:14px}
+
+@media (prefers-reduced-motion:reduce){
+  .look-refined .btn:active,.look-refined .chip:active{transform:none}
+  .look-refined .roadline-rolling,.look-refined .mk-lane::before,.look-refined .mk-lane::after{animation:none}
+}

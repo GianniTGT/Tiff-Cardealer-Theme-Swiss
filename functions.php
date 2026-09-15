@@ -5,7 +5,9 @@
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'DAS_V4_VERSION', '1.2.2' );
+// Bumped for the design pass of 15 September 2026: style.css and site.js both changed, and
+// this string is what cache-busts them for a visitor who already holds the old files.
+define( 'DAS_V4_VERSION', '1.3.0' );
 
 function das_info( $key = null ) {
 	$i = array(
@@ -85,6 +87,42 @@ add_action( 'wp_enqueue_scripts', function () {
 		'phone' => das_info( 'tel1' ),
 	) );
 } );
+
+/**
+ * The three look-and-feel decisions from the design session of 15 September 2026, each
+ * behind its own filter so any of them can go back to the theme's older behaviour with one
+ * line in a child theme — no CSS editing, no fork.
+ *
+ *   das_look         'refined' (default) draws the capsule controls, the gradient fills and
+ *                    the translucent header from §26. 'theme' is the flat original.
+ *   das_motion_level 'calm' (default) keeps the entrances and drops the ambient loops.
+ *                    'alive' runs everything in §24; 'still' runs nothing but the hover lift.
+ *   das_shelf        'roomy' (default) 330px cards with a 30px gap — three across on a
+ *                    desktop. 'regular' is the theme's own 268/20; 'dense' is 236/14.
+ */
+function das_shelf_sizes() {
+	$shelves = array(
+		'dense'   => array( '236px', '14px' ),
+		'regular' => array( '268px', '20px' ),
+		'roomy'   => array( '330px', '30px' ),
+	);
+	$key = (string) apply_filters( 'das_shelf', 'roomy' );
+	return $shelves[ $key ] ?? $shelves['roomy'];
+}
+
+add_filter( 'body_class', function ( $classes ) {
+	if ( 'refined' === apply_filters( 'das_look', 'refined' ) ) { $classes[] = 'look-refined'; }
+	$motion = (string) apply_filters( 'das_motion_level', 'calm' );
+	if ( in_array( $motion, array( 'still', 'calm' ), true ) ) { $classes[] = 'motion-' . $motion; }
+	return $classes;
+} );
+
+// The shelf is two numbers, so it rides on the stylesheet rather than earning a file of its
+// own — §9 allows the theme exactly one stylesheet and one script.
+add_action( 'wp_enqueue_scripts', function () {
+	list( $min, $gap ) = das_shelf_sizes();
+	wp_add_inline_style( 'das-v4', sprintf( ':root{--card-min:%s;--gap-grid:%s}', $min, $gap ) );
+}, 20 );
 
 add_action( 'init', function () {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );

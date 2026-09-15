@@ -245,7 +245,7 @@ while ( have_posts() ) :
 			<?php if ( $similar ) : ?>
 				<div class="car-similar">
 					<h2>Similar vehicles</h2>
-					<div class="grid">
+					<div class="grid rv-stagger">
 						<?php foreach ( $similar as $s ) { echo das_car_card( $s ); } ?>
 					</div>
 				</div>

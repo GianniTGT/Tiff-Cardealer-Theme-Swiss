@@ -33,12 +33,13 @@ if ( ! is_singular( 'car' ) ) :
 					<?php das_logo_img(); ?>
 					<span class="logo-text"><b style="color:#fff"><?php echo esc_html( das_info( 'name' ) ); ?></b></span>
 				</a>
-				<p class="foot-slogan">Dependable. Alaskan. Straightforward.</p>
+				<?php /* The tagline "Dependable. Alaskan. Straightforward." and the WhatsApp /
+				   e-mail glyph row were both removed on the owner's instruction (15 Sep 2026).
+				   The number and the address are text links in the Contact column below, which
+				   is where somebody looks for them; the glyphs were a second, smaller copy of
+				   the same two facts. `.foot-slogan` and `.socials` stay in style.css for a
+				   dealership that wants them. */ ?>
 				<p style="margin-top:10px;max-width:300px">A small Alaskan business helping our neighbors find the right vehicle &mdash; first car, family car, or work truck.</p>
-				<div class="socials">
-					<a href="https://wa.me/<?php echo esc_attr( ltrim( das_info( 'tel1' ), '+' ) ); ?>" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.1-.7l.4-.5c.1-.2.1-.3.2-.5 0-.2 0-.4-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.9 2.9 4.5 4a15 15 0 0 0 1.5.6c.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg></a>
-					<a href="mailto:<?php echo esc_attr( das_info( 'email' ) ); ?>" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm8 7.4L20 7H4l8 5.4zM4 9.2V17h16V9.2l-8 5.4-8-5.4z"/></svg></a>
-				</div>
 			</div>
 			<div>
 				<h4>Explore</h4>

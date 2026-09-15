@@ -205,7 +205,7 @@ $hidden = function ( $except ) use ( $filters ) {
 			</div>
 		<?php endif; ?>
 
-		<div class="grid">
+		<div class="grid rv-stagger">
 			<?php
 			if ( $is_tax ) {
 				if ( have_posts() ) {
