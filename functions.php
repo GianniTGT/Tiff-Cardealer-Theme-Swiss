@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Bumped for the design pass of 15 September 2026: style.css and site.js both changed, and
 // this string is what cache-busts them for a visitor who already holds the old files.
-define( 'DAS_V4_VERSION', '1.3.0' );
+define( 'DAS_V4_VERSION', '1.3.1' );
 
 function das_info( $key = null ) {
 	$i = array(
