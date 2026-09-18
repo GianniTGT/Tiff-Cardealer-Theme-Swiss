@@ -204,6 +204,51 @@ Geschäftsbeziehung, nicht ins Leere.
 Angaben im Umlauf. Für den Kontakt mit Arben unwichtig, für ein Impressum oder einen
 Vertrag nicht.
 
+### Kontaktaufnahme mit Arben — vorbereitet, noch nicht abgeschickt
+
+**Stand 18. September 2026: wartend.** Kontaktdaten von Arca-IT AG per Impressum bestätigt
+(nicht vermutet):
+
+| | |
+|---|---|
+| E-Mail | **info@arca-it.ch** |
+| Telefon | **031 829 80 80** |
+| Adresse | Wölflistrasse 5, CH-3006 Bern |
+
+*Kein persönlicher Arben-Kontakt öffentlich auffindbar — nur die allgemeine Firmenadresse.*
+
+**Offen, bevor etwas verschickt wird:**
+1. Wer schreibt — Sabit (Vertragskunde, mehr Gewicht) oder Gianni in seinem Auftrag?
+2. Welcher Kanal — E-Mail an `info@arca-it.ch` z.Hd. Arben, oder Telefonanruf?
+
+**Entwurf, eine einzige Forderung (§4):**
+
+```
+Betreff: Domain-Inhaberschaft bit-automobile.ch / immobit.ch
+
+Grüezi Arben
+
+Wir planen einen Website-Relaunch für ImmoBit AG (bit-automobile.ch) und
+benötigen dafür eine kurze Bestätigung:
+
+Ist ImmoBit AG der eingetragene Domaininhaber (Registrant) von
+bit-automobile.ch und immobit.ch, oder läuft die Registrierung über
+Arca-IT AG?
+
+Falls die Domains bereits auf ImmoBit AG eingetragen sind, benötigen wir
+lediglich die Möglichkeit, die Nameserver anzupassen. Falls sie auf
+Arca-IT AG registriert sind, bitten wir um die Übertragung des Inhabers
+auf ImmoBit AG.
+
+Hosting-Zugang oder der Wix-Login werden dafür nicht benötigt.
+
+Besten Dank und freundliche Grüsse
+[Sabit Kadriu / ImmoBit AG]
+```
+
+**Nächster Schritt liegt bei Gianni/Sabit, nicht bei dieser Session:** entscheiden wer/wie,
+dann abschicken.
+
 ---
 
 ## 5 · Der kommerzielle Befund
