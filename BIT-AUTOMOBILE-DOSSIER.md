@@ -125,6 +125,16 @@ Drei Dinge folgen daraus:
    und ist `immobit.ch` eine zweite, eigene Domain der AG — oder liegt hier eine dritte
    Partei dazwischen.
 
+**Nachtrag vom 18. September 2026.** Gianni hat zusätzlich einen Screenshot der
+**Hoststar-Login-Seite** gezeigt (`My Panel`, Login mit Domain + Passwort) — **leer, keine
+Zugangsdaten eingegeben, kein Dashboard sichtbar.** Das ist die öffentliche Login-Maske, kein
+Beleg für Zugriff. **Wichtig: `My Panel` ist etwas anderes als das Webmail oben** — `My Panel`
+wäre die eigentliche Hosting-/Domain-Verwaltung bei Hoststar, während `webmail.hoststar.ch`
+nur die Mailbox `info@immobit.ch` zeigt. Punkt 2 oben gilt unverändert: **`My Panel` wird für
+den geplanten Umzug nicht gebraucht**, selbst wenn Arben es später doch freigibt — und selbst
+ein Blick hinein würde nicht zwingend den Registrar-Inhaber zeigen, nur was innerhalb der
+Hoststar-Hosting-Verwaltung liegt.
+
 *Es wurde kein Postfachinhalt gelesen. Die Angaben stammen ausschliesslich von der gezeigten
 Kontoseite.*
 
@@ -224,6 +234,22 @@ weiteres, überprüfbares Verkaufsargument neben der SEO-Lücke oben.
 **Vor dem Bauen zu prüfen, nicht zu vermuten:** ob `bit-automobile.ch` (Wix) dasselbe fehlt,
 und ob die Firmendaten aus §1 (ImmoBit AG, UID CHE-345.577.846) für ein korrektes Impressum
 ausreichen.
+
+**Nachprüfung für `bit-automobile.ch`, diesmal gemessen** — per PHP-`curl` über den
+DAS-Server (normaler Internetzugang, siehe §10), Startseite abgerufen (633 KB, HTTP 200):
+
+| | |
+|---|---|
+| Text „Impressum" | **vorhanden**, als Überschrift (`<h5>`) im HTML |
+| Text „Datenschutzerklärung" | **vorhanden**, ebenso als `<h5>`-Überschrift |
+| `href` zu einer Impressum-/Datenschutz-Seite | **keiner gefunden** |
+| `/impressum`, `/datenschutz` als eigene Pfade | **beide 404** |
+
+**Wahrscheinlichste Erklärung: Wix-„Lightbox"** — ein Popup-Fenster, das per JavaScript
+öffnet statt über eine echte URL. Anders als bei `immobit.ch` (dort fehlt der Text
+offenbar komplett) **existiert hier zumindest der Anspruch auf Impressum/Datenschutz** —
+ob das Popup wirklich funktioniert und was drinsteht, ist damit noch nicht gemessen. Das
+gehört per Browser geprüft, nicht per `curl`, bevor man daraus einen Befund macht.
 
 ---
 
