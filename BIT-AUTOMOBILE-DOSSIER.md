@@ -138,6 +138,18 @@ Sabits Geschäftspost liegt heute im Konto eines Dritten, der den Zugang verweig
 das so ist, gehört ihm seine eigene Mail faktisch nicht. Das ist kein technisches Detail,
 sondern ein Geschäftsrisiko — und der beste Grund, den Umzug jetzt zu machen statt später.
 
+### Der Name der Agentur — Vermutung, nicht gemessen
+
+**Nachtrag vom 18. September 2026.** Sabit hat ein zweites Dokument gezeigt, Fusszeile
+„**Erstellt von: Arca-IT AG**". Eine Websuche bestätigt: **Arca-IT AG**, Bern
+(CHE-492.626.439), IT-Dienstleisterin für KMU mit **Webdesign und Hosting** im
+Leistungsangebot — das passt zum Profil des „früheren Entwicklers", der Hosting- und
+Wix-Zugang verweigert.
+
+**Das ist eine plausible Vermutung, kein Beleg.** Die Fusszeile sagt, wer das gezeigte
+Dokument erstellt hat — nicht zwingend, wer bei Hoststar Vertragskunde ist oder die
+Wix-Domain hält. Vor jeder Kontaktaufnahme mit „Arca-IT AG" gehört das von Sabit bestätigt.
+
 ---
 
 ## 5 · Der kommerzielle Befund
@@ -192,6 +204,8 @@ Webseite kommt, sieht zwei Marken. Das muss Sabit entscheiden.
 - [ ] **Ist der gezeigte Hoststar-Zugang (`info@immobit.ch`) seiner?** Und gehört `immobit.ch`
       der AG?
 - [ ] **Wer ist bei Hoststar Vertragskunde — er selbst oder die Agentur?** Und welcher Tarif.
+- [ ] **Ist die Agentur Arca-IT AG?** Vermutung aus einer Dokument-Fusszeile (§4), von Sabit
+      noch nicht bestätigt.
 - [ ] **Wer hält die Domain beim Registrar?** Von aussen nicht sichtbar (WHOIS-Port 43 läuft
       aus dieser Umgebung in einen Timeout, RDAP antwortet 403). Liegt die Domain bei der
       Agentur, gehört sie **vor** jedem Umzug auf die ImmoBit AG übertragen.
