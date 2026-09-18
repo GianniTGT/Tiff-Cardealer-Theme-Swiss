@@ -338,6 +338,35 @@ Bei CHF 29 unterbietest du also das **günstigste** bexio-Paket, während du meh
 Das ist kein Argument gegen 29 — es ist ein Argument dagegen, 29 den **Regelpreis** zu
 nennen.
 
+**Nachtrag vom 18. September 2026 — eine echte Offerte statt der Websuche.** Gianni hat ein
+reales bexio-Angebot gezeigt, keine Preisliste:
+
+```
+Betreff: bexio spezial Angebot
+
+Advanced Paket für CHF 504.- exkl. MwSt. mit 30% Rabatt
++ Lohnbuchhaltung CHF 300.- exkl. MwSt.
+Total im ersten Jahr: CHF 652.80 exkl. MwSt. (Sie sparen CHF 151.20)
+
+Einmalige Kosten:
+1 x Buchhaltung Schulung für CHF 490.-
+1 x Buchhaltung Schulung für CHF 490.-
+1 x Lohnbuchhaltung Schulung für CHF 490.-
+
+Total CHF 1470.- abzgl. 30%
+Total neu: CHF 1029.- einmalig exkl. MwSt. (Sie sparen CHF 441.-)
+```
+
+**Das bestätigt den Anker von oben, mit zwei neuen Zahlen.** CHF 504.-/Jahr für *Advanced*
+ist exakt die CHF 42/Mt aus der Websuche — der Marktanker stimmt. Zwei Dinge, die dort
+fehlten:
+
+1. **Ein Rabatt-Mechanismus.** Die 30 % gelten hier nur auf das Advanced-Paket, nicht auf die
+   Lohnbuchhaltung — das ist die Art Kleingedrucktes, die eine reine Preisliste nicht zeigt.
+2. **Einmalige Schulungskosten von CHF 1'029.—**, zusätzlich zum Jahrespreis. Das ist die
+   bexio-Entsprechung zu dem, was §10.3/§15.3 für die Website vorschlagen — Aufbau/Einführung
+   einmalig, Betrieb monatlich getrennt. **Auch bexio trennt Bauen vom Betreiben.**
+
 ### 9.3 Die Rechnung, damit die Entscheidung mit offenen Augen fällt
 
 | Kunden | Umsatz/Jahr | Infrastruktur | Netto **vor** deiner Zeit |
