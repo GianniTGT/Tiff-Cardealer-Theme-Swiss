@@ -1,115 +1,91 @@
-# Tiff Cardealer — the WordPress theme
+# BIT Automobile — Webseite und Infrastruktur
 
-The website half of the Tiff Cardealer product line. The desktop half is
-[`Tiff-Cardealer-Manager`](https://github.com/GianniTGT/Tiff-Cardealer-Manager), and its
-`CLAUDE.md` is the shared memory for both — every `§` reference below points there.
+Alles zum Schweizer Projekt: **BIT Automobile** (Handelsname der *ImmoBit AG*,
+Oberwangen b. Bern, Kontakt Sabit Kadriu). Die geplante Webseite, ihre Infrastruktur —
+Domain, DNS, Mail-Hosting — und die kaufmännische Seite dazu.
 
-**This repository was created on 13 September 2026, and the theme is older than it.** Until
-that day the theme existed **only** on one customer's live server. Everything before the
-first commit is in `CLAUDE.md` §11, which is long and is the real history.
+**Dieses Repository enthält seit dem 18. September 2026 nur noch dieses eine Thema.** Was
+vorher hier lag, gehörte woanders hin; der Abschnitt weiter unten sagt genau, was
+verschwunden ist und wo es jetzt steht.
 
 ---
 
-## The first commit is a snapshot, not a cleanup
+## Was hier liegt
 
-It is exactly what was running on `downtownautosale.com` — folder `das-v4`, prefix `das_`,
-theme version 1.2.0 — with nothing renamed and nothing tidied.
-
-**That was a decision, and the alternative is the trap.** Renaming in the same breath would
-make the first commit a theme that has never run anywhere, and §12 records what an untested
-write to this theme costs: on 18 August a half-written script left eight bytes of garbage on
-`inc/cars.php` and **took the whole site down** — front end, wp-admin, and the tool that
-would have fixed it. It took a person at a cPanel File Manager to restore one file.
-
-So: the repository first agrees with reality. Every change after that is a change somebody
-can read as a diff.
-
-### How it got here, and how to do it again
-
-The theme was pulled through the site's own Novamira connector (`novamira/execute-php`
-returning `file_get_contents`), because **the sandbox cannot reach the site over HTTPS** —
-measured, `000`, the network policy refuses it. Then every file was checked:
-
-```
-31 of 31 files match the server byte for byte   (md5, 13 September 2026)
-```
-
-**Do that again if you ever re-pull.** A transfer that was not verified is a transfer you are
-hoping about — rule 15 in `KLIENT-I-RI.md`.
-
-### What was deliberately left out
-
-| | why |
+| Datei | Was es ist |
 |---|---|
-| `assets/img/team/*.{jpg,webp}` | photographs of real people at one dealership. Dealer content that happens to sit in the theme folder — §5. The empty `index.html` stays as the directory-listing guard |
-| `_backup-20260814-105228/` | a backup folder from 14 August. Backups are not the theme |
-| `inc/cars.php.bak`, `style.css.bak` | same |
+| `BIT-AUTOMOBILE-DOSSIER.md` | **Die Hauptdatei.** Firma, Domain, DNS, Mail-Hosting, Logo, die Fragen an Sabit, die fehlenden Dateien und das Zugangsproblem mit dem früheren Entwickler |
+| `dossier/` | Dasselbe Dossier gestaltet — HTML mit abhakbarer Fragenliste, und als PDF zum Verschicken |
+| `BETRIEB-UND-HOSTING.md` | Das Betriebs- und Hostingmodell: was der Betrieb einer solchen Seite kostet, was verrechnet wird, wer wofür haftet |
+| `OFFERTE-VORLAGE.md` | Die Vorlage, aus der die Offerte entsteht |
+| `offerte/` | Die gerenderte Offerte für BIT Automobile |
 
 ---
 
-## Four things block the second dealership, and all four are measured
+## Die zwei Befunde, auf die es ankommt
 
-None is a bug. Each is the dealer's identity sitting inside a product that is sold to
-somebody else, which is exactly what §5 exists to prevent — and the theme has never had a
-`scripts/status.mjs` to catch it the way the Manager does.
+Beide sind gemessen, nicht erzählt — die Herkunft steht im Dossier an jeder Zeile.
 
-| | where | what it should be |
+**Die Zone liegt bei Wix, die Mail bei Hoststar.** `bit-automobile.ch` zeigt auf
+`ns12/ns13.wixdns.net`, der MX aber auf `mail.bit-automobile.ch` → `168.119.41.56` →
+`lx21.hoststar.hosting`. Wer die Webseite von Wix wegholt und den MX dabei vergisst, nimmt
+Sabit die Geschäftspost mit. **Zonenexport vor jedem Umzug.**
+
+**Google sieht keines seiner Fahrzeuge.** `/fahrzeuge` liefert im Server-HTML kein einziges
+Auto — kein AutoScout24, kein Widget, kein iframe. Wer „Volvo XC60 Occasion Bern" sucht,
+findet ihn nicht, weil es nichts zu indexieren gibt. Das ist das Verkaufsargument, und es ist
+nachprüfbar.
+
+---
+
+## Was *nicht* hier liegt
+
+**Der Gestaltungsentwurf für BIT Automobile ist in keinem Repository.** Er entstand in einer
+Claude-Design-Sitzung und existiert nur dort. Solange das so ist, beschreibt dieses
+Repository das Projekt, es enthält es nicht. Sobald der Entwurf als Dateien vorliegt, gehört
+er hierher — dann bekommt dieses README einen Abschnitt mehr.
+
+**Das WordPress-Theme ist nicht hier.** Es liegt in
+[`Tiff-Cardealer-Manager`](https://github.com/GianniTGT/Tiff-Cardealer-Manager) im Ordner
+`theme/`, und das ist die Quelle. Es ist ohnehin nicht das, was der Name dieses Repositories
+vermuten liess: der Code war der Theme von **Downtown Auto Sales, Anchorage, Alaska** —
+Prefix `das_`, Textdomain `das-v4`, `downtownautosale.com` in der `style.css`, das Logo des
+Händlers einkompiliert. An diesem Theme ist nichts schweizerisch ausser dem
+Repository-Namen.
+
+---
+
+## Der Aufräumschnitt vom 18. September 2026
+
+Entfernt, weil es nicht zu BIT Automobile gehört:
+
+| Was | Wohin | Nachweis |
 |---|---|---|
-| **The dealer's logo is compiled in** | `assets/img/logo.png`, 178×96, read by `inc/template-tags.php` and `inc/watermark.php` | uploaded per dealership, or an option — never a file in the theme |
-| **`Theme URI` and `Author URI`** | `style.css`, both `https://downtownautosale.com/` | the vendor's own site. A customer's address as the *author's* URI is the wrong way round |
-| **`Text Domain: das-v4`** | `style.css` | `tiff-cardealer` |
-| **The folder and the function prefix** | `das-v4/`, `das_*` | `tiff-cardealer/`, `tcd_*` — §5 has recorded this as "a separate job" since August |
+| Die 34 Theme-Dateien (`style.css`, `functions.php`, `inc/`, `assets/`, alle Templates) und `DESIGN-SYSTEM.md` | `Tiff-Cardealer-Manager` → `theme/` | **34 von 35 Dateien byte-identisch** (Blob-Hashes verglichen, 18. September 2026). Die einzige Abweichung ist `README.md`: die Kopie dort trägt einen zusätzlichen Kasten, der erklärt, dass sie ab dem 15. September die Quelle ist |
+| `business/SCHWEIZ-SAAS.md` | Historie von `Tiff-Cardealer-Manager` (Commit `78aa21c`) und die Historie dieses Repos | Anderes Produkt: ein Architekturvorschlag für ein künftiges Schweizer Mehrmandanten-Cloudprodukt. Nichts davon ist gebaut, und BIT kommt darin kein einziges Mal vor |
+| `business/offerte/offerte-aino.html` | Nur die Historie dieses Repos | Andere Kundin |
 
-**The rename is one job and it is cheapest now**, because the second dealership's site is the
-first one that will carry the new name. It is not the first commit's job.
+Der Ordner `business/` ist dabei verschwunden: er trennte die Geschäftsseite vom Theme, und
+das Theme ist weg. Sein Inhalt liegt jetzt auf der Wurzel.
 
-**Do it as its own change, with the live site in mind**: `das_` is ~200 call sites, the
-folder name is what `wp-content/themes/` keys on, and changing the active theme's directory
-means WordPress loses track of it until the option is updated. Test it somewhere that is not
-a dealership's live site.
+**Gelöscht heisst nicht weg.** Alles steht weiter in der Git-Historie. Eine Datei kommt mit
+einem Befehl zurück:
 
----
+```
+git show 956909d:business/SCHWEIZ-SAAS.md > SCHWEIZ-SAAS.md
+```
 
-## Where this theme is installed
-
-| | |
-|---|---|
-| `downtownautosale.com` | Downtown Auto Sales, Anchorage, Alaska. Live since the DNS switch (§10) |
-
-**The desktop app writes to this site over REST**, and the two halves agree on exactly
-sixteen `car_*` meta fields plus two routes the theme owns:
-
-- `das/v1/leads` — the enquiry list, `edit_posts`, oldest first (§20.4)
-- `das/v1/vehicle-photos` — a vehicle's public photo addresses by VIN, which is what makes
-  Instagram posting possible at all (§25)
-
-**`inc/privacy-boundary.php` is the wall**, and it is the one file to be careful with: only
-the sixteen public fields are registered with REST, anything else is discarded before the
-database, and any financial-looking meta key is blocked from any route and logged. §6 is the
-whole argument. **A change that widens it is a change that leaks a dealership's costs.**
+`956909d` ist der letzte Commit vor dem Schnitt.
 
 ---
 
-## Two rules this theme has already paid for
+## Offen
 
-**Back the file up in the same call that edits it.** Not before, not after. Novamira is a
-WordPress plugin, so a fatal in the theme takes the tool that would fix it, and there is no
-second way in (§12).
-
-**Verify on the rendered page, never on the source.** The theme source answers what it was
-told to say; only fetching the page proves what a customer gets. §11 records the five
-"differences" that were hunted for and did not exist, and the opcache that served old
-bytecode over a correct file for an hour.
-
----
-
-## Swiss dealerships work the other way round
-
-The Alaska install is *app → website*: the desktop app is the source of truth and pushes
-vehicles up (§9). **A Swiss dealership lists on AutoScout24 first**, and the website is fed
-*from* there. So the inventory direction reverses, and `das/v1/vehicle-photos`,
-`inc/privacy-boundary.php` and the whole push target are not what a Swiss site needs.
-
-Nothing for that is built, and the mechanism — partner API, dealer feed export, or neither —
-**has not been measured.** Do not guess at it: three guesses at one third-party URL already
-cost this project an evening each (§23).
+- **Registrar von `bit-automobile.ch`** — von aussen nicht sichtbar (WHOIS-Port 43 läuft in
+  einen Timeout, RDAP antwortet 403). Liegt die Domain bei der Agentur, gehört sie **vor**
+  jedem Umzug auf die ImmoBit AG übertragen.
+- **MX und NS von `immobit.ch`** — die zweite Domain löst auf dieselben Wix-IPs auf, ihre
+  Mail-Einträge sind noch nicht gemessen.
+- **Die zwei kommerziellen AutoScout24-Fragen** — wie `client_id`/`client_secret` zu bekommen
+  sind, und was die VIN-Abfrage kostet. Die technische Seite steht in
+  `Tiff-Cardealer-Manager` → `AUTOSCOUT24-API.md`.

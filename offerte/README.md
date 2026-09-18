@@ -1,14 +1,13 @@
-# Die druckbaren Offerten
+# Die druckbare Offerte
 
-Zwei A4-Seiten, je **eine Seite**, in den Farben von Tiff Software Solutions.
+Eine A4-Seite, in den Farben von Tiff Software Solutions.
 Text und Begründung stehen in `../OFFERTE-VORLAGE.md`, die Preise in
 `../BETRIEB-UND-HOSTING.md` §15.3.
 
 | Datei | Für |
 |---|---|
 | `offerte-bit-automobile.html` | **ImmoBit AG** / BIT Automobile — Sabit Kadriu, Adresse vollständig |
-| `offerte-aino.html` | **AINO Haustechnik GmbH** — Adresse und Anrede sind noch auszufüllen |
-| `_offerte.css` | das gemeinsame Aussehen, A4-Druck |
+| `_offerte.css` | das Aussehen, A4-Druck |
 
 ## So machst du ein PDF daraus
 
@@ -20,8 +19,7 @@ Ränder **Standard** (oder „Keine" — die Ränder stehen im Stylesheet), Hint
 
 Die Stellen mit **gepunkteter goldener Linie** sind Platzhalter:
 
-- **Beide:** deine Strasse, PLZ und Telefonnummer im Absender
-- **AINO:** Anrede, Name, Strasse, PLZ und Ort
+- deine Strasse, PLZ und Telefonnummer im Absender
 
 Suche im HTML nach `class="fuellen"` — dort stehen sie alle.
 
@@ -30,7 +28,7 @@ Suche im HTML nach `class="fuellen"` — dort stehen sie alle.
 | | |
 |---|---|
 | **MWST** | Die Seite sagt *„ohne MWST (nicht mehrwertsteuerpflichtig)"*. Stimmt das nicht, gehört dort *„zzgl. 8.1 % MWST"* hin und deine UID in die Fusszeile |
-| **Datum** | Beide tragen den **15.09.2026** und gelten bis **15.10.2026** — an drei Stellen: Datum, Gültigkeit, Fusszeile |
+| **Datum** | Sie trägt den **15.09.2026** und gilt bis **15.10.2026** — an drei Stellen: Datum, Gültigkeit, Fusszeile |
 | **Kündigungsfrist** | zwei Monate auf Ende Monat |
 
 ## Drei Sätze, die nicht verschwinden dürfen
@@ -47,6 +45,6 @@ Formulierung aus:
 
 ## Geprüft, nicht angenommen
 
-Beide Seiten wurden mit Chromium nach A4 gerendert und die Seitenzahl im PDF gezählt:
-**je eine Seite**, mit rund **12 mm Luft** am Fuss. Die erste Fassung brauchte zwei Seiten —
+Die Seite wurde mit Chromium nach A4 gerendert und die Seitenzahl im PDF gezählt:
+**eine Seite**, mit rund **12 mm Luft** am Fuss. Die erste Fassung brauchte zwei Seiten —
 das war der Grund, es zu messen statt zu schätzen.

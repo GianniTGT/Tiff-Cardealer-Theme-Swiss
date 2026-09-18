@@ -1,19 +1,9 @@
-# Nothing here is generated, so this list is short on purpose.
+# Hier wird nichts generiert, deshalb ist die Liste kurz.
 
-# Editor and OS litter
+# Editor- und Systemmüll
 .DS_Store
 Thumbs.db
 *.swp
 
-# What the live server accumulates and the theme is not
-*.bak
-*.broken
-_backup-*/
-
-# The dealership's own people. Their photographs live on their server,
-# never in the product — CLAUDE.md §5. The empty index.html stays: it is the
-# guard against directory listing, and a fresh install needs the folder to
-# exist so a dealership can drop tif/os/aj/gianni.{jpg,jpeg,png,webp} into it.
-# Same shape as .env.* / !.env.example in the Manager repo.
-assets/img/team/*
-!assets/img/team/index.html
+# Die Regeln für Theme-Backups und die Teamfotos des Händlers sind mit dem Theme
+# weggezogen — sie stehen jetzt in Tiff-Cardealer-Manager, theme/.gitignore.

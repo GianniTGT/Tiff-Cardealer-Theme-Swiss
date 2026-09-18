@@ -1,4 +1,4 @@
-# Offerte — eine Seite, für beide Kunden
+# Offerte an BIT Automobile — eine Seite
 
 **Stand: 15. September 2026.** Die Preise stammen aus `BETRIEB-UND-HOSTING.md` §15.3 und
 sind entschieden: **CHF 1'000 einmalig, danach CHF 20 + CHF 29 im Monat.**
@@ -112,21 +112,6 @@ Freundliche Grüsse
 | **MWST** | Der Satz oben nimmt an, dass du **nicht** mehrwertsteuerpflichtig bist (Schwelle CHF 100'000 Umsatz). Stimmt das nicht, gehört *„zzgl. 8.1 % MWST"* hin und deine UID in den Fuss |
 | **Kündigungsfrist** | ich habe **zwei Monate auf Ende Monat** gesetzt. Kürzer ist freundlicher, länger schützt dich nach einem Aufbau. Für Freunde ist zwei richtig |
 | **Datum und Gültigkeit** | 30 Tage ist üblich |
-
-## Was bei AINO Haustechnik anders ist
-
-Dieselbe Seite, vier Änderungen:
-
-| | |
-|---|---|
-| **Adresse und Anrede** | AINO Haustechnik GmbH |
-| **Einleitungssatz** | statt Fahrzeugen: *„…womit du Rapporte, Offerten und Rechnungen an einem Ort führst."* |
-| **Punkt 1** | die Liste bleibt, nur *„gestaltet für einen Fahrzeughandel"* → *„gestaltet für einen Handwerksbetrieb"* |
-| **Punkt 3** | Fahrzeugbestand → **Rapporte, Stunden, Material, Offerten und Teilrechnungen**; MFK → **Serviceverträge und Wartungstermine**; die Zeile *„Fahrzeuge auf die Website"* fällt weg |
-
-**Der Kasten über den Liefertermin ist bei ihm noch wichtiger, nicht weniger wichtig.** Für
-ihn existiert die Software nicht einmal in einer anderen Fassung — `BETRIEB-UND-HOSTING.md`
-§9.6 sagt deshalb: kein Datum versprechen, das nicht steht.
 
 ## Warum die Offerte so gebaut ist
 

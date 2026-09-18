@@ -12,6 +12,19 @@ ohne Hosting, der eine Website will und dazu die Handwerker-Software für Sanit�
 Frage dahinter: *wenn ich für mich sowieso Cloud beschaffe, kann ich das den Kunden auch
 gleich anbieten?*
 
+> **Diese Datei ist die einzige hier, die nicht nur von BIT Automobile handelt.** Beim
+> Aufräumen vom 18. September 2026 blieb sie ganz stehen, und das war Absicht: die Passagen
+> über **AINO Haustechnik GmbH** — §9, §9.5, §9.6, §11.4, §13.3, §14, §14.1, §14.3 — und die
+> über Alaska stecken *in* der Argumentation, nicht neben ihr: der zweite Kunde ist stellenweise
+> genau der Grund, warum ein Satz über Sabit so lautet, wie er lautet. Herausschneiden wäre
+> ein Umschreiben, kein Löschen, und ein halb umgeschriebenes Entscheidungsdokument ist
+> schlimmer als ein ehrliches. Wer es trotzdem will, sagt es — dann wird es als eigene
+> Arbeit gemacht und gelesen, nicht per Suchen-und-Ersetzen.
+>
+> Aus demselben Aufräumen zeigen die Verweise auf `SCHWEIZ-SAAS.md` (§4.3, §4.6, §2, §3) ins
+> Leere: die Datei ist raus, weil sie ein anderes Produkt beschreibt. Sie steht in der
+> Historie — `git show 956909d:business/SCHWEIZ-SAAS.md`.
+
 ---
 
 ## 0. Die Antwort in drei Sätzen
