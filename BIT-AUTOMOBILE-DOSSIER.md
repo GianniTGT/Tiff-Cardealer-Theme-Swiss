@@ -138,17 +138,32 @@ Sabits Geschäftspost liegt heute im Konto eines Dritten, der den Zugang verweig
 das so ist, gehört ihm seine eigene Mail faktisch nicht. Das ist kein technisches Detail,
 sondern ein Geschäftsrisiko — und der beste Grund, den Umzug jetzt zu machen statt später.
 
-### Der Name der Agentur — Vermutung, nicht gemessen
+### Der Name der Agentur — jetzt belegt, mit zwei offenen Punkten
 
-**Nachtrag vom 18. September 2026.** Sabit hat ein zweites Dokument gezeigt, Fusszeile
-„**Erstellt von: Arca-IT AG**". Eine Websuche bestätigt: **Arca-IT AG**, Bern
-(CHE-492.626.439), IT-Dienstleisterin für KMU mit **Webdesign und Hosting** im
-Leistungsangebot — das passt zum Profil des „früheren Entwicklers", der Hosting- und
-Wix-Zugang verweigert.
+**Nachtrag vom 18. September 2026.** Sabit hat zwei weitere Dokumente gezeigt. Erst eine
+Dokument-Fusszeile „Erstellt von: Arca-IT AG" (Vermutung), dann eine **echte Rechnung**:
 
-**Das ist eine plausible Vermutung, kein Beleg.** Die Fusszeile sagt, wer das gezeigte
-Dokument erstellt hat — nicht zwingend, wer bei Hoststar Vertragskunde ist oder die
-Wix-Domain hält. Vor jeder Kontaktaufnahme mit „Arca-IT AG" gehört das von Sabit bestätigt.
+```
+Arca-IT AG, Wölflistrasse 5, 3006 Bern — MWST CHE-492.626.439
+Rechnung RE-00282, Kundennummer 000170, Datum 01.02.2024
+An: Immobit AG, Breitmattweg 6, 3173 Oberwangen b. Bern
+Pos. 1: Hosting www.immobit.ch — 1.00 Jahr — CHF 179.00
+Total inkl. 8.10% MWST: CHF 193.50
+```
+
+**Das ist ein Beleg, keine Vermutung mehr: Arca-IT AG stellt Immobit AG Hosting für
+`immobit.ch` in Rechnung.** Das erklärt auch die Weigerung aus §4 direkt — Arca-IT AG ist
+selbst Reseller-Kunde bei Hoststar (`lx21.hoststar.hosting`, derselbe Host, auf den der MX
+von `bit-automobile.ch` zeigt, §3) und verwaltet fremde Kundenpostfächer im selben Panel.
+
+**Zwei Dinge bleiben offen, bevor daraus ein Kontakt wird:**
+
+1. **Die Rechnung ist vom 1. Februar 2024** — über zweieinhalb Jahre alt. Sie belegt eine
+   frühere Vertragsbeziehung, nicht zwingend eine heute noch laufende.
+2. **Die Adresse weicht von der zuvor gezeigten ab**: hier `Breitmattweg 6`, vorher
+   `Herzwilstrasse 262` — beides 3173 Oberwangen b. Bern. Entweder ist die AG umgezogen,
+   oder es sind zwei unterschiedliche Angaben im Umlauf. Vor einem Anschreiben lohnt sich,
+   welche aktuell ist.
 
 ---
 
@@ -204,8 +219,8 @@ Webseite kommt, sieht zwei Marken. Das muss Sabit entscheiden.
 - [ ] **Ist der gezeigte Hoststar-Zugang (`info@immobit.ch`) seiner?** Und gehört `immobit.ch`
       der AG?
 - [ ] **Wer ist bei Hoststar Vertragskunde — er selbst oder die Agentur?** Und welcher Tarif.
-- [ ] **Ist die Agentur Arca-IT AG?** Vermutung aus einer Dokument-Fusszeile (§4), von Sabit
-      noch nicht bestätigt.
+- [ ] **Läuft der Arca-IT-AG-Vertrag (Rechnung vom 01.02.2024, §4) heute noch?** Die Agentur
+      ist belegt, das Datum ist es nicht mehr — aktuellen Stand bei Sabit erfragen.
 - [ ] **Wer hält die Domain beim Registrar?** Von aussen nicht sichtbar (WHOIS-Port 43 läuft
       aus dieser Umgebung in einen Timeout, RDAP antwortet 403). Liegt die Domain bei der
       Agentur, gehört sie **vor** jedem Umzug auf die ImmoBit AG übertragen.
