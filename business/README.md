@@ -18,3 +18,10 @@ remains correct even though the files describing the Swiss business now live som
 | `BETRIEB-UND-HOSTING.md` | The hosting/operations business model |
 | `OFFERTE-VORLAGE.md` | The offer template |
 | `offerte/` | Two rendered client offers — BIT Automobile and "aino" |
+| `BIT-AUTOMOBILE-DOSSIER.md` | Everything known about the Swiss prospect: company, domain, DNS, mail hosting, logo, the open questions, and the access dispute with their previous developer |
+| `dossier/` | The same dossier rendered — HTML (with a checkable question list) and PDF |
+
+**One caution about `BIT-AUTOMOBILE-DOSSIER.md`.** Every line in it carries its own origin,
+and that is not decoration: what was *measured* (public DNS, the company register) and what
+Sabit *said* are two different kinds of fact. A domain move planned on the wrong one takes his
+business mail down with it.
