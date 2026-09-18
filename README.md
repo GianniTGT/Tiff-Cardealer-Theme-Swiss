@@ -64,9 +64,30 @@ Entfernt, weil es nicht zu BIT Automobile gehört:
 | Die 34 Theme-Dateien (`style.css`, `functions.php`, `inc/`, `assets/`, alle Templates) und `DESIGN-SYSTEM.md` | `Tiff-Cardealer-Manager` → `theme/` | **34 von 35 Dateien byte-identisch** (Blob-Hashes verglichen, 18. September 2026). Die einzige Abweichung ist `README.md`: die Kopie dort trägt einen zusätzlichen Kasten, der erklärt, dass sie ab dem 15. September die Quelle ist |
 | `business/SCHWEIZ-SAAS.md` | Historie von `Tiff-Cardealer-Manager` (Commit `78aa21c`) und die Historie dieses Repos | Anderes Produkt: ein Architekturvorschlag für ein künftiges Schweizer Mehrmandanten-Cloudprodukt. Nichts davon ist gebaut, und BIT kommt darin kein einziges Mal vor |
 | `business/offerte/offerte-aino.html` | Nur die Historie dieses Repos | Andere Kundin |
+| **AINO Haustechnik GmbH** aus `BETRIEB-UND-HOSTING.md` und `OFFERTE-VORLAGE.md` | Nur die Historie dieses Repos | Dieselbe andere Kundin, nur eingewachsen statt in eigenen Dateien — siehe unten |
 
 Der Ordner `business/` ist dabei verschwunden: er trennte die Geschäftsseite vom Theme, und
 das Theme ist weg. Sein Inhalt liegt jetzt auf der Wurzel.
+
+### Wie AINO aus `BETRIEB-UND-HOSTING.md` herausgelöst wurde
+
+Diese Datei war der schwierige Teil: sie handelte von *zwei* ersten Kunden, und der zweite
+stand nicht in eigenen Dateien, sondern in acht Abschnitten mitten in der Argumentation.
+Deshalb wurde sie gelesen und umgeschrieben, nicht durchsucht und ersetzt — **18 einzeln
+geprüfte Änderungen**, jede an genau einer Stelle:
+
+- **§9.6 gehörte ganz AINO** und ist entfernt; §9 heisst jetzt „Der erste Kunde".
+- **Tabellenzeilen** in §9.4, §11.4 und §13.3 sind weg; die Absätze daneben sind auf einen
+  Kunden umformuliert, nicht abgeschnitten.
+- **Die Rechnungen in §14.4 und §15.3 wurden neu gerechnet**, nach derselben Formel wie
+  vorher: aus `2'000 + 1'176 − 310 ≈ 2'866` für zwei Kunden wird `1'000 + 588 − 310 ≈ 1'278`
+  für einen. Die Infrastruktur ist ein fester Block und wurde deshalb *nicht* halbiert.
+
+**Zwei Dinge blieben absichtlich stehen**, und ein Kasten oben in der Datei sagt warum:
+Giannis **wörtliche Zitate** in §13 und §14 nennen AINO — ein Zitat umzuschreiben, damit es
+besser ins Dossier passt, wäre eine Fälschung. Und die Passagen über **Alaska** sind kein
+fremdes Thema: dass TCM dort läuft, ist genau der Grund, warum die Schweizer Fassung eine
+Portierung ist und kein Neubau. Das ist ein Argument über Sabit.
 
 **Gelöscht heisst nicht weg.** Alles steht weiter in der Git-Historie. Eine Datei kommt mit
 einem Befehl zurück:
