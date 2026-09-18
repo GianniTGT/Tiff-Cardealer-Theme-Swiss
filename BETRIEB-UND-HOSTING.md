@@ -6,11 +6,27 @@ Gegenstück zu `KLIENT-I-RI.md`: dort steht, wie ein Kunde mit der **lokalen** I
 ans Laufen kommt. Hier steht, wie es aussieht, wenn nichts mehr lokal ist — und wer dann
 wofür geradesteht.
 
-Anlass ist Giannis eigene Lage, in seinen Worten: ein Kunde mit Domain und ohne Hosting,
-der eine Website will und ausserdem der Schweizer Pilot für TCM Cloud ist; ein zweiter Kunde
-ohne Hosting, der eine Website will und dazu die Handwerker-Software für Sanitär. Und die
-Frage dahinter: *wenn ich für mich sowieso Cloud beschaffe, kann ich das den Kunden auch
-gleich anbieten?*
+Anlass ist Giannis eigene Lage, in seinen Worten: ein Kunde mit Domain und ohne eigenes
+Hosting bei ihm, der eine Website will und ausserdem der Schweizer Pilot für TCM Cloud ist.
+Und die Frage dahinter: *wenn ich für mich sowieso Cloud beschaffe, kann ich das den Kunden
+auch gleich anbieten?*
+
+> **Aufgeräumt am 18. September 2026.** Diese Datei handelte ursprünglich von *zwei* ersten
+> Kunden; der zweite, **AINO Haustechnik GmbH**, ist herausgenommen — samt dem Abschnitt 9.6,
+> der ganz ihm gehörte, seinen Tabellenzeilen und den Rechnungen, die zwei Kunden
+> zusammenzählten. Die Beträge in §14.4 und §15.3 sind dabei auf einen Kunden neu gerechnet,
+> nicht gestrichen.
+>
+> **Zwei Dinge blieben absichtlich stehen.** Erstens Giannis wörtliche Zitate in §13 und §14
+> — *„Ich mache Sabit und AINO jeweils eine Homepage"* ist gesagt worden, und ein Zitat
+> umzuschreiben, damit es besser ins Dossier passt, wäre eine Fälschung. Zweitens die
+> Passagen über **Alaska**: dort läuft TCM wirklich, und genau das ist der Grund, warum die
+> Schweizer Fassung eine Portierung ist und kein Neubau — ein Argument über Sabit, kein
+> fremdes Thema.
+>
+> Aus demselben Aufräumen zeigen die Verweise auf `SCHWEIZ-SAAS.md` (§4.3, §4.6, §2, §3) ins
+> Leere: die Datei ist raus, weil sie ein anderes Produkt beschreibt. Sie steht in der
+> Historie — `git show 956909d:business/SCHWEIZ-SAAS.md`.
 
 ---
 
@@ -22,10 +38,10 @@ Supportnummer:
 | | Was der Kunde kauft | Was er bekommt | Wo es läuft |
 |---|---|---|---|
 | **Website** | eine Dienstleistung | eine gepflegte Website | Reseller-Webhosting |
-| **Software** (TCM Cloud, Handwerk) | ein Abo | einen Login | **eigener Server, getrennt** |
+| **Software** (TCM Cloud) | ein Abo | einen Login | **eigener Server, getrennt** |
 | **Hosting** | — | **verkaufst du nicht** | — |
 
-**Ja, du kannst beiden Kunden das Hosting mitliefern** — aber nie als *Hosting*, sondern
+**Ja, du kannst deinen Kunden das Hosting mitliefern** — aber nie als *Hosting*, sondern
 als unsichtbare Zutat in etwas, das du sowieso verkaufst. Und **Website-Hosting und
 SaaS-Server dürfen nicht dieselbe Maschine sein**, aus einem Grund, den dieses Projekt schon
 zweimal bezahlt hat (§2).
@@ -110,7 +126,7 @@ Deshalb ist E-Mail die Sorte Arbeit, die niemand sieht und die trotzdem Wochen f
 gibt keine Fehlermeldung, an der man anfangen könnte, sondern nur einen Kunden, der sagt
 „es kommt nichts an" — und drei völlig verschiedene Fehler, die alle so klingen (§12.3).
 
-**Der Beleg dafür ist frisch und gehört einem der zwei Kunden selbst:** bei
+**Der Beleg dafür ist frisch und gehört Sabit selbst:** bei
 `bit-automobile.ch` steht das DKIM am falschen Ort und wirkt deshalb gar nicht, ein DMARC
 fehlt ganz, und Sabit beschwert sich, dass keine Mails kommen. Gemessen, nicht erinnert —
 **§12.**
@@ -168,7 +184,7 @@ Bestellen nachprüfen.
 | | Produkt | Preis (laut Suche) | Wofür |
 |---|---|---|---|
 | **Websites** | hosttech **Reseller Webhosting «start»** | **CHF 12.90/Mt**, 100 GB, **20 Kunden** | beide Kundenwebsites und die nächsten achtzehn |
-| **SaaS** | hosttech **vServer** | **ab CHF 12.90/Mt** | TCM Cloud + Handwerk, getrennte Maschine |
+| **SaaS** | hosttech **vServer** | **ab CHF 12.90/Mt** | TCM Cloud, getrennte Maschine |
 | Managed Server | | ab CHF 129.—/Mt | **nicht nötig** — siehe unten |
 | Webhosting einzeln | | ab CHF 4.90/Mt | nur falls Reseller nicht passt |
 
@@ -268,23 +284,20 @@ sobald sie stehen, und sie hängen an keiner einzigen der offenen Fragen aus
 
 ---
 
-## 9. Die zwei ersten Kunden, und die 29 Franken
+## 9. Der erste Kunde, und die 29 Franken
 
-**Nachtrag vom 15. September 2026.** Aus „irgendwann zwei Kunden" sind zwei Firmen mit
-Namen geworden, und ein Preis steht im Raum.
+**Nachtrag vom 15. September 2026.** Aus „irgendwann ein Kunde" ist eine Firma mit Namen
+geworden, und ein Preis steht im Raum.
 
 | | Firma | Was | Stand |
 |---|---|---|---|
 | **1** | **ImmoBit AG**, Oberwangen b. Bern — Marke **bit-automobile.ch** | Website **+ TCM Swiss** | Website existiert bereits |
-| **2** | **AINO Haustechnik GmbH** | Website **+ Handwerk/Sanitär** | **Software existiert nicht** |
 
-**Dieser Absatz stand hier bis zum Abend des 15. September und war für die Hälfte falsch** —
-er bleibt stehen, weil ein Dokument, das einen Irrtum still wegnimmt, nichts beibringt
-(`CLAUDE.md` §1): *„Beide Firmen konnten von hier aus nicht geprüft werden."* Für **AINO**
-gilt das weiter — eine Suche lieferte nichts Belastbares, die Zusammenfassung behauptete
-einen Handelsregistereintrag, den keiner ihrer Links stützte, und er ist deshalb nirgends
-als Tatsache notiert. Für **bit-automobile.ch** gilt es nicht: der direkte Weg ist gesperrt,
-der indirekte über den DAS-Server nicht. **Gemessen in §10.**
+**Hier stand bis zum Abend des 15. September, die Firma habe von hier aus nicht geprüft
+werden können** — und das war falsch. Der Satz bleibt als Korrektur stehen, weil ein
+Dokument, das einen Irrtum still wegnimmt, nichts beibringt (`CLAUDE.md` §1). Für
+**bit-automobile.ch** gilt er nicht: der direkte Weg ist gesperrt, der indirekte über den
+DAS-Server nicht. **Gemessen in §10.**
 
 ### 9.1 Zuerst die Frage, die auf jede Rechnung durchschlägt
 
@@ -368,7 +381,6 @@ Daten.
 |---|---|---|
 | Website-Betrieb | **29.—/Mt** | 39.—/Mt |
 | TCM Swiss | **29.—/Mt** | **89.—/Mt** |
-| Handwerk (später) | — | 89.—/Mt |
 
 Für ImmoBit wären das **58.— im Monat** im Pilot statt 29. Immer noch unter bexio *Basic*
 für **zwei** Produkte, und der Weg zu 128.— ist vorgezeichnet statt später erstritten.
@@ -388,36 +400,6 @@ für **zwei** Produkte, und der Weg zu 128.— ist vorgezeichnet statt später e
    rechnet ohnehin pro Firma.
 3. **Monatlich und jährlich.** Üblich ist **Jahr = zehn Monate**: CHF 290 statt 348. Für
    einen Einzelkämpfer ist Geld im Voraus mehr wert als die zwei Monate Differenz.
-
-### 9.6 AINO: die Website ja, das Abo noch nicht
-
-**Die Handwerker-Software existiert nicht.** Deshalb die klarste Empfehlung in diesem
-Abschnitt: **nimm dafür jetzt kein Abo entgegen.**
-
-- **Die Website zuerst.** Die ist real, lieferbar, bringt sofort Geld und Vertrauen — und
-  hängt an keiner einzigen offenen Frage.
-- **AINO wird Entwicklungspartner, nicht Abonnent.** Sein Ablauf definiert Version 1. Dafür
-  bekommt er später einen dauerhaft guten Preis — das ist ein fairer Tausch und er kostet
-  heute nichts.
-- **Kein Datum versprechen, das nicht steht.** Ein verpasster Termin beim ersten Kunden
-  einer neuen Software ist teurer als drei Monate Verspätung, die nie zugesagt wurden.
-
-**`KUNDE-FRAGEN.md` gilt auch für ihn**, nur mit Sanitär-Vokabular. Die sechs Fragen aus
-Block A übersetzt:
-
-| Auto | Sanitär |
-|---|---|
-| Woher kommen die Fahrzeuge? | **Regie oder Pauschal** — und in welchem Verhältnis? |
-| Effektiv oder Saldosteuersatz? | **gleich, wörtlich** |
-| Wie viele Fahrzeuge? | Wie viele Mitarbeiter schreiben **Rapporte**? |
-| Export und B2B? | **Serviceverträge und Wartungen** — wiederkehrende Arbeit ist ein eigenes Modul |
-| Wer arbeitet damit? | **gleich** — nach Namen fragen, nicht nach Rollen |
-| Eigene Werkstatt? | **Material: eigenes Lager oder direkt ab Grossist?** |
-
-Dazu zwei, die es beim Auto nicht gibt und die den Zuschnitt entscheiden:
-**Akonto- und Teilrechnungen** (bei längeren Baustellen der Normalfall), und die Frist des
-**Bauhandwerkerpfandrechts** — vier Monate nach Vollendung der Arbeiten, ZGB Art. 837. Eine
-Frist, die das System kennen sollte, weil ihr Verpassen den Anspruch kostet.
 
 ---
 
@@ -585,16 +567,15 @@ angekommen sein** — SMTP nimmt an und entscheidet später, und es gibt keinen 
 dem das Wegwerfen steht. Genau deshalb ist die Arbeit daran etwas wert, obwohl sie niemand
 sieht. Und genau deshalb hat sie gerade ein Kunde, bei dem sie nie gemacht wurde (§12).
 
-### 11.4 Für die zwei Kunden heisst das
+### 11.4 Für ImmoBit heisst das
 
 | | Modell | Warum |
 |---|---|---|
 | **ImmoBit AG** (bit-automobile) | **A** | Er **hat** schon Hoststar (§10.2). Nicht anfassen: die Mail läuft dort mit SPF und DKIM, und Mail umziehen ist das Einzige, was beim Übernehmen wirklich wehtun kann. Du bekommst einen Zugang und verrechnest deine Arbeit |
-| **AINO Haustechnik** | **B** | Hat nichts. Dein Reseller-Platz, still inbegriffen |
 
-**Beides gleichzeitig zu fahren ist kein Fehler**, sondern die normale Lage eines
-Einzelkämpfers: der eine Kunde bringt sein Hosting mit, der andere nicht. Was gleich
-bleiben muss, ist die Rechnungszeile und der Satz aus §11.2.
+**Dass ein späterer Kunde Modell B braucht, ist kein Fehler**, sondern die normale Lage
+eines Einzelkämpfers: der eine Kunde bringt sein Hosting mit, der nächste nicht. Was in
+beiden Fällen gleich bleiben muss, ist die Rechnungszeile und der Satz aus §11.2.
 
 ### 11.5 Was an Sabits Aufbau gemessen ist — und was nicht
 
@@ -747,7 +728,7 @@ gemacht, für das andere ein Server.
 | | Produkt | Preis | Was darauf läuft |
 |---|---|---|---|
 | **Websites** | Reseller «start» | **12.90/Mt** *(geprüft)* | die Kundenseiten, WordPress |
-| **Software** | **vServer** | ab 12.90/Mt *(Suche)* | **TCM Cloud und TIF Handwerker, beide auf derselben Maschine** |
+| **Software** | **vServer** | ab 12.90/Mt *(Suche)* | **TCM Cloud** |
 
 **Beide Programme dürfen sich einen vServer teilen** — das widerspricht §2 nicht. Die Regel
 dort trennt *Websites* von *Software*, weil eine Kunden-Website von jemandem bearbeitet
@@ -764,8 +745,8 @@ Mandanten dieser Grösse. Der erste zahlende Kunde bezahlt die ganze Serverrechn
 
 | Wann | Was | Warum |
 |---|---|---|
-| **jetzt** | Webhosting für **AINO** | er hat nichts, die Website kommt zuerst |
 | **jetzt nicht** | Hosting für **Sabit** | er hat Hoststar (§10.2) — erst hineinschauen |
+| **erst mit dem ersten Kunden ohne Hosting** | Webhosting | wer nichts hat, braucht es zuerst; Sabit hat etwas |
 | **erst wenn die Software läuft** | **vServer** | ein Server für eine Anwendung, die es nicht gibt, ist zwölf Monate Miete für nichts |
 
 **Ob heute schon das Reseller-Paket oder ein einzelnes Webhosting**, ist eine Rechnung und
@@ -808,9 +789,9 @@ darin steckt, damit die dritte Seite nicht automatisch auch 1'000 kostet:
 | Macht | **CHF 25 bis 50 pro Stunde** |
 | Seite 2 und 3 | **deutlich schneller**, weil die Theme schon existiert — dort wird 1'000 ein guter Preis |
 
-**Eine Warnung, die Geld kostet, wenn sie untergeht: AINO ist kein Autohändler.** Die Tiff
-Cardealer Theme passt dort nicht. Das ist eine zweite Theme oder eine neutrale — und der
-Grund, warum seine Seite *nicht* automatisch gleich schnell geht wie Sabits.
+**Das gilt aber nur für den nächsten Autohändler.** Die Tiff Cardealer Theme passt nur dort;
+ein Kunde aus einer anderen Branche braucht eine zweite oder eine neutrale Theme, und seine
+Seite geht dann *nicht* automatisch gleich schnell wie Sabits.
 
 ### 14.2 Das Loch im Plan: „ich supporte die Webpräsenz" — gratis, für immer
 
@@ -846,9 +827,9 @@ Was das gegenüber „29 für die Software" ändert:
 - **Der Kunde bekommt ab dem ersten Monat etwas Echtes** — die Betreuung ist real und
   sofort lieferbar.
 - **Kein Liefertermin wird geschuldet.** Das ist der grosse Gewinn: Ein Abo für eine
-  Software, die es nicht gibt, ist ein Versprechen mit Datum. §9.6 sagt das für AINO schon
-  in aller Schärfe — hier gilt es für beide, nur ist es bei Sabit milder, weil TCM für
-  Alaska existiert und die Schweizer Fassung eine Portierung ist und kein Neubau.
+  Software, die es nicht gibt, ist ein Versprechen mit Datum. Bei Sabit ist das milder als
+  bei einem Kunden, für den gar nichts existiert — TCM läuft in Alaska, die Schweizer
+  Fassung ist eine Portierung und kein Neubau. Milder ist aber nicht keines.
 - **Die Software wird zum Geschenk statt zur Schuld.** Wenn sie kommt, ist sie ein Grund
   für Dankbarkeit und für den nächsten Kunden — nicht die verspätete Erfüllung einer
   Rechnung, die seit acht Monaten läuft.
@@ -857,21 +838,21 @@ Was das gegenüber „29 für die Software" ändert:
 
 | | |
 |---|---|
-| **Als Geschäft, für sich** | **Nein.** 2'000 einmalig und ~700 im Jahr, abzüglich ~310 Infrastruktur, für zwei Websites und zwei Softwares. Rechnet man die Stunden dazu, ist es nahe null |
-| **Als **erster Kunde**, der der zweite und dritte möglich macht** | **Ja, und deutlich.** Genau dafür ist er da |
+| **Als Geschäft, für sich** | **Nein.** 1'000 einmalig und ~590 im Jahr, abzüglich ~310 Infrastruktur, für eine Website und eine Software. Rechnet man die Stunden dazu, ist es nahe null |
+| **Als **erster Kunde**, der den zweiten und dritten möglich macht** | **Ja, und deutlich.** Genau dafür ist er da |
 
-**Was diese zwei Kunden wirklich einbringen, ist nicht das Geld:**
+**Was dieser Kunde wirklich einbringt, ist nicht das Geld:**
 
-- **Zwei fertige Referenzen**, die man dem vierten zeigen kann.
-- **Eine Theme und eine Software, die an echten Betrieben bewiesen sind** — `KUNDE-FRAGEN.md`
-  existiert genau deshalb.
-- **Zwei Leute, die Gianni vertrauen**, und die ihm sagen, was fehlt, statt zu kündigen.
+- **Eine fertige Referenz**, die man dem nächsten zeigen kann.
+- **Eine Theme und eine Software, die an einem echten Betrieb bewiesen sind** —
+  `KUNDE-FRAGEN.md` existiert genau deshalb.
+- **Einen Mann, der Gianni vertraut**, und der ihm sagt, was fehlt, statt zu kündigen.
 
 **Die eine Bedingung, damit es das bleibt: es darf kein Muster werden.** Zwanzig Freunde zu
 1'000 und 29 sind ein Vollzeitberuf ohne Lohn. Der Regelpreis gehört deshalb heute
-aufgeschrieben, auch wenn ihn noch niemand bezahlt (§9.4) — und *diesen zweien* gegenüber
-darf ruhig stehen, dass sie den Freundschaftspreis bekommen. Das ist kein Nachteil, das ist
-der Grund, warum sie später weiterempfehlen.
+aufgeschrieben, auch wenn ihn noch niemand bezahlt (§9.4) — und *ihm* gegenüber darf ruhig
+stehen, dass er den Freundschaftspreis bekommt. Das ist kein Nachteil, das ist der Grund,
+warum er später weiterempfiehlt.
 
 ---
 
@@ -931,7 +912,7 @@ Drei Gründe, jeder für sich ausreichend:
 3. **Preise lassen sich einzeln erhöhen.** Wenn TCM Swiss in zwei Jahren mehr kann, steigt
    die eine Zeile. Die Webbetreuung bleibt, wo sie ist, und die Erhöhung ist begründbar.
 
-**Und der psychologische Teil, der hier zählt:** Gianni hat den beiden bereits *29 für die
+**Und der psychologische Teil, der hier zählt:** Gianni hat ihm bereits *29 für die
 Software* gesagt. Diese Aufteilung nimmt nichts zurück — die 29 bleiben wörtlich stehen,
 es kommt die Betreuung dazu, die es vorher gar nicht gab. Das ist ein leichteres Gespräch
 als „aus 29 werden 49".
@@ -947,16 +928,17 @@ offen bleiben nur noch **pro Firma oder pro Benutzer** (Empfehlung: pro Firma) u
 |---|---|---|
 | **Einmalig** | Website: Aufbau, Inhalte, Mail in Ordnung (§12) | **CHF 1'000.—** |
 | **Monatlich, ab Aufschaltung** | Webbetreuung | **CHF 20.—** |
-| **Monatlich, ab Aufschaltung** | Software-Lizenz (TCM bzw. Handwerk) | **CHF 29.—** |
+| **Monatlich, ab Aufschaltung** | Software-Lizenz (TCM Swiss) | **CHF 29.—** |
 
 **Das Abo beginnt mit der Website, nicht mit der Software** — §14.3, unverändert und der
 wichtigste Punkt der ganzen Konstruktion. Der Kunde zahlt ab Tag eins für etwas, das es
 gibt; die Software kommt dazu, wenn sie fertig ist. **So wird kein Liefertermin geschuldet.**
 
-Jahr 1 mit beiden Kunden: 2'000 einmalig plus 1'176 Abo minus ~310 Infrastruktur ≈
-**2'866**. Ab Jahr 2 laufen **~866** weiter, ohne dass noch eine Seite gebaut wird. **Der
-zehnte Kunde bringt ~5'400 im Jahr, und für ihn wird nichts mehr gebaut ausser seiner
-Website.**
+Jahr 1 mit Sabit allein: 1'000 einmalig plus 588 Abo minus ~310 Infrastruktur ≈ **1'278**.
+Ab Jahr 2 laufen **~278** weiter, ohne dass noch eine Seite gebaut wird. Die Infrastruktur
+ist dabei ein fester Block und wächst mit dem zweiten Kunden kaum mit — deshalb fällt jeder
+weitere fast ganz durch. **Der zehnte Kunde bringt ~5'400 im Jahr, und für ihn wird nichts
+mehr gebaut ausser seiner Website.**
 
 ### 15.4 Zu den „60 % schon vorhanden" — die Schätzung ist fair, die Aufteilung nicht
 

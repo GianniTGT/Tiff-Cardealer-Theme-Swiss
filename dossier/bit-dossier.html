@@ -1,0 +1,446 @@
+<title>BIT Automobile Dossier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --blau:#3C77B2;
+    --blau-tief:#2A5A8C;
+    --blau-ink:#1E4467;
+    --grund:#F4F6F9;
+    --flaeche:#FFFFFF;
+    --ink:#16202B;
+    --ink-2:#4A5A6B;
+    --linie:#DFE5EC;
+    --linie-stark:#C6D0DB;
+    --wash:#EAF1F8;
+    --warn:#8A5A00;
+    --warn-flaeche:#FFF6E3;
+    --warn-linie:#E8CB90;
+    --gefahr:#8E2C22;
+    --gefahr-flaeche:#FDEEEC;
+    --gefahr-linie:#E6B3AC;
+    --ok:#1E6B4B;
+    --sh:0 1px 2px rgba(22,32,43,.05);
+    --sh-2:0 8px 24px -10px rgba(22,32,43,.22);
+    --code-bg:#12212F;
+    --code-ink:#DCE7F2;
+    --sans:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --blau:#6BA6DE;
+      --blau-tief:#8FBFEC;
+      --blau-ink:#B9D7F2;
+      --grund:#0E1822;
+      --flaeche:#17242F;
+      --ink:#E8EFF5;
+      --ink-2:#A3B4C2;
+      --linie:#283A49;
+      --linie-stark:#364C5E;
+      --wash:#1B2E3F;
+      --warn:#F0C775;
+      --warn-flaeche:#33280F;
+      --warn-linie:#5C4A1E;
+      --gefahr:#F0A79C;
+      --gefahr-flaeche:#361C19;
+      --gefahr-linie:#5E2F28;
+      --ok:#7BCFA5;
+      --sh:0 1px 2px rgba(0,0,0,.35);
+      --sh-2:0 8px 24px -10px rgba(0,0,0,.5);
+      --code-bg:#0A131C;
+      --code-ink:#DCE7F2;
+    }
+  }
+  :root[data-theme="dark"]{
+    --blau:#6BA6DE;
+    --blau-tief:#8FBFEC;
+    --blau-ink:#B9D7F2;
+    --grund:#0E1822;
+    --flaeche:#17242F;
+    --ink:#E8EFF5;
+    --ink-2:#A3B4C2;
+    --linie:#283A49;
+    --linie-stark:#364C5E;
+    --wash:#1B2E3F;
+    --warn:#F0C775;
+    --warn-flaeche:#33280F;
+    --warn-linie:#5C4A1E;
+    --gefahr:#F0A79C;
+    --gefahr-flaeche:#361C19;
+    --gefahr-linie:#5E2F28;
+    --ok:#7BCFA5;
+    --sh:0 1px 2px rgba(0,0,0,.35);
+    --sh-2:0 8px 24px -10px rgba(0,0,0,.5);
+    --code-bg:#0A131C;
+    --code-ink:#DCE7F2;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--grund);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px;padding-block:40px 80px}
+
+  /* --- Kopf --- */
+  header{margin-bottom:8px}
+  .marke{
+    display:inline-flex;align-items:center;gap:11px;margin-bottom:20px;
+  }
+  .balken{width:4px;height:42px;background:var(--blau);flex:none;border-radius:1px}
+  .marke-text{line-height:1.08}
+  .marke-text b{display:block;font-weight:700;font-size:21px;letter-spacing:-.4px}
+  .marke-text span{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);letter-spacing:.4px;margin-top:2px}
+  h1{
+    font-size:clamp(29px,5.4vw,41px);font-weight:700;line-height:1.08;
+    letter-spacing:-1px;margin:0;text-wrap:balance;
+  }
+  .lede{color:var(--ink-2);margin:14px 0 0;max-width:60ch;font-size:16.5px}
+
+  h2{
+    font-size:clamp(19px,2.8vw,23px);font-weight:700;line-height:1.2;
+    letter-spacing:-.4px;margin:0;text-wrap:balance;
+  }
+  section{margin-top:44px}
+  .kopf{margin-bottom:16px}
+  .kopf p{color:var(--ink-2);margin:7px 0 0;font-size:15px;max-width:58ch}
+
+  /* --- Herkunfts-Marken --- */
+  .tag{
+    display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;
+    letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:4px;
+    vertical-align:2px;margin-left:8px;white-space:nowrap;
+  }
+  .tag-mess{background:var(--wash);color:var(--blau-ink);border:1px solid var(--linie-stark)}
+  .tag-sagt{background:transparent;color:var(--ink-2);border:1px dashed var(--linie-stark)}
+  .tag-offen{background:var(--warn-flaeche);color:var(--warn);border:1px solid var(--warn-linie)}
+
+  /* --- Fakten-Tabellen --- */
+  .karte{
+    background:var(--flaeche);border:1px solid var(--linie);border-radius:12px;
+    box-shadow:var(--sh);overflow:hidden;
+  }
+  .zeile{
+    display:grid;grid-template-columns:minmax(120px,34%) 1fr;gap:4px 16px;
+    padding:11px 16px;border-bottom:1px solid var(--linie);align-items:baseline;
+  }
+  .zeile:last-child{border-bottom:none}
+  .zeile dt{color:var(--ink-2);font-size:14px}
+  .zeile dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+  dl{margin:0}
+  @media(max-width:520px){
+    .zeile{grid-template-columns:1fr;padding:10px 14px}
+    .zeile dt{font-size:12.5px}
+  }
+  code,.m{font-family:var(--mono);font-size:.885em}
+  code{background:var(--wash);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+  .gross{font-size:17px;font-weight:600;letter-spacing:-.2px}
+
+  pre{
+    margin:14px 0 0;padding:14px 16px;overflow-x:auto;
+    background:var(--code-bg);color:var(--code-ink);border-radius:10px;
+    font-family:var(--mono);font-size:13px;line-height:1.6;
+  }
+  pre code{background:none;padding:0;color:inherit}
+
+  /* --- Abhakbares --- */
+  ol.liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  ol.liste li{
+    background:var(--flaeche);border:1px solid var(--linie);border-radius:11px;box-shadow:var(--sh);
+  }
+  ol.liste label{
+    display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;
+    padding:14px 16px;cursor:pointer;
+  }
+  ol.liste input{
+    appearance:none;-webkit-appearance:none;margin:0;
+    width:21px;height:21px;flex:none;margin-top:1px;
+    border:1.5px solid var(--linie-stark);border-radius:5px;background:var(--flaeche);
+    cursor:pointer;display:grid;place-items:center;
+    transition:background .15s ease,border-color .15s ease;
+  }
+  ol.liste input:checked{background:var(--blau);border-color:var(--blau)}
+  ol.liste input:checked::after{
+    content:"";width:5px;height:10px;margin-top:-2px;
+    border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(43deg);
+  }
+  :root[data-theme="dark"] ol.liste input:checked::after,
+  :root:not([data-theme="light"]) ol.liste input:checked::after{border-color:#0E1822}
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]) ol.liste input:checked::after{border-color:#fff}
+  }
+  ol.liste input:focus-visible{outline:3px solid var(--blau);outline-offset:2px}
+  .was{font-weight:600;display:block}
+  .warum{color:var(--ink-2);font-size:14.5px;display:block;margin-top:3px}
+  ol.liste input:checked ~ .txt{opacity:.5}
+  ol.liste input:checked ~ .txt .was{text-decoration:line-through;text-decoration-color:var(--linie-stark)}
+
+  /* --- Hinweisblöcke --- */
+  .note{border-radius:11px;padding:15px 17px;margin-top:12px;border:1px solid var(--linie);background:var(--flaeche)}
+  .note.warn{background:var(--warn-flaeche);border-color:var(--warn-linie)}
+  .note.gefahr{background:var(--gefahr-flaeche);border-color:var(--gefahr-linie)}
+  /* Nur die Überschrift des Blocks, nicht jedes fette Wort im Fliesstext —
+     ohne den Kindselektor zerriss ein <b> mitten im Satz den Absatz. */
+  .note > b{display:block;font-weight:600;margin-bottom:5px}
+  .note > b.warn-ink,.note.warn > b{color:var(--warn)}
+  .note.gefahr > b{color:var(--gefahr)}
+  .note p{margin:0;font-size:15px;color:var(--ink-2)}
+  .note.warn p,.note.gefahr p{color:var(--ink);opacity:.85}
+  .note p + p{margin-top:9px}
+
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--linie);color:var(--ink-2);font-size:13.5px}
+  footer p{margin:0 0 7px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="marke">
+      <div class="balken"></div>
+      <div class="marke-text">
+        <b>BIT Automobile</b>
+        <span>ImmoBit AG · Oberwangen b. Bern</span>
+      </div>
+    </div>
+    <h1>Was wir wissen,<br>und was noch fehlt</h1>
+    <p class="lede">Alles zusammengezogen: Firma, Domain, Hosting, Logo. Jede Zeile ist markiert, woher sie kommt — <span class="tag tag-mess" style="margin-left:0">gemessen</span> <span class="tag tag-sagt">von Sabit</span> <span class="tag tag-offen">offen</span></p>
+  </header>
+
+  <section>
+    <div class="kopf"><h2>Firma <span class="tag tag-mess">Handelsregister</span></h2></div>
+    <div class="karte"><dl>
+      <div class="zeile"><dt>Firma</dt><dd class="gross">ImmoBit AG</dd></div>
+      <div class="zeile"><dt>Rechtsform</dt><dd>Aktiengesellschaft</dd></div>
+      <div class="zeile"><dt>UID</dt><dd class="m">CHE-345.577.846</dd></div>
+      <div class="zeile"><dt>Eingetragen</dt><dd>5. Dezember 2022 · Statuten 1. Dezember 2022</dd></div>
+      <div class="zeile"><dt>Sitz</dt><dd>Köniz</dd></div>
+      <div class="zeile"><dt>Domizil</dt><dd>Herzwilstrasse 262, 3173 Oberwangen b. Bern</dd></div>
+      <div class="zeile"><dt>Kapital</dt><dd>CHF 100'000, voll liberiert · 1'000 Namenaktien à CHF 100, vinkuliert</dd></div>
+      <div class="zeile"><dt>Zweck</dt><dd>Immobilien <b>und</b> Handel mit Neu- und Occasionswagen sowie Betrieb einer Autowerkstätte</dd></div>
+      <div class="zeile"><dt>Person</dt><dd>Sabit Kadriu, zeichnungsberechtigt</dd></div>
+    </dl></div>
+
+    <div class="note gefahr">
+      <b>Die Rechtsperson heisst nicht BIT Automobile</b>
+      <p><b>BIT Automobile ist ein Handelsname der ImmoBit AG.</b> Ein Impressum, das nur „BIT Automobile" nennt, ist falsch — es muss die AG und die UID tragen.</p>
+      <p>Dazu eine Schreibweisen-Falle: das Register schreibt <code>BIT Automobile</code> <b>ohne</b> Bindestrich, die Visitenkarte <code>BIT-Automobile</code> <b>mit</b>. Fürs Impressum gilt das Register; das Logo darf seine Schreibweise behalten.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kopf">
+      <h2>Domain und Hosting <span class="tag tag-mess">DNS, 16.09.2026</span></h2>
+      <p>Öffentliche DNS-Einträge, selbst abgefragt. Kein Zugriff auf Postfächer oder Konten.</p>
+    </div>
+    <div class="karte"><dl>
+      <div class="zeile"><dt>Domain</dt><dd class="m gross">bit-automobile.ch</dd></div>
+      <div class="zeile"><dt>DNS-Zone</dt><dd><b>Wix</b> — <span class="m">ns12.wixdns.net</span>, <span class="m">ns13.wixdns.net</span></dd></div>
+      <div class="zeile"><dt>Webseite</dt><dd><b>Wix</b> — <span class="m">185.230.63.186 / .171 / .107</span> → <span class="m">unalocated.63.wixsite.com</span></dd></div>
+      <div class="zeile"><dt>www</dt><dd class="m">34.149.87.45</dd></div>
+      <div class="zeile"><dt>Mail (MX)</dt><dd><b>Hoststar</b> — <span class="m">10 mail.bit-automobile.ch</span> → <span class="m">168.119.41.56</span> → <span class="m">lx21.hoststar.hosting</span></dd></div>
+      <div class="zeile"><dt>SPF</dt><dd class="m">v=spf1 a:bit-automobile.ch mx ~all</dd></div>
+      <div class="zeile"><dt>DKIM</dt><dd>TXT an der Domain statt unter einem Selektor · <span class="m">t=y</span> (Testmodus) · 13 übliche Selektoren geprüft, keiner existiert</dd></div>
+      <div class="zeile"><dt>DMARC</dt><dd>fehlt</dd></div>
+      <div class="zeile"><dt>Startseite</dt><dd>632 KB</dd></div>
+    </dl></div>
+
+    <div class="note gefahr">
+      <b>Beim Umzug hängt seine Geschäftspost daran</b>
+      <p>Die Zone liegt bei <b>Wix</b>, das Postfach bei <b>Hoststar</b>. Wer die Webseite von Wix wegholt, muss die DNS-Zone mitnehmen — und dabei den MX-Eintrag <b>exakt</b> übernehmen. Wird er vergessen oder falsch gesetzt, <b>steht seine Mail.</b></p>
+      <p>Vorgehen: Zonenexport vor dem Umzug, MX und SPF eins zu eins übertragen, TTL vorher runtersetzen.</p>
+    </div>
+
+    <div class="note warn">
+      <b>Der kommerzielle Befund — und das Verkaufsargument</b>
+      <p><code>/fahrzeuge</code> liefert im Server-HTML <b>kein einziges Fahrzeug.</b> Kein AutoScout24, kein Widget, kein iframe. Wix zeichnet manches per JavaScript, deshalb ist die saubere Aussage nicht „leer", sondern die schärfere: <b>Google sieht keines seiner Fahrzeuge.</b></p>
+      <p>Wer „Volvo XC60 Occasion Bern" sucht, findet ihn nicht — weil es nichts zu indexieren gibt.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kopf">
+      <h2>Kontakt und Auftritt <span class="tag tag-mess">von seiner Seite</span></h2>
+    </div>
+    <div class="karte"><dl>
+      <div class="zeile"><dt>Telefon</dt><dd class="m">031 552 00 02 · 078 868 87 97</dd></div>
+      <div class="zeile"><dt>E-Mail</dt><dd class="m">info@bit-automobile.ch</dd></div>
+      <div class="zeile"><dt>Öffnungszeiten</dt><dd>Mo–Fr 08:00–18:00 · Sa 09:00–14:00</dd></div>
+      <div class="zeile"><dt>Slogan</dt><dd>„Qualität findet hier ein Zuhause!"</dd></div>
+      <div class="zeile"><dt>Leistungen</dt><dd>An- und Verkauf · Fahrzeugaufbereitung · Carrosserie und Werkstatt · Fahrzeugbewertung</dd></div>
+    </dl></div>
+  </section>
+
+  <section>
+    <div class="kopf">
+      <h2>Logo <span class="tag tag-mess">auf den Pixel</span></h2>
+    </div>
+    <div class="karte"><dl>
+      <div class="zeile"><dt>Hausfarbe</dt><dd><span class="m">#3C77B2</span> — der einzige gemessene Farbwert</dd></div>
+      <div class="zeile"><dt>Transparenz</dt><dd>keine — blau auf weissem Grund</dd></div>
+      <div class="zeile"><dt>Original</dt><dd class="m">3555 × 961 px</dd></div>
+      <div class="zeile"><dt>Gebäudetafel</dt><dd>einzeilig, weiss, ohne Balken — beide <span class="m">t</span> mit Querbalken auf <b>beiden</b> Seiten</dd></div>
+      <div class="zeile"><dt>Web und Karte</dt><dd>zweizeilig, blau, mit Balken — beide <span class="m">t</span> nur nach <b>rechts</b></dd></div>
+    </dl></div>
+    <div class="note">
+      <b>Es sind zwei verschiedene Logos im Umlauf, nicht eines.</b>
+      <p>Wer von der Tafel auf die Webseite kommt, sieht zwei Marken. Das muss Sabit entscheiden.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kopf">
+      <h2>Fragen an Sabit</h2>
+      <p>Die Liste merkt sich deine Häkchen in diesem Browser.</p>
+    </div>
+    <ol class="liste" id="liste">
+      <li><label><input type="checkbox" id="q-as24-zugang"><span class="txt">
+        <span class="was">AutoScout24: wie bekommt man <span class="m">client_id</span> und <span class="m">client_secret</span>?</span>
+        <span class="warum">Selbst im Portal oder per Vertrag — und darf TIFF im Auftrag des Händlers zugreifen? <b>Diese Antwort entscheidet, ob es zwei Wochen Arbeit sind oder ein Geschäftsverhältnis.</b></span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="q-as24-vin"><span class="txt">
+        <span class="was">Was kostet die VIN-Abfrage bei AutoScout24?</span>
+        <span class="warum">Die Spezifikation sagt es ausdrücklich: <em>„There will be a fee to obtain vehicle information using the VIN."</em> Pro Aufruf, im Abo, mit Kontingent? Es gibt kostenlose Alternativen über Stammnummer und Typenscheinnummer.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="q-hoststar"><span class="txt">
+        <span class="was">Wer ist bei Hoststar Kunde — er selbst oder eine Agentur?</span>
+        <span class="warum">Und welcher Tarif. Ohne Zugang zu diesem Konto lässt sich die Mail beim Umzug nicht sichern.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="q-registrar"><span class="txt">
+        <span class="was">Wer hält die Domain beim Registrar?</span>
+        <span class="warum">Von aussen nicht sichtbar. Wenn die Domain bei einer Agentur liegt, gehört sie vor jedem Umzug auf ihn übertragen.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="q-fahrzeuge"><span class="txt">
+        <span class="was">Wo pflegt er seine Fahrzeuge heute wirklich?</span>
+        <span class="warum">Gemessen ist nur, dass auf <code>/fahrzeuge</code> serverseitig nichts steht. Seine Antwort hängt direkt an der AutoScout24-Frage.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="q-mwst"><span class="txt">
+        <span class="was">MWST-Nummer — ist die AG pflichtig?</span>
+        <span class="warum">Fehlt fürs Impressum.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="q-personen"><span class="txt">
+        <span class="was">Ist ausser ihm jemand zeichnungsberechtigt?</span>
+        <span class="warum">Der übermittelte Handelsregister-Auszug brach vor dem Abschnitt <em>Personen</em> ab.</span>
+      </span></label></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="kopf"><h2>Dateien, die wir brauchen</h2></div>
+    <ol class="liste" id="liste2">
+      <li><label><input type="checkbox" id="d-vektor"><span class="txt">
+        <span class="was">Logo als AI oder EPS — von der Firma, die die Tafel gemacht hat</span>
+        <span class="warum"><b>Das ist das Einzige, was das Logo blockiert.</b> Über ein PNG lassen sich gemessene Rechtecke legen, aber der neue Arm des <span class="m">t</span> berührt den Nachbarn mit null Pixel Luft. Die Laufweite zu öffnen ist im Vektor eine Minute und über Bitmap unmöglich.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="d-karte"><span class="txt">
+        <span class="was">Visitenkarte als PDF oder AI von der Druckerei</span>
+        <span class="warum">Das Blau der Karte wirkt tiefer als das der Webseite. Mit dieser Datei wird daraus ein exaktes CMYK oder Pantone — und Webseite, Tafel und Karte sagen zum ersten Mal dasselbe. Aus einem Handyfoto lässt sich kein Hex messen.</span>
+      </span></label></li>
+
+      <li><label><input type="checkbox" id="d-fahrzeuge"><span class="txt">
+        <span class="was">Echte Fahrzeugdaten</span>
+        <span class="warum">Preise, Kilometer, Baujahre. Die Fotos sind seine, die Zahlen im Entwurf nicht.</span>
+      </span></label></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="kopf"><h2>Was Sabit entscheiden muss</h2></div>
+    <ol class="liste" id="liste3">
+      <li><label><input type="checkbox" id="e-logo"><span class="txt">
+        <span class="was">Welches der beiden Logos gilt</span>
+        <span class="warum">Tafel oder Web/Karte. Heute sind zwei Marken im Umlauf.</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="e-farbe"><span class="txt">
+        <span class="was">Welche der vier Logo-Farben</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="e-maus"><span class="txt">
+        <span class="was">Maus-Effekt auf <span class="m">bit</span>: Schatten / Sofort / Spur / Aus</span>
+        <span class="warum">Steht derzeit auf 32px.</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="e-dunkel"><span class="txt">
+        <span class="was">Dunkel oder hell?</span>
+        <span class="warum">Der Entwurf wurde dunkel, weil ein grauer AMG und ein mattschwarzer 911 auf Weiss die Hälfte ihrer Wirkung verlieren. Gianni hatte früher Weiss gewünscht — die Rückkehr ist ein Satz Variablen, kein Neubau.</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="e-verkaeufer"><span class="txt">
+        <span class="was">Braucht er die Rolle <em>Verkäufer</em> überhaupt?</span>
+        <span class="warum">Arbeitet er allein, ist die Trennung Chef/Verkäufer Arbeit ohne Nutzen — dann sollte die Demo den Schalter verstecken, bevor er sie sieht. Hat er jemanden im Salon, ist es das stärkste Argument.</span>
+      </span></label></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="kopf">
+      <h2>Technische Arbeit, die sich sofort lohnt</h2>
+      <p>Drei DNS-Einträge, eine halbe Stunde — und ein Nutzen, den er merkt, bevor über die Webseite geredet wird.</p>
+    </div>
+    <ol class="liste" id="liste4">
+      <li><label><input type="checkbox" id="t-dkim"><span class="txt">
+        <span class="was">DKIM an die richtige Stelle setzen</span>
+        <span class="warum">Der Schlüssel steht heute direkt auf der Domain statt unter <span class="m">&lt;selektor&gt;._domainkey</span>. So findet ihn kein Mailserver — er tut schlicht nichts. Dazu steht <span class="m">t=y</span> darin, der Testmodus.</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="t-dmarc"><span class="txt">
+        <span class="was">DMARC anlegen</span>
+        <span class="warum"><span class="m">_dmarc.bit-automobile.ch</span> existiert nicht. Ohne DMARC ist die Domain schlecht gegen Fälschung geschützt.</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="t-spf"><span class="txt">
+        <span class="was">SPF schärfen</span>
+        <span class="warum"><span class="m">a:bit-automobile.ch</span> autorisiert die Wix-Webserver zum Mailversand — die versenden aber gar nicht. Und <span class="m">~all</span> ist Softfail statt Hardfail.</span>
+      </span></label></li>
+      <li><label><input type="checkbox" id="t-zone"><span class="txt">
+        <span class="was">Zonenexport sichern, bevor irgendetwas umzieht</span>
+        <span class="warum">Der MX zeigt auf Hoststar, die Zone liegt bei Wix. Beim Wegzug von Wix muss der MX exakt mit — sonst steht die Post.</span>
+      </span></label></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="kopf"><h2>Nicht verwechseln</h2></div>
+    <div class="note warn">
+      <b>Im Entwurf und in der Demo sind Zahlen erfunden</b>
+      <p><b>Preise, Kilometerstände und Baujahre sind frei erfunden</b> — die Seite sagt das an drei Stellen selbst. Echt sind seine eigenen Showroom-Fotos und die Fahrzeugnamen, die daraus abgelesen wurden: AMG GT Roadster, 911 Turbo Cabrio, AMG GT 4-Türer.</p>
+      <p>Wenn du das jemandem zeigst: nur Sabit kann die echten Zahlen liefern.</p>
+    </div>
+    <div class="note">
+      <b>Eine Notiz ist inzwischen überholt</b>
+      <p>In <code>CLAUDE.md</code> §26 steht noch „Schweiz ist AutoScout24 → Webseite". <b>Das ist seit dem 15. September falsch</b> — Sabits eigene Beobachtung hat die Richtung umgedreht auf <b>TCM → Webseite + AutoScout24</b>. Korrigiert ist es in <code>AUTOSCOUT24-API.md</code> und der <code>TODO.md</code>; der alte Satz gehört bei Gelegenheit nachgezogen.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Herkunft der Angaben.</b> Firma aus dem Handelsregister des Kantons Bern. Kontakt, Auftritt und Logo aus seiner Webseite und den übermittelten Bildern, gemessen am 14. September 2026. DNS und Hosting selbst abgefragt am 16. September 2026 — ausschliesslich öffentliche Einträge, kein Zugriff auf Postfächer oder Konten.</p>
+    <p><b>Technische Notiz.</b> <code>bit-automobile.ch</code> ist aus einer Websitzung nicht erreichbar (<span class="m">curl</span> antwortet <span class="m">000</span>). Gemessen wurde über das PHP des DAS-Servers, das normalen Internetzugang hat.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var KEY = 'bit-dossier-v1';
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+    var saved = {};
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) { saved = JSON.parse(raw) || {}; }
+    } catch (e) { saved = {}; }
+
+    boxes.forEach(function (b) {
+      if (saved[b.id]) { b.checked = true; }
+      b.addEventListener('change', save);
+    });
+
+    function save() {
+      var out = {};
+      boxes.forEach(function (b) { if (b.checked) { out[b.id] = 1; } });
+      try { localStorage.setItem(KEY, JSON.stringify(out)); } catch (e) { /* privates Fenster — die Liste funktioniert trotzdem */ }
+    }
+  })();
+</script>
