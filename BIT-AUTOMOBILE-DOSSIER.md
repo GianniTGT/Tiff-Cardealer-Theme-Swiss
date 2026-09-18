@@ -156,14 +156,15 @@ Total inkl. 8.10% MWST: CHF 193.50
 selbst Reseller-Kunde bei Hoststar (`lx21.hoststar.hosting`, derselbe Host, auf den der MX
 von `bit-automobile.ch` zeigt, §3) und verwaltet fremde Kundenpostfächer im selben Panel.
 
-**Zwei Dinge bleiben offen, bevor daraus ein Kontakt wird:**
+**Von Sabit bestätigt (18. September 2026): der Vertrag läuft noch, und der Ansprechpartner
+bei Arca-IT AG heisst Arben.** Damit ist Punkt 1 erledigt — der Kontakt geht an eine aktive
+Geschäftsbeziehung, nicht ins Leere.
 
-1. **Die Rechnung ist vom 1. Februar 2024** — über zweieinhalb Jahre alt. Sie belegt eine
-   frühere Vertragsbeziehung, nicht zwingend eine heute noch laufende.
-2. **Die Adresse weicht von der zuvor gezeigten ab**: hier `Breitmattweg 6`, vorher
-   `Herzwilstrasse 262` — beides 3173 Oberwangen b. Bern. Entweder ist die AG umgezogen,
-   oder es sind zwei unterschiedliche Angaben im Umlauf. Vor einem Anschreiben lohnt sich,
-   welche aktuell ist.
+**Ein Punkt bleibt offen:** Die Adresse weicht von der zuvor gezeigten ab — hier
+`Breitmattweg 6`, auf der Visitenkarte vorher `Herzwilstrasse 262`, beides
+3173 Oberwangen b. Bern. Entweder ist die AG umgezogen, oder es sind zwei unterschiedliche
+Angaben im Umlauf. Für den Kontakt mit Arben unwichtig, für ein Impressum oder einen
+Vertrag nicht.
 
 ---
 
@@ -219,8 +220,8 @@ Webseite kommt, sieht zwei Marken. Das muss Sabit entscheiden.
 - [ ] **Ist der gezeigte Hoststar-Zugang (`info@immobit.ch`) seiner?** Und gehört `immobit.ch`
       der AG?
 - [ ] **Wer ist bei Hoststar Vertragskunde — er selbst oder die Agentur?** Und welcher Tarif.
-- [ ] **Läuft der Arca-IT-AG-Vertrag (Rechnung vom 01.02.2024, §4) heute noch?** Die Agentur
-      ist belegt, das Datum ist es nicht mehr — aktuellen Stand bei Sabit erfragen.
+- [x] ~~Läuft der Arca-IT-AG-Vertrag heute noch?~~ **Ja, von Sabit bestätigt (18.9.2026).
+      Ansprechpartner: Arben.**
 - [ ] **Wer hält die Domain beim Registrar?** Von aussen nicht sichtbar (WHOIS-Port 43 läuft
       aus dieser Umgebung in einen Timeout, RDAP antwortet 403). Liegt die Domain bei der
       Agentur, gehört sie **vor** jedem Umzug auf die ImmoBit AG übertragen.
