@@ -69,6 +69,34 @@ gesetzt, steht seine Mail.
 Vorgehen: **Zonenexport vor dem Umzug**, MX und SPF eins zu eins übertragen, TTL vorher
 runtersetzen.
 
+### Pronar ligjor vs. kontroll teknik — dy gjëra të ndryshme
+
+**Nachtrag vom 18. September 2026.** Gianni fragte, ob „Transfer zu ImmoBit AG" überhaupt
+das richtige Wort ist, wenn beide Domains ohnehin schon Sabit gehören könnten. Die Antwort:
+**es sind zwei verschiedene Fragen, und die Messungen oben beantworten nur die zweite.**
+
+| Frage | Was sie bedeutet | Ist sie beantwortet? |
+|---|---|---|
+| **Wer ist rechtlicher Inhaber (Registrant)?** | Der Name, der beim Registrar hinterlegt ist | **Nein** — WHOIS/RDAP sind aus dieser Umgebung blockiert (§8) |
+| **Wer kontrolliert die Nameserver technisch?** | Wer die Zone tatsächlich ändern kann | **Ja, teilweise** — die Zone liegt bei Wix, verwaltet vermutlich von Arca-IT (siehe §4) |
+
+**Das ändert, was „Transfer" bedeuten kann:**
+
+- **Ist ImmoBit AG bereits der eingetragene Inhaber** (Arca-IT hat nur als Dienstleister die
+  Zone verwaltet) → kein rechtlicher Transfer nötig, nur die **Nameserver umstellen** — das
+  kann sogar Arca-IT selbst tun, sobald sie das Ziel kennen.
+- **Ist Arca-IT AG der eingetragene Inhaber** (Domain „für den Kunden" auf eigenen Namen
+  registriert, eine verbreitete Agenturpraxis) → die Domain gehört **heute rechtlich noch
+  nicht** ImmoBit AG. Dann braucht es einen echten **Inhaberwechsel** (Registrant-Wechsel,
+  ggf. mit Auth-Code), bevor irgendetwas anderes zählt.
+
+**Und das gilt für `immobit.ch` genauso — separat geprüft, nicht automatisch dasselbe
+Ergebnis wie für `bit-automobile.ch`.** Beide Domains landen auf denselben Wix-IPs, das sagt
+nichts über ihre jeweiligen Registrare.
+
+**Die eine Frage, die das klärt** (an Sabit oder direkt an Arben): *„Seid ihr (ImmoBit AG)
+der eingetragene Inhaber von `bit-automobile.ch` und `immobit.ch`, oder ist es Arca-IT AG?"*
+
 ---
 
 ## 3 · Der Mail-Zugang (Hoststar)
@@ -177,6 +205,25 @@ nicht „leer", sondern die schärfere:
 > **Google sieht keines seiner Fahrzeuge.**
 
 Wer „Volvo XC60 Occasion Bern" sucht, findet ihn nicht — weil es nichts zu indexieren gibt.
+
+### Impressum und Datenschutz fehlen auf immobit.ch — von Gianni berichtet, nicht gemessen
+
+**Nachtrag vom 18. September 2026.** Gianni meldet: `https://www.immobit.ch/kontakt` hat
+kein Impressum und keine Datenschutzerklärung. **Diese Session konnte das nicht selbst
+prüfen** — der Zugriff auf `immobit.ch` ist aus dieser Umgebung netzwerkseitig blockiert,
+wie schon bei anderen externen Domains in diesem Projekt. Als Sabits Aussage/Beobachtung
+übernommen, nicht als Messung.
+
+**Falls das stimmt, ist es ein echter Mangel, kein Stilfehler:** Ein Impressum ist in der
+Schweiz für Geschäftswebseiten Pflicht (Art. 3 UWG), eine Datenschutzerklärung seit dem
+revDSG ebenso, sobald Personendaten verarbeitet werden — und ein Kontaktformular tut das
+per Definition. **Beides gehört in dieselbe Übernahme wie die Mail-Reparatur aus §12** (in
+`BETRIEB-UND-HOSTING.md`): einmalige Arbeit beim Aufbau, kein laufender Posten, und ein
+weiteres, überprüfbares Verkaufsargument neben der SEO-Lücke oben.
+
+**Vor dem Bauen zu prüfen, nicht zu vermuten:** ob `bit-automobile.ch` (Wix) dasselbe fehlt,
+und ob die Firmendaten aus §1 (ImmoBit AG, UID CHE-345.577.846) für ein korrektes Impressum
+ausreichen.
 
 ---
 
