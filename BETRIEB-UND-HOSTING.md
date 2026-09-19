@@ -1006,19 +1006,25 @@ nicht fertiggestellt.**
 
 ### 16.2 `immobit.ch` ist ein zweites, eigenes Geschäft
 
-`immobit.ch` hat **bereits eine eigene, laufende Website** — kein Neubau nötig, anders als
-bei `bit-automobile.ch`. Aber: **dasselbe Impressum/Datenschutz-Problem wie bei
-`bit-automobile.ch`** (Dossier §5) besteht auch hier — von Gianni bestätigt, nicht nur
-vermutet wie zuvor.
+`immobit.ch` hat **bereits eine eigene, laufende Website** — auf Wix, wie
+`bit-automobile.ch`. **Korrektur gegenüber der ersten Fassung dieses Abschnitts:** „Website
+existiert bereits" hiess hier fälschlich „kein Neubau nötig". **Stimmt nicht** — Wix hat
+keinen Export (Dossier §10.1), das gilt für `immobit.ch` genauso wie für
+`bit-automobile.ch`. Die Seite muss **von Hand nachgebaut** werden, nur mit vorhandenem statt
+neu zu erstellendem Inhalt — schneller als ein Neubau von null, aber ein Neubau. Dazu kommt
+**dasselbe Impressum/Datenschutz-Problem** wie bei `bit-automobile.ch` (Dossier §5), von
+Gianni bestätigt.
 
-**Konsequenz: `immobit.ch` braucht ebenfalls CHF 20.—/Mt** (Betreuung, Hosting, und die
-Impressum/Datenschutz-Reparatur) — **aber das ist Sabit noch nicht mitgeteilt.** Es ist
-Giannis Entscheidung, keine bereits vereinbarte Position. Getrennt abzurechnen von
-`bit-automobile.ch`, mit derselben Logik wie in §11.3/§15.2: zwei Domains, zwei
-Rechnungspositionen, auch wenn derselbe Kunde dahintersteht.
+**Entscheidung: derselbe Aufbaupreis wie `bit-automobile.ch` — CHF 1'000 einmalig**, statt
+nach Aufwand differenziert. Einfacher zu kommunizieren, deckt die Arbeit sicher ab, kein
+Rabatt für „weniger Aufwand", den man später rechtfertigen müsste. Dazu **CHF 20.—/Mt**
+Betreuung, wie bei `bit-automobile.ch`.
 
-**Kein CHF 1'000-Aufbaupreis für `immobit.ch`** — die Website existiert bereits, nur die
-Rechtstexte fehlen. Das ist einmalige Kleinarbeit, kein Neubau.
+**Beides ist Sabit noch nicht mitgeteilt** — Giannis Entscheidung, keine bereits vereinbarte
+Position. Getrennt abzurechnen von `bit-automobile.ch`, mit derselben Logik wie in
+§11.3/§15.2: zwei Domains, zwei Rechnungspositionen, auch wenn derselbe Kunde dahintersteht.
+
+**Total für beide Domains: CHF 2'000 einmalig + CHF 40.—/Mt.**
 
 ### 16.3 Terminproblem: Gianni ist bis 5.10.2026 in den Ferien
 
