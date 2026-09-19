@@ -991,3 +991,48 @@ einen Termin ableitet:
 **Der vorhandene Teil ist der, der schon durchdacht ist; der fehlende ist der, der wehtut.**
 Das ist kein Gegenargument gegen das Geschäft — es ist der Grund, warum §14.3 das Abo an
 die Website hängt und nicht an die Software.
+
+---
+
+## 16. Zwei Geschäfte, nicht eines — und ein Terminproblem
+
+**Nachtrag vom 19. September 2026.** Gianni stellt klar, was bisher vermischt war.
+
+### 16.1 Das Gespräch mit Sabit galt nur `bit-automobile.ch`
+
+**`immobit.ch` war nie Teil der Preisverhandlung** aus §9–§15. Die CHF 1'000 einmalig /
+CHF 20 monatlich gelten für **`bit-automobile.ch` allein** — und dessen Website **ist noch
+nicht fertiggestellt.**
+
+### 16.2 `immobit.ch` ist ein zweites, eigenes Geschäft
+
+`immobit.ch` hat **bereits eine eigene, laufende Website** — kein Neubau nötig, anders als
+bei `bit-automobile.ch`. Aber: **dasselbe Impressum/Datenschutz-Problem wie bei
+`bit-automobile.ch`** (Dossier §5) besteht auch hier — von Gianni bestätigt, nicht nur
+vermutet wie zuvor.
+
+**Konsequenz: `immobit.ch` braucht ebenfalls CHF 20.—/Mt** (Betreuung, Hosting, und die
+Impressum/Datenschutz-Reparatur) — **aber das ist Sabit noch nicht mitgeteilt.** Es ist
+Giannis Entscheidung, keine bereits vereinbarte Position. Getrennt abzurechnen von
+`bit-automobile.ch`, mit derselben Logik wie in §11.3/§15.2: zwei Domains, zwei
+Rechnungspositionen, auch wenn derselbe Kunde dahintersteht.
+
+**Kein CHF 1'000-Aufbaupreis für `immobit.ch`** — die Website existiert bereits, nur die
+Rechtstexte fehlen. Das ist einmalige Kleinarbeit, kein Neubau.
+
+### 16.3 Terminproblem: Gianni ist bis 5.10.2026 in den Ferien
+
+**Die am 19. September erhaltenen Hoststar-Transfercodes** (Dossier §4) sind **14 Tage
+gültig** — das Fenster schliesst rund um den 3. Oktober, **vor** Giannis Rückkehr. Das ist
+**kein Notfall**: Hoststar stellt die Freigabe auf Wunsch jederzeit neu aus (dieselbe
+My-Panel-Aktion), sie kostet nichts und ist nicht auf einen einmaligen Versuch begrenzt.
+
+**Entscheidung: die Codes verfallen lassen, nichts überstürzen.** Der Domain-Transfer hat
+ohnehin keinen Sinn, solange der hosttech-Reseller nicht steht und niemand während der
+Ferien die Mail-Migration überwachen kann — ein Transfer ohne fertige Zielumgebung riskiert
+genau den Mail-Ausfall, vor dem Dossier §2 warnt. **Nach der Rückkehr (ab 5.10.) neue Codes
+anfordern, dann in einem Zug durchziehen.**
+
+**Was bis dahin trotzdem geht, weil es kein Zugriffsfenster braucht:** das Gespräch mit
+Sabit über die `immobit.ch`-Position (§16.2), und die Entscheidung, ob `bit-automobile.ch`
+in der Zwischenzeit weitergebaut wird.
