@@ -167,6 +167,22 @@ Verifizierungscode nach Alaska ging — um 04:20 Uhr dort. Das war richtig so, u
 deshalb lohnt es sich, die Zugriffe von Anfang an sauber zu setzen statt später zu
 reparieren.
 
+**Die zweite Gegenprobe, live erlebt statt erinnert:** Sabit selbst, mit Arca-IT AG
+(`BIT-AUTOMOBILE-DOSSIER.md` §4). Dass jemand dort im Hoststar-Panel eine Domain zum Transfer
+freigeben konnte, bewies nur Kontozugriff — **die Frage, wer als Halter/Inhaber eingetragen
+ist, blieb offen**, weil es beim Registrieren nie sauber geklärt wurde. Genau das darf bei
+den eigenen hosttech-Kunden nie passieren.
+
+### Checkliste für jede Domain im hosttech-Reseller-Panel
+
+1. **Beim Registrieren/Anlegen im Panel: Domaininhaber = der Kunde**, mit seinem korrekten
+   Firmennamen und seiner eigenen Adresse — nie „Tiff" oder Giannis eigener Name, auch wenn
+   das Reseller-Konto technisch dir gehört.
+2. **Sofort danach prüfen, nicht erst bei Bedarf:** ein Blick ins WHOIS/RDAP oder in die
+   Domain-Detailansicht im Panel, ob der Halter-Eintrag wirklich den Kunden zeigt.
+3. **Dem Kunden mitteilen, wo er das selbst nachschauen kann** — das ist der Unterschied zu
+   Arca-IT: Transparenz von Anfang an, nicht erst auf Nachfrage.
+
 ---
 
 ## 5. Was konkret bestellt wird
