@@ -167,6 +167,22 @@ Verifizierungscode nach Alaska ging — um 04:20 Uhr dort. Das war richtig so, u
 deshalb lohnt es sich, die Zugriffe von Anfang an sauber zu setzen statt später zu
 reparieren.
 
+**Die zweite Gegenprobe, live erlebt statt erinnert:** Sabit selbst, mit Arca-IT AG
+(`BIT-AUTOMOBILE-DOSSIER.md` §4). Dass jemand dort im Hoststar-Panel eine Domain zum Transfer
+freigeben konnte, bewies nur Kontozugriff — **die Frage, wer als Halter/Inhaber eingetragen
+ist, blieb offen**, weil es beim Registrieren nie sauber geklärt wurde. Genau das darf bei
+den eigenen hosttech-Kunden nie passieren.
+
+### Checkliste für jede Domain im hosttech-Reseller-Panel
+
+1. **Beim Registrieren/Anlegen im Panel: Domaininhaber = der Kunde**, mit seinem korrekten
+   Firmennamen und seiner eigenen Adresse — nie „Tiff" oder Giannis eigener Name, auch wenn
+   das Reseller-Konto technisch dir gehört.
+2. **Sofort danach prüfen, nicht erst bei Bedarf:** ein Blick ins WHOIS/RDAP oder in die
+   Domain-Detailansicht im Panel, ob der Halter-Eintrag wirklich den Kunden zeigt.
+3. **Dem Kunden mitteilen, wo er das selbst nachschauen kann** — das ist der Unterschied zu
+   Arca-IT: Transparenz von Anfang an, nicht erst auf Nachfrage.
+
 ---
 
 ## 5. Was konkret bestellt wird
@@ -337,6 +353,35 @@ Betrieb: dass er die Felder nicht selbst erfinden muss.
 Bei CHF 29 unterbietest du also das **günstigste** bexio-Paket, während du mehr lieferst.
 Das ist kein Argument gegen 29 — es ist ein Argument dagegen, 29 den **Regelpreis** zu
 nennen.
+
+**Nachtrag vom 18. September 2026 — eine echte Offerte statt der Websuche.** Gianni hat ein
+reales bexio-Angebot gezeigt, keine Preisliste:
+
+```
+Betreff: bexio spezial Angebot
+
+Advanced Paket für CHF 504.- exkl. MwSt. mit 30% Rabatt
++ Lohnbuchhaltung CHF 300.- exkl. MwSt.
+Total im ersten Jahr: CHF 652.80 exkl. MwSt. (Sie sparen CHF 151.20)
+
+Einmalige Kosten:
+1 x Buchhaltung Schulung für CHF 490.-
+1 x Buchhaltung Schulung für CHF 490.-
+1 x Lohnbuchhaltung Schulung für CHF 490.-
+
+Total CHF 1470.- abzgl. 30%
+Total neu: CHF 1029.- einmalig exkl. MwSt. (Sie sparen CHF 441.-)
+```
+
+**Das bestätigt den Anker von oben, mit zwei neuen Zahlen.** CHF 504.-/Jahr für *Advanced*
+ist exakt die CHF 42/Mt aus der Websuche — der Marktanker stimmt. Zwei Dinge, die dort
+fehlten:
+
+1. **Ein Rabatt-Mechanismus.** Die 30 % gelten hier nur auf das Advanced-Paket, nicht auf die
+   Lohnbuchhaltung — das ist die Art Kleingedrucktes, die eine reine Preisliste nicht zeigt.
+2. **Einmalige Schulungskosten von CHF 1'029.—**, zusätzlich zum Jahrespreis. Das ist die
+   bexio-Entsprechung zu dem, was §10.3/§15.3 für die Website vorschlagen — Aufbau/Einführung
+   einmalig, Betrieb monatlich getrennt. **Auch bexio trennt Bauen vom Betreiben.**
 
 ### 9.3 Die Rechnung, damit die Entscheidung mit offenen Augen fällt
 
@@ -962,3 +1007,54 @@ einen Termin ableitet:
 **Der vorhandene Teil ist der, der schon durchdacht ist; der fehlende ist der, der wehtut.**
 Das ist kein Gegenargument gegen das Geschäft — es ist der Grund, warum §14.3 das Abo an
 die Website hängt und nicht an die Software.
+
+---
+
+## 16. Zwei Geschäfte, nicht eines — und ein Terminproblem
+
+**Nachtrag vom 19. September 2026.** Gianni stellt klar, was bisher vermischt war.
+
+### 16.1 Das Gespräch mit Sabit galt nur `bit-automobile.ch`
+
+**`immobit.ch` war nie Teil der Preisverhandlung** aus §9–§15. Die CHF 1'000 einmalig /
+CHF 20 monatlich gelten für **`bit-automobile.ch` allein** — und dessen Website **ist noch
+nicht fertiggestellt.**
+
+### 16.2 `immobit.ch` ist ein zweites, eigenes Geschäft
+
+`immobit.ch` hat **bereits eine eigene, laufende Website** — auf Wix, wie
+`bit-automobile.ch`. **Korrektur gegenüber der ersten Fassung dieses Abschnitts:** „Website
+existiert bereits" hiess hier fälschlich „kein Neubau nötig". **Stimmt nicht** — Wix hat
+keinen Export (Dossier §10.1), das gilt für `immobit.ch` genauso wie für
+`bit-automobile.ch`. Die Seite muss **von Hand nachgebaut** werden, nur mit vorhandenem statt
+neu zu erstellendem Inhalt — schneller als ein Neubau von null, aber ein Neubau. Dazu kommt
+**dasselbe Impressum/Datenschutz-Problem** wie bei `bit-automobile.ch` (Dossier §5), von
+Gianni bestätigt.
+
+**Entscheidung: derselbe Aufbaupreis wie `bit-automobile.ch` — CHF 1'000 einmalig**, statt
+nach Aufwand differenziert. Einfacher zu kommunizieren, deckt die Arbeit sicher ab, kein
+Rabatt für „weniger Aufwand", den man später rechtfertigen müsste. Dazu **CHF 20.—/Mt**
+Betreuung, wie bei `bit-automobile.ch`.
+
+**Beides ist Sabit noch nicht mitgeteilt** — Giannis Entscheidung, keine bereits vereinbarte
+Position. Getrennt abzurechnen von `bit-automobile.ch`, mit derselben Logik wie in
+§11.3/§15.2: zwei Domains, zwei Rechnungspositionen, auch wenn derselbe Kunde dahintersteht.
+
+**Total für beide Domains: CHF 2'000 einmalig + CHF 40.—/Mt.**
+
+### 16.3 Terminproblem: Gianni ist bis 5.10.2026 in den Ferien
+
+**Die am 19. September erhaltenen Hoststar-Transfercodes** (Dossier §4) sind **14 Tage
+gültig** — das Fenster schliesst rund um den 3. Oktober, **vor** Giannis Rückkehr. Das ist
+**kein Notfall**: Hoststar stellt die Freigabe auf Wunsch jederzeit neu aus (dieselbe
+My-Panel-Aktion), sie kostet nichts und ist nicht auf einen einmaligen Versuch begrenzt.
+
+**Entscheidung: die Codes verfallen lassen, nichts überstürzen.** Der Domain-Transfer hat
+ohnehin keinen Sinn, solange der hosttech-Reseller nicht steht und niemand während der
+Ferien die Mail-Migration überwachen kann — ein Transfer ohne fertige Zielumgebung riskiert
+genau den Mail-Ausfall, vor dem Dossier §2 warnt. **Nach der Rückkehr (ab 5.10.) neue Codes
+anfordern, dann in einem Zug durchziehen.**
+
+**Was bis dahin trotzdem geht, weil es kein Zugriffsfenster braucht:** das Gespräch mit
+Sabit über die `immobit.ch`-Position (§16.2), und die Entscheidung, ob `bit-automobile.ch`
+in der Zwischenzeit weitergebaut wird.

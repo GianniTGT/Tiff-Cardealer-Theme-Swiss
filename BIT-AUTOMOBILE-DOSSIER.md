@@ -69,6 +69,34 @@ gesetzt, steht seine Mail.
 Vorgehen: **Zonenexport vor dem Umzug**, MX und SPF eins zu eins übertragen, TTL vorher
 runtersetzen.
 
+### Pronar ligjor vs. kontroll teknik — dy gjëra të ndryshme
+
+**Nachtrag vom 18. September 2026.** Gianni fragte, ob „Transfer zu ImmoBit AG" überhaupt
+das richtige Wort ist, wenn beide Domains ohnehin schon Sabit gehören könnten. Die Antwort:
+**es sind zwei verschiedene Fragen, und die Messungen oben beantworten nur die zweite.**
+
+| Frage | Was sie bedeutet | Ist sie beantwortet? |
+|---|---|---|
+| **Wer ist rechtlicher Inhaber (Registrant)?** | Der Name, der beim Registrar hinterlegt ist | **Nein** — WHOIS/RDAP sind aus dieser Umgebung blockiert (§8) |
+| **Wer kontrolliert die Nameserver technisch?** | Wer die Zone tatsächlich ändern kann | **Ja, teilweise** — die Zone liegt bei Wix, verwaltet vermutlich von Arca-IT (siehe §4) |
+
+**Das ändert, was „Transfer" bedeuten kann:**
+
+- **Ist ImmoBit AG bereits der eingetragene Inhaber** (Arca-IT hat nur als Dienstleister die
+  Zone verwaltet) → kein rechtlicher Transfer nötig, nur die **Nameserver umstellen** — das
+  kann sogar Arca-IT selbst tun, sobald sie das Ziel kennen.
+- **Ist Arca-IT AG der eingetragene Inhaber** (Domain „für den Kunden" auf eigenen Namen
+  registriert, eine verbreitete Agenturpraxis) → die Domain gehört **heute rechtlich noch
+  nicht** ImmoBit AG. Dann braucht es einen echten **Inhaberwechsel** (Registrant-Wechsel,
+  ggf. mit Auth-Code), bevor irgendetwas anderes zählt.
+
+**Und das gilt für `immobit.ch` genauso — separat geprüft, nicht automatisch dasselbe
+Ergebnis wie für `bit-automobile.ch`.** Beide Domains landen auf denselben Wix-IPs, das sagt
+nichts über ihre jeweiligen Registrare.
+
+**Die eine Frage, die das klärt** (an Sabit oder direkt an Arben): *„Seid ihr (ImmoBit AG)
+der eingetragene Inhaber von `bit-automobile.ch` und `immobit.ch`, oder ist es Arca-IT AG?"*
+
 ---
 
 ## 3 · Der Mail-Zugang (Hoststar)
@@ -96,6 +124,16 @@ Drei Dinge folgen daraus:
 3. **Der Benutzername lautet auf `immobit.ch`.** Zu klären: ist das Sabits eigenes Postfach,
    und ist `immobit.ch` eine zweite, eigene Domain der AG — oder liegt hier eine dritte
    Partei dazwischen.
+
+**Nachtrag vom 18. September 2026.** Gianni hat zusätzlich einen Screenshot der
+**Hoststar-Login-Seite** gezeigt (`My Panel`, Login mit Domain + Passwort) — **leer, keine
+Zugangsdaten eingegeben, kein Dashboard sichtbar.** Das ist die öffentliche Login-Maske, kein
+Beleg für Zugriff. **Wichtig: `My Panel` ist etwas anderes als das Webmail oben** — `My Panel`
+wäre die eigentliche Hosting-/Domain-Verwaltung bei Hoststar, während `webmail.hoststar.ch`
+nur die Mailbox `info@immobit.ch` zeigt. Punkt 2 oben gilt unverändert: **`My Panel` wird für
+den geplanten Umzug nicht gebraucht**, selbst wenn Arben es später doch freigibt — und selbst
+ein Blick hinein würde nicht zwingend den Registrar-Inhaber zeigen, nur was innerhalb der
+Hoststar-Hosting-Verwaltung liegt.
 
 *Es wurde kein Postfachinhalt gelesen. Die Angaben stammen ausschliesslich von der gezeigten
 Kontoseite.*
@@ -138,6 +176,120 @@ Sabits Geschäftspost liegt heute im Konto eines Dritten, der den Zugang verweig
 das so ist, gehört ihm seine eigene Mail faktisch nicht. Das ist kein technisches Detail,
 sondern ein Geschäftsrisiko — und der beste Grund, den Umzug jetzt zu machen statt später.
 
+### Der Name der Agentur — jetzt belegt, mit zwei offenen Punkten
+
+**Nachtrag vom 18. September 2026.** Sabit hat zwei weitere Dokumente gezeigt. Erst eine
+Dokument-Fusszeile „Erstellt von: Arca-IT AG" (Vermutung), dann eine **echte Rechnung**:
+
+```
+Arca-IT AG, Wölflistrasse 5, 3006 Bern — MWST CHE-492.626.439
+Rechnung RE-00282, Kundennummer 000170, Datum 01.02.2024
+An: Immobit AG, Breitmattweg 6, 3173 Oberwangen b. Bern
+Pos. 1: Hosting www.immobit.ch — 1.00 Jahr — CHF 179.00
+Total inkl. 8.10% MWST: CHF 193.50
+```
+
+**Das ist ein Beleg, keine Vermutung mehr: Arca-IT AG stellt Immobit AG Hosting für
+`immobit.ch` in Rechnung.** Das erklärt auch die Weigerung aus §4 direkt — Arca-IT AG ist
+selbst Reseller-Kunde bei Hoststar (`lx21.hoststar.hosting`, derselbe Host, auf den der MX
+von `bit-automobile.ch` zeigt, §3) und verwaltet fremde Kundenpostfächer im selben Panel.
+
+**Von Sabit bestätigt (18. September 2026): der Vertrag läuft noch, und der Ansprechpartner
+bei Arca-IT AG heisst Arben.** Damit ist Punkt 1 erledigt — der Kontakt geht an eine aktive
+Geschäftsbeziehung, nicht ins Leere.
+
+**Ein Punkt bleibt offen:** Die Adresse weicht von der zuvor gezeigten ab — hier
+`Breitmattweg 6`, auf der Visitenkarte vorher `Herzwilstrasse 262`, beides
+3173 Oberwangen b. Bern. Entweder ist die AG umgezogen, oder es sind zwei unterschiedliche
+Angaben im Umlauf. Für den Kontakt mit Arben unwichtig, für ein Impressum oder einen
+Vertrag nicht.
+
+### Kontaktaufnahme mit Arben — vorbereitet, noch nicht abgeschickt
+
+**Stand 18. September 2026: wartend.** Kontaktdaten von Arca-IT AG per Impressum bestätigt
+(nicht vermutet):
+
+| | |
+|---|---|
+| E-Mail | **info@arca-it.ch** |
+| Telefon | **031 829 80 80** |
+| Adresse | Wölflistrasse 5, CH-3006 Bern |
+
+*Kein persönlicher Arben-Kontakt öffentlich auffindbar — nur die allgemeine Firmenadresse.*
+
+**Offen, bevor etwas verschickt wird:**
+1. Wer schreibt — Sabit (Vertragskunde, mehr Gewicht) oder Gianni in seinem Auftrag?
+2. Welcher Kanal — E-Mail an `info@arca-it.ch` z.Hd. Arben, oder Telefonanruf?
+
+**Entwurf, eine einzige Forderung (§4):**
+
+```
+Betreff: Domain-Inhaberschaft bit-automobile.ch / immobit.ch
+
+Grüezi Arben
+
+Wir planen einen Website-Relaunch für ImmoBit AG (bit-automobile.ch) und
+benötigen dafür eine kurze Bestätigung:
+
+Ist ImmoBit AG der eingetragene Domaininhaber (Registrant) von
+bit-automobile.ch und immobit.ch, oder läuft die Registrierung über
+Arca-IT AG?
+
+Falls die Domains bereits auf ImmoBit AG eingetragen sind, benötigen wir
+lediglich die Möglichkeit, die Nameserver anzupassen. Falls sie auf
+Arca-IT AG registriert sind, bitten wir um die Übertragung des Inhabers
+auf ImmoBit AG.
+
+Hosting-Zugang oder der Wix-Login werden dafür nicht benötigt.
+
+Besten Dank und freundliche Grüsse
+[Sabit Kadriu / ImmoBit AG]
+```
+
+**Nächster Schritt liegt bei Gianni/Sabit, nicht bei dieser Session:** entscheiden wer/wie,
+dann abschicken.
+
+### Durchbruch: beide Domains bei Hoststar zum Transfer freigegeben
+
+**Stand 19. September 2026.** Jemand (vermutlich Arben, oder Sabit selbst) hat im
+Hoststar-„My Panel" (§3) den Transfer beider Domains ausgelöst. Hoststar hat automatisch
+bestätigt:
+
+| Domain | Registrierungsperiode bis | Status |
+|---|---|---|
+| `bit-automobile.ch` | 2027-08-29 | **zum Transfer freigegeben** |
+| `immobit.ch` | 2027-01-03 | **zum Transfer freigegeben** |
+
+**Das beantwortet die offene Frage aus §2/§8 direkt: Hoststar ist der Registrar beider
+Domains** — nicht Arca-IT AG separat, nicht ein Dritter. Damit ist der schwierigste Teil von
+§4 (Registrar-Zugang) faktisch erledigt.
+
+**Die Transfercodes selbst stehen absichtlich nicht hier.** Sie funktionieren wie ein
+Passwort — wer sie hat, kann den Transfer auslösen — und gehören nicht in ein Git-Repo,
+dessen Historie für immer bleibt. Sie sind bei Gianni/Sabit sicher hinterlegt (nicht im
+Repo), **gültig 14 Tage ab Erhalt der Hoststar-Mail vom 19. September 2026** — danach
+verfallen sie und müssen neu angefordert werden.
+
+**Nächster Schritt:** Sobald der hosttech-Reseller-Account existiert (§5 in
+`BETRIEB-UND-HOSTING.md`), dort mit dem jeweiligen Transfercode den Domain-Transfer
+starten — **innerhalb des 14-Tage-Fensters**, sonst verfällt die Freigabe.
+
+**Präzisiert am Abend des 19. September:** Gianni lässt Sabit ausrichten, Arben solle die
+**laufende Freigabe nicht stornieren** (Hoststar zeigt sie unter „Laufende Transfers" mit
+einer Abbrechen-Option). Das ist etwas anderes als der technische Transfer zu hosttech
+selbst — der bleibt auf nach den Ferien verschoben (§16.3 in `BETRIEB-UND-HOSTING.md`).
+Läuft die Freigabe dennoch vorher ab, ist das kein Problem: Hoststar stellt sie kostenlos
+neu aus.
+
+**Wichtig, damit daraus keine falsche Schlussfolgerung wird:** Dass jemand (vermutlich
+Arben) die Freigabe im Hoststar-Panel auslösen konnte, beweist **Kontozugriff**, nicht
+**Registranten-Status**. Wer den Zugang zum Hoststar-Konto hat, kann eine Domain zum
+Transfer freigeben, unabhängig davon, wer als „Halter" (Inhaber) beim Registrar eingetragen
+ist — beides läuft oft über dieselbe Agentur-Loginmaske, auch wenn der Kunde korrekt als
+Halter eingetragen ist. **Die Frage aus §2 („Pronar ligjor vs. kontroll teknik") bleibt
+offen.** Um sie zu klären, braucht es weiterhin entweder einen Blick ins WHOIS/RDAP-Feld
+„Halter" oder eine direkte Antwort von Arben/Sabit — dieser Vorfall ersetzt das nicht.
+
 ---
 
 ## 5 · Der kommerzielle Befund
@@ -149,6 +301,41 @@ nicht „leer", sondern die schärfere:
 > **Google sieht keines seiner Fahrzeuge.**
 
 Wer „Volvo XC60 Occasion Bern" sucht, findet ihn nicht — weil es nichts zu indexieren gibt.
+
+### Impressum und Datenschutz fehlen auf immobit.ch — von Gianni berichtet, nicht gemessen
+
+**Nachtrag vom 18. September 2026.** Gianni meldet: `https://www.immobit.ch/kontakt` hat
+kein Impressum und keine Datenschutzerklärung. **Diese Session konnte das nicht selbst
+prüfen** — der Zugriff auf `immobit.ch` ist aus dieser Umgebung netzwerkseitig blockiert,
+wie schon bei anderen externen Domains in diesem Projekt. Als Sabits Aussage/Beobachtung
+übernommen, nicht als Messung.
+
+**Falls das stimmt, ist es ein echter Mangel, kein Stilfehler:** Ein Impressum ist in der
+Schweiz für Geschäftswebseiten Pflicht (Art. 3 UWG), eine Datenschutzerklärung seit dem
+revDSG ebenso, sobald Personendaten verarbeitet werden — und ein Kontaktformular tut das
+per Definition. **Beides gehört in dieselbe Übernahme wie die Mail-Reparatur aus §12** (in
+`BETRIEB-UND-HOSTING.md`): einmalige Arbeit beim Aufbau, kein laufender Posten, und ein
+weiteres, überprüfbares Verkaufsargument neben der SEO-Lücke oben.
+
+**Vor dem Bauen zu prüfen, nicht zu vermuten:** ob `bit-automobile.ch` (Wix) dasselbe fehlt,
+und ob die Firmendaten aus §1 (ImmoBit AG, UID CHE-345.577.846) für ein korrektes Impressum
+ausreichen.
+
+**Nachprüfung für `bit-automobile.ch`, diesmal gemessen** — per PHP-`curl` über den
+DAS-Server (normaler Internetzugang, siehe §10), Startseite abgerufen (633 KB, HTTP 200):
+
+| | |
+|---|---|
+| Text „Impressum" | **vorhanden**, als Überschrift (`<h5>`) im HTML |
+| Text „Datenschutzerklärung" | **vorhanden**, ebenso als `<h5>`-Überschrift |
+| `href` zu einer Impressum-/Datenschutz-Seite | **keiner gefunden** |
+| `/impressum`, `/datenschutz` als eigene Pfade | **beide 404** |
+
+**Wahrscheinlichste Erklärung: Wix-„Lightbox"** — ein Popup-Fenster, das per JavaScript
+öffnet statt über eine echte URL. Anders als bei `immobit.ch` (dort fehlt der Text
+offenbar komplett) **existiert hier zumindest der Anspruch auf Impressum/Datenschutz** —
+ob das Popup wirklich funktioniert und was drinsteht, ist damit noch nicht gemessen. Das
+gehört per Browser geprüft, nicht per `curl`, bevor man daraus einen Befund macht.
 
 ---
 
@@ -192,6 +379,8 @@ Webseite kommt, sieht zwei Marken. Das muss Sabit entscheiden.
 - [ ] **Ist der gezeigte Hoststar-Zugang (`info@immobit.ch`) seiner?** Und gehört `immobit.ch`
       der AG?
 - [ ] **Wer ist bei Hoststar Vertragskunde — er selbst oder die Agentur?** Und welcher Tarif.
+- [x] ~~Läuft der Arca-IT-AG-Vertrag heute noch?~~ **Ja, von Sabit bestätigt (18.9.2026).
+      Ansprechpartner: Arben.**
 - [ ] **Wer hält die Domain beim Registrar?** Von aussen nicht sichtbar (WHOIS-Port 43 läuft
       aus dieser Umgebung in einen Timeout, RDAP antwortet 403). Liegt die Domain bei der
       Agentur, gehört sie **vor** jedem Umzug auf die ImmoBit AG übertragen.
