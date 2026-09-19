@@ -281,6 +281,15 @@ selbst — der bleibt auf nach den Ferien verschoben (§16.3 in `BETRIEB-UND-HOS
 Läuft die Freigabe dennoch vorher ab, ist das kein Problem: Hoststar stellt sie kostenlos
 neu aus.
 
+**Wichtig, damit daraus keine falsche Schlussfolgerung wird:** Dass jemand (vermutlich
+Arben) die Freigabe im Hoststar-Panel auslösen konnte, beweist **Kontozugriff**, nicht
+**Registranten-Status**. Wer den Zugang zum Hoststar-Konto hat, kann eine Domain zum
+Transfer freigeben, unabhängig davon, wer als „Halter" (Inhaber) beim Registrar eingetragen
+ist — beides läuft oft über dieselbe Agentur-Loginmaske, auch wenn der Kunde korrekt als
+Halter eingetragen ist. **Die Frage aus §2 („Pronar ligjor vs. kontroll teknik") bleibt
+offen.** Um sie zu klären, braucht es weiterhin entweder einen Blick ins WHOIS/RDAP-Feld
+„Halter" oder eine direkte Antwort von Arben/Sabit — dieser Vorfall ersetzt das nicht.
+
 ---
 
 ## 5 · Der kommerzielle Befund
