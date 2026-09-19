@@ -249,6 +249,31 @@ Besten Dank und freundliche Grüsse
 **Nächster Schritt liegt bei Gianni/Sabit, nicht bei dieser Session:** entscheiden wer/wie,
 dann abschicken.
 
+### Durchbruch: beide Domains bei Hoststar zum Transfer freigegeben
+
+**Stand 19. September 2026.** Jemand (vermutlich Arben, oder Sabit selbst) hat im
+Hoststar-„My Panel" (§3) den Transfer beider Domains ausgelöst. Hoststar hat automatisch
+bestätigt:
+
+| Domain | Registrierungsperiode bis | Status |
+|---|---|---|
+| `bit-automobile.ch` | 2027-08-29 | **zum Transfer freigegeben** |
+| `immobit.ch` | 2027-01-03 | **zum Transfer freigegeben** |
+
+**Das beantwortet die offene Frage aus §2/§8 direkt: Hoststar ist der Registrar beider
+Domains** — nicht Arca-IT AG separat, nicht ein Dritter. Damit ist der schwierigste Teil von
+§4 (Registrar-Zugang) faktisch erledigt.
+
+**Die Transfercodes selbst stehen absichtlich nicht hier.** Sie funktionieren wie ein
+Passwort — wer sie hat, kann den Transfer auslösen — und gehören nicht in ein Git-Repo,
+dessen Historie für immer bleibt. Sie sind bei Gianni/Sabit sicher hinterlegt (nicht im
+Repo), **gültig 14 Tage ab Erhalt der Hoststar-Mail vom 19. September 2026** — danach
+verfallen sie und müssen neu angefordert werden.
+
+**Nächster Schritt:** Sobald der hosttech-Reseller-Account existiert (§5 in
+`BETRIEB-UND-HOSTING.md`), dort mit dem jeweiligen Transfercode den Domain-Transfer
+starten — **innerhalb des 14-Tage-Fensters**, sonst verfällt die Freigabe.
+
 ---
 
 ## 5 · Der kommerzielle Befund
