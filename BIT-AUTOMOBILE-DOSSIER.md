@@ -274,6 +274,13 @@ verfallen sie und müssen neu angefordert werden.
 `BETRIEB-UND-HOSTING.md`), dort mit dem jeweiligen Transfercode den Domain-Transfer
 starten — **innerhalb des 14-Tage-Fensters**, sonst verfällt die Freigabe.
 
+**Präzisiert am Abend des 19. September:** Gianni lässt Sabit ausrichten, Arben solle die
+**laufende Freigabe nicht stornieren** (Hoststar zeigt sie unter „Laufende Transfers" mit
+einer Abbrechen-Option). Das ist etwas anderes als der technische Transfer zu hosttech
+selbst — der bleibt auf nach den Ferien verschoben (§16.3 in `BETRIEB-UND-HOSTING.md`).
+Läuft die Freigabe dennoch vorher ab, ist das kein Problem: Hoststar stellt sie kostenlos
+neu aus.
+
 ---
 
 ## 5 · Der kommerzielle Befund
