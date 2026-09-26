@@ -63,6 +63,16 @@ Datenbank, nie im Code). Standard ist die **Preproduktion**.
 11 Beispielfahrzeuge mit den echten Showroom-Fotos). Vor dem ersten echten Abgleich:
 Pfad der Inseratsliste und Feldnamen gegen eine echte Antwort prüfen.
 
+**Probelauf** (*Werkzeuge → AutoScout24 → «Probelauf (nichts speichern)»*): liest Sabits
+Inserate, speichert nichts, zeigt pro Inserat «würde anlegen: Marke Modell – CHF – km – Jahr –
+Bilder» und meldet fehlende Felder (Hinweis auf falsche Feldnamen). Die unveränderte Antwort
+von AutoScout24 lässt sich als JSON herunterladen (liegt in `uploads/bit-as24/`, von aussen
+gesperrt, ohne Token, die letzten 5 bleiben). Erst danach «Jetzt abgleichen».
+Auf der Kommandozeile: `wp bit as24 sync --dry-run`.
+
+**Kosten:** Der Code liest nur (Anmeldung + Inseratsliste). Er kann bei AutoScout24 nichts
+inserieren, aktivieren oder buchen.
+
 Demo-Fahrzeuge sind auf der Seite mit «Demo · Testdaten» beschriftet und werden vor dem
 Livegang gelöscht: *Werkzeuge → BIT Demo-Daten* oder `wp bit demo remove`.
 Ein echter Abgleich fasst Demo-Fahrzeuge nie an und umgekehrt.
@@ -73,14 +83,15 @@ Ein echter Abgleich fasst Demo-Fahrzeuge nie an und umgekehrt.
 wp bit setup                               # Seiten, Menüs, Startseite
 wp bit demo load | remove                  # Demo-Fahrzeuge
 wp bit as24 import --file=x.json [--dry-run] [--demo]
-wp bit as24 sync                           # echter Abgleich (braucht Zugangsdaten)
+wp bit as24 sync [--dry-run]               # echter Abgleich / Probelauf (braucht Zugangsdaten)
 ```
 
 ## Tests
 
 ```
-wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 29 Tests: CHF, Telefon, MWST, AS24-Zuordnung, Import
+wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 39 Tests: CHF, Telefon, MWST, AS24-Zuordnung, Import, Probelauf gegen Attrappe
 BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 188 Prüfungen im Browser + Bildschirmfotos
+ADMIN_USER=… ADMIN_PASS=… AS24_MOCK=1 node tests/e2e.js                # + 7 Prüfungen Probelauf im Admin (mit Attrappe)
 ```
 
 Der Browser-Test prüft jede Seite (HTTP-Status, keine PHP-Meldung, aktiver Menüpunkt,
@@ -89,10 +100,14 @@ kein Entwurf-Hinweis, kein seitliches Scrollen auf dem Handy), dazu Suche/Filter
 Dienstleistungs-Karten → eigene Seite, Animationen und Maus-«bit»,
 Kontaktformular bis in die Anfragen-Liste, und den Login.
 
+**AutoScout24-Attrappe** (`tests/as24-mock.php`, `tests/as24-mock-mu-plugin.php`): antwortet
+lokal wie der echte Server, mit den erfundenen Daten; es geht nichts ins Internet. Nur für
+Tests – **nie** als mu-plugin auf den echten Server kopieren.
+
 ## Auf hosttech installieren
 
 1. WordPress installieren (Sprache Deutsch (Schweiz)).
-2. Ordner `bit-automobile` als ZIP unter *Design → Themes → Theme hochladen*, aktivieren.
+2. Ordner `bit-automobile` **ohne** `tests/` als ZIP unter *Design → Themes → Theme hochladen*, aktivieren.
 3. Benutzer für Sabit anlegen, Rolle **Redakteur**.
 4. E-Mail-Versand prüfen (Formular) — ggf. SMTP über das hosttech-Postfach.
 5. Demo-Fahrzeuge löschen, echte Fahrzeuge erfassen oder AutoScout24 verbinden.

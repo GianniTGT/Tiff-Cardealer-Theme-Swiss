@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 const BIT_AS24_OPTION = 'bit_as24_settings';
 const BIT_AS24_REPORT = 'bit_as24_last_report';
+const BIT_AS24_PROBE  = 'bit_as24_last_probe';
 
 /** Einstellungen mit Standardwerten. */
 function bit_as24_settings() {
@@ -76,8 +77,12 @@ function bit_as24_token() {
 	return $body['access_token'];
 }
 
-/** Alle Inserate des Haendlers holen (seitenweise). */
-function bit_as24_fetch_listings() {
+/**
+ * Alle Inserate des Haendlers holen (seitenweise).
+ * $raw bekommt die unveraenderten Antworten von AutoScout24 (fuer den Probelauf).
+ */
+function bit_as24_fetch_listings( &$raw = null ) {
+	$raw = array();
 	if ( ! bit_as24_is_configured() ) {
 		return new WP_Error( 'bit_as24_config', 'AutoScout24 ist noch nicht eingerichtet (Seller-ID, Client-ID, Secret).' );
 	}
@@ -114,7 +119,12 @@ function bit_as24_fetch_listings() {
 		if ( 200 !== $code ) {
 			return new WP_Error( 'bit_as24_http', 'AutoScout24 antwortet mit HTTP ' . $code . '.' );
 		}
-		$body  = json_decode( wp_remote_retrieve_body( $res ), true );
+		$text  = wp_remote_retrieve_body( $res );
+		$raw[] = array(
+			'url'  => $url,
+			'body' => json_decode( $text, true ) ?? $text,
+		);
+		$body  = json_decode( $text, true );
 		$items = bit_as24_extract_items( $body );
 		$all   = array_merge( $all, $items );
 		++$page;
@@ -410,6 +420,7 @@ function bit_as24_import( array $listings, array $opts = array() ) {
 		$item = is_array( $raw ) ? bit_as24_map_listing( $raw ) : null;
 		if ( ! $item ) {
 			++$report['skipped'];
+			$report['log'][] = 'übersprungen: Inserat ohne ID (Feld «id» fehlt)';
 			continue;
 		}
 		$seen[]  = $item['as24_id'];
@@ -423,7 +434,33 @@ function bit_as24_import( array $listings, array $opts = array() ) {
 		}
 		if ( $opts['dry_run'] ) {
 			$report[ $post_id ? 'updated' : 'created' ]++;
-			$report['log'][] = ( $post_id ? 'würde ändern: ' : 'würde anlegen: ' ) . $item['title'];
+			$f     = $item['fields'];
+			$parts = array_filter(
+				array(
+					$item['title'],
+					bit_chf( $f['price'] ),
+					'' !== $f['km'] ? bit_num( $f['km'] ) . ' km' : '',
+					$f['year'],
+					count( $item['images'] ) . ' Bilder',
+				)
+			);
+			$report['log'][] = ( $post_id ? 'würde ändern: ' : 'würde anlegen: ' ) . implode( ' – ', $parts );
+			// Fehlt etwas Wichtiges, stimmt vermutlich ein Feldname nicht.
+			$missing = array();
+			foreach ( array( 'price' => 'Preis', 'km' => 'Kilometer', 'year' => 'Jahrgang' ) as $k => $label ) {
+				if ( '' === (string) $f[ $k ] ) {
+					$missing[] = $label;
+				}
+			}
+			if ( ! $item['images'] ) {
+				$missing[] = 'Bilder';
+			}
+			if ( '' === $item['brand'] ) {
+				$missing[] = 'Marke';
+			}
+			if ( $missing ) {
+				$report['errors'][] = 'Hinweis ' . $item['title'] . ': fehlt ' . implode( ', ', $missing ) . ' – Feldname prüfen (Rohdaten).';
+			}
 			continue;
 		}
 
@@ -525,18 +562,57 @@ function bit_as24_import( array $listings, array $opts = array() ) {
 	return $report;
 }
 
-/** Echter Abgleich: holen und importieren. */
-function bit_as24_sync() {
-	$listings = bit_as24_fetch_listings();
+/**
+ * Abgleich mit AutoScout24: holen und importieren.
+ * $dry_run = Probelauf: liest alles, speichert keine Fahrzeuge, legt die
+ * Rohdaten als geschuetzte Datei ab und merkt sich den Bericht separat.
+ */
+function bit_as24_sync( $dry_run = false ) {
+	$raw      = array();
+	$listings = bit_as24_fetch_listings( $raw );
 	if ( is_wp_error( $listings ) ) {
 		$report = array(
-			'time'   => current_time( 'mysql' ),
-			'errors' => array( $listings->get_error_message() ),
+			'time'    => current_time( 'mysql' ),
+			'dry_run' => (bool) $dry_run,
+			'errors'  => array( $listings->get_error_message() ),
 		);
-		update_option( BIT_AS24_REPORT, $report, false );
+		update_option( $dry_run ? BIT_AS24_PROBE : BIT_AS24_REPORT, $report, false );
 		return $report;
 	}
-	return bit_as24_import( $listings );
+	if ( ! $dry_run ) {
+		return bit_as24_import( $listings );
+	}
+	$report             = bit_as24_import( $listings, array( 'dry_run' => true ) );
+	$report['found']    = count( $listings );
+	$report['raw_file'] = bit_as24_save_raw( $raw );
+	update_option( BIT_AS24_PROBE, $report, false );
+	return $report;
+}
+
+/** Ordner fuer Rohdaten: im Upload-Ordner, von aussen gesperrt. */
+function bit_as24_raw_dir() {
+	$dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'bit-as24';
+	if ( ! is_dir( $dir ) ) {
+		wp_mkdir_p( $dir );
+	}
+	if ( ! file_exists( $dir . '/.htaccess' ) ) {
+		file_put_contents( $dir . '/.htaccess', "Require all denied\nDeny from all\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		file_put_contents( $dir . '/index.php', "<?php // Stille.\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	}
+	return $dir;
+}
+
+/** Rohdaten speichern (nur die Antworten, nie das Token); die letzten 5 bleiben. */
+function bit_as24_save_raw( array $raw ) {
+	$dir  = bit_as24_raw_dir();
+	$name = 'rohdaten-' . wp_date( 'Ymd-His' ) . '-' . wp_generate_password( 8, false ) . '.json';
+	file_put_contents( $dir . '/' . $name, wp_json_encode( $raw, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$files = glob( $dir . '/rohdaten-*.json' );
+	rsort( $files );
+	foreach ( array_slice( $files, 5 ) as $old ) {
+		wp_delete_file( $old );
+	}
+	return $name;
 }
 
 /* ---------- Automatischer Abgleich stuendlich (wenn eingeschaltet) ---------- */
@@ -591,11 +667,48 @@ function bit_as24_page() {
 			</table>
 			<?php submit_button( 'Speichern' ); ?>
 		</form>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-			<input type="hidden" name="action" value="bit_as24_run">
-			<?php wp_nonce_field( 'bit_as24_run' ); ?>
-			<?php submit_button( 'Jetzt abgleichen', 'secondary', 'submit', false, bit_as24_is_configured() ? array() : array( 'disabled' => 'disabled' ) ); ?>
-		</form>
+		<?php $off = bit_as24_is_configured() ? array() : array( 'disabled' => 'disabled' ); ?>
+		<h2>Abgleich</h2>
+		<p>
+			<strong>Probelauf</strong> liest Sabits Inserate bei AutoScout24 und zeigt, was passieren würde – es wird <strong>nichts gespeichert</strong> und nichts auf der Webseite geändert.<br>
+			<strong>Jetzt abgleichen</strong> legt die Fahrzeuge dann wirklich an bzw. ändert sie.<br>
+			Beides liest nur; es wird bei AutoScout24 nichts inseriert und nichts gebucht.
+		</p>
+		<div style="display:flex;gap:8px;flex-wrap:wrap">
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="bit_as24_probe">
+				<?php wp_nonce_field( 'bit_as24_probe' ); ?>
+				<?php submit_button( 'Probelauf (nichts speichern)', 'primary', 'submit', false, $off ); ?>
+			</form>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return confirm('Fahrzeuge jetzt wirklich von AutoScout24 übernehmen?')">
+				<input type="hidden" name="action" value="bit_as24_run">
+				<?php wp_nonce_field( 'bit_as24_run' ); ?>
+				<?php submit_button( 'Jetzt abgleichen', 'secondary', 'submit', false, $off ); ?>
+			</form>
+		</div>
+		<?php if ( ! bit_as24_is_configured() ) : ?>
+			<p class="description">Erst Seller-ID, Client-ID und Secret speichern.</p>
+		<?php endif; ?>
+		<?php $probe = get_option( BIT_AS24_PROBE ); ?>
+		<?php if ( $probe ) : ?>
+			<h2 id="probelauf">Letzter Probelauf</h2>
+			<p><?php echo esc_html( $probe['time'] ?? '' ); ?> –
+				<?php printf( '%d Inserate gelesen: würde anlegen %d, würde ändern %d, gleich %d, würde als verkauft markieren %d, übersprungen %d', (int) ( $probe['found'] ?? 0 ), (int) ( $probe['created'] ?? 0 ), (int) ( $probe['updated'] ?? 0 ), (int) ( $probe['unchanged'] ?? 0 ), (int) ( $probe['sold'] ?? 0 ), (int) ( $probe['skipped'] ?? 0 ) ); ?></p>
+			<?php foreach ( (array) ( $probe['errors'] ?? array() ) as $err ) : ?>
+				<p style="color:#b32d2e"><?php echo esc_html( $err ); ?></p>
+			<?php endforeach; ?>
+			<?php if ( ! empty( $probe['log'] ) ) : ?>
+				<ul class="bit-probe" style="list-style:disc;padding-left:20px;max-height:420px;overflow:auto;background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:12px 12px 12px 32px">
+					<?php foreach ( $probe['log'] as $line ) : ?>
+						<li><?php echo esc_html( $line ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+			<?php if ( ! empty( $probe['raw_file'] ) ) : ?>
+				<p><a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=bit_as24_raw&file=' . rawurlencode( $probe['raw_file'] ) ), 'bit_as24_raw' ) ); ?>">Rohdaten herunterladen (JSON)</a>
+				<span class="description">So schickt AutoScout24 die Daten wirklich – zum Vergleich mit der Zuordnung im Code.</span></p>
+			<?php endif; ?>
+		<?php endif; ?>
 		<?php if ( $report ) : ?>
 			<h2>Letzter Abgleich</h2>
 			<p><?php echo esc_html( $report['time'] ?? '' ); ?> –
@@ -631,6 +744,39 @@ add_action(
 		update_option( BIT_AS24_OPTION, $s, false );
 		delete_transient( 'bit_as24_token' );
 		wp_safe_redirect( admin_url( 'tools.php?page=bit-as24&saved=1' ) );
+		exit;
+	}
+);
+
+add_action(
+	'admin_post_bit_as24_probe',
+	function () {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Keine Berechtigung.' );
+		}
+		check_admin_referer( 'bit_as24_probe' );
+		bit_as24_sync( true );
+		wp_safe_redirect( admin_url( 'tools.php?page=bit-as24#probelauf' ) );
+		exit;
+	}
+);
+
+add_action(
+	'admin_post_bit_as24_raw',
+	function () {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Keine Berechtigung.' );
+		}
+		check_admin_referer( 'bit_as24_raw' );
+		$name = sanitize_file_name( wp_unslash( $_GET['file'] ?? '' ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$path = bit_as24_raw_dir() . '/' . $name;
+		if ( ! preg_match( '/^rohdaten-[\w-]+\.json$/', $name ) || ! is_readable( $path ) ) {
+			wp_die( 'Datei nicht gefunden.' );
+		}
+		nocache_headers();
+		header( 'Content-Type: application/json; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename="' . $name . '"' );
+		readfile( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		exit;
 	}
 );

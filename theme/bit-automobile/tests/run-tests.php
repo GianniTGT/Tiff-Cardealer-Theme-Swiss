@@ -109,6 +109,34 @@ foreach ( $items as $it ) {
 	}
 }
 
+// --- Probelauf gegen die AutoScout24-Attrappe (kein Internet, nichts wird gespeichert) ---
+require_once BIT_DIR . '/tests/as24-mock.php';
+$saved_settings = get_option( BIT_AS24_OPTION, null );
+update_option( BIT_AS24_OPTION, array( 'seller_id' => '12345', 'client_id' => 'test', 'client_secret' => 'test-secret' ) );
+delete_transient( 'bit_as24_token' );
+add_filter( 'pre_http_request', 'bit_as24_mock_response', 10, 3 );
+$before = wp_count_posts( 'fahrzeug' )->publish;
+$probe  = bit_as24_sync( true );
+$t( 'Probelauf: 11 Inserate gelesen', 11 === ( $probe['found'] ?? 0 ), wp_json_encode( $probe['errors'] ?? array() ) );
+$t( 'Probelauf: würde 11 anlegen', 11 === ( $probe['created'] ?? 0 ) );
+$t( 'Probelauf: speichert keine Fahrzeuge', (int) $before === (int) wp_count_posts( 'fahrzeug' )->publish && 0 === bit_as24_find_post( 'probe-demo-1001' ) );
+$t( 'Probelauf: keine Hinweise (alle Felder gefunden)', empty( $probe['errors'] ), wp_json_encode( $probe['errors'] ?? array() ) );
+$t( 'Probelauf: Zeile mit Preis und km', (bool) preg_grep( '/würde anlegen: Mercedes-Benz AMG GT C – CHF 129’900 – 31’500 km – 2018 – 3 Bilder/u', $probe['log'] ?? array() ) );
+$raw_path = bit_as24_raw_dir() . '/' . ( $probe['raw_file'] ?? 'x' );
+$t( 'Probelauf: Rohdaten gespeichert', is_readable( $raw_path ) && str_contains( (string) file_get_contents( $raw_path ), 'probe-demo-1001' ) );
+$t( 'Probelauf: Rohdaten ohne Token', ! str_contains( (string) file_get_contents( $raw_path ), 'mock-token' ) );
+$t( 'Rohdaten-Ordner gesperrt', is_readable( bit_as24_raw_dir() . '/.htaccess' ) );
+$t( 'Probelauf-Bericht separat', ( get_option( BIT_AS24_PROBE )['raw_file'] ?? '' ) === $probe['raw_file'] );
+delete_transient( 'bit_as24_token' );
+update_option( BIT_AS24_OPTION, array( 'seller_id' => '12345', 'client_id' => 'test', 'client_secret' => 'falsch' ) );
+$bad = bit_as24_sync( true );
+$t( 'Falsches Secret: klare Fehlermeldung', str_contains( implode( ' ', $bad['errors'] ?? array() ), 'Anmeldung fehlgeschlagen' ) );
+remove_filter( 'pre_http_request', 'bit_as24_mock_response', 10 );
+delete_transient( 'bit_as24_token' );
+delete_option( BIT_AS24_PROBE );
+wp_delete_file( $raw_path );
+null === $saved_settings ? delete_option( BIT_AS24_OPTION ) : update_option( BIT_AS24_OPTION, $saved_settings );
+
 echo "\n{$ok} OK, {$fail} FEHLER\n";
 if ( $fail ) {
 	exit( 1 );

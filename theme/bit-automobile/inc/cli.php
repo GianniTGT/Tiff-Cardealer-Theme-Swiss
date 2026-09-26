@@ -4,7 +4,7 @@
  *   wp bit setup                         Seiten, Menues, Startseite einrichten
  *   wp bit demo load | remove            Demo-Fahrzeuge (Testdaten)
  *   wp bit as24 import --file=<json>     Import aus Datei (z.B. Testdaten)  [--dry-run] [--demo]
- *   wp bit as24 sync                     Abgleich mit AutoScout24 (braucht Zugangsdaten)
+ *   wp bit as24 sync [--dry-run]         Abgleich mit AutoScout24 (braucht Zugangsdaten); --dry-run = Probelauf
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -38,7 +38,11 @@ WP_CLI::add_command(
 	function ( $args, $assoc ) {
 		$do = $args[0] ?? 'import';
 		if ( 'sync' === $do ) {
-			bit_cli_report( bit_as24_sync() );
+			$r = bit_as24_sync( isset( $assoc['dry-run'] ) );
+			bit_cli_report( $r );
+			if ( ! empty( $r['raw_file'] ) ) {
+				WP_CLI::log( 'Rohdaten: ' . bit_as24_raw_dir() . '/' . $r['raw_file'] );
+			}
 			return;
 		}
 		$file = $assoc['file'] ?? '';

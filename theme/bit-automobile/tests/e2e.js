@@ -256,6 +256,39 @@ const PAGES = [
     void first;
   }
 
+  /* ---------- AutoScout24-Probelauf im Admin (nur mit lokaler Attrappe) ---------- */
+  if (process.env.ADMIN_USER && process.env.ADMIN_PASS && process.env.AS24_MOCK === '1') {
+    const xc = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+    const xp = await xc.newPage();
+    await xp.goto(BASE + '/wp-login.php', { waitUntil: 'networkidle' });
+    await xp.fill('#user_login', process.env.ADMIN_USER);
+    await xp.fill('#user_pass', process.env.ADMIN_PASS);
+    await Promise.all([xp.waitForNavigation(), xp.click('#wp-submit')]);
+    await xp.goto(BASE + '/wp-admin/tools.php?page=bit-as24', { waitUntil: 'networkidle' });
+    t('AS24: Probelauf-Knopf gesperrt ohne Zugangsdaten', await xp.locator('input[value="Probelauf (nichts speichern)"]').isDisabled());
+    await xp.fill('#as24_seller', '12345');
+    await xp.fill('#as24_client', 'test');
+    await xp.fill('#as24_secret', 'test-secret');
+    await Promise.all([xp.waitForNavigation(), xp.click('input[value="Speichern"]')]);
+    t('AS24: Secret nicht im Formular sichtbar', (await xp.locator('#as24_secret').inputValue()) === '');
+    const before = await xp.evaluate(async (b) => (await (await fetch(b + '/wp-json/wp/v2/fahrzeug?per_page=100')).json()).length, BASE);
+    await Promise.all([xp.waitForNavigation(), xp.click('input[value="Probelauf (nichts speichern)"]')]);
+    const summary = await xp.locator('#probelauf + p').innerText();
+    t('AS24: Probelauf liest 11, würde 11 anlegen', /11 Inserate gelesen: würde anlegen 11/.test(summary), summary);
+    t('AS24: Liste mit Preis und km', /würde anlegen: Mercedes-Benz AMG GT C – CHF 129’900 – 31’500 km/.test(await xp.locator('.bit-probe').innerText()));
+    const after = await xp.evaluate(async (b) => (await (await fetch(b + '/wp-json/wp/v2/fahrzeug?per_page=100')).json()).length, BASE);
+    t('AS24: Probelauf hat nichts gespeichert', before === after, before + ' → ' + after);
+    const dl = await Promise.all([xp.waitForEvent('download'), xp.click('text=Rohdaten herunterladen (JSON)')]);
+    const rawTxt = fs.readFileSync(await dl[0].path(), 'utf8');
+    t('AS24: Rohdaten herunterladbar', /probe-demo-1001/.test(rawTxt) && !/mock-token/.test(rawTxt));
+    const direct = await xp.request.get(BASE + '/wp-content/uploads/bit-as24/' + dl[0].suggestedFilename());
+    t('AS24: Rohdaten von aussen gesperrt', direct.status() === 403, String(direct.status()));
+    await xp.locator('#probelauf').scrollIntoViewIfNeeded();
+    await xp.evaluate(() => window.scrollBy(0, -260));
+    await xp.screenshot({ path: path.join(OUT, '27-admin-autoscout24-probelauf.jpg'), type: 'jpeg', quality: 80 });
+    await xc.close();
+  }
+
   await browser.close();
   console.log('\n' + ok + ' OK, ' + fail + ' FEHLER');
   process.exit(fail ? 1 : 0);
