@@ -1,0 +1,344 @@
+/* BIT Automobile — Design System.
+   1:1 aus dem Entwurf «BIT Automobile Webseite» uebernommen: Farbe, Schrift,
+   Mass, Bewegung und die Teile. Die Schriften liegen lokal im Theme
+   (kein Google Fonts, siehe Datenschutz). Quelle: Google Fonts, OFL. */
+
+/* ---------- Schrift ---------- */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:100%;font-display:swap;
+  src:url(../fonts/archivo-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:100%;font-display:swap;
+  src:url(../fonts/archivo-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Archivo Narrow';font-style:normal;font-weight:500 700;font-display:swap;
+  src:url(../fonts/archivo-narrow-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Archivo Narrow';font-style:normal;font-weight:500 700;font-display:swap;
+  src:url(../fonts/archivo-narrow-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ---------- Farbe ---------- */
+:root{
+  /* Die Webseite nutzt die etwas hellere Stufe aus dem Entwurf. */
+  --black:#0C0E10;
+  --panel:#141719;
+  --panel-2:#1B1F22;
+  --panel-3:#232830;
+  --panel-4:#2C3238;
+
+  --text:#EDEFF1;
+  --text-2:#A8B0B7;
+  --text-3:#79838B;
+  --white:#FFFFFF;
+
+  --blue:#4A8FD1;
+  --blue-2:#3C77B2;
+  --blue-deep:#2B5672;
+  --blue-wash:rgba(74,143,209,.13);
+  --blue-glow:rgba(74,143,209,.30);
+
+  --aare:#3FA9A0;
+  --aare-2:#79D8CB;
+
+  --amber:#E0A33C;
+  --red:#E05A55;
+
+  --hair:rgba(255,255,255,.10);
+  --hair-2:rgba(255,255,255,.16);
+}
+:root{
+  --surface-page:var(--black);
+  --surface-card:var(--panel);
+  --surface-field:var(--panel-2);
+  --surface-field-hover:var(--panel-3);
+  --surface-divider:var(--panel-4);
+
+  --text-body:var(--text);
+  --text-muted:var(--text-2);
+  --text-label:var(--text-3);
+  --text-on-accent:#06121C;
+  --text-on-white:#0A0B0C;
+
+  --accent:var(--blue);
+  --accent-brand:var(--blue-2);
+  --accent-wash:var(--blue-wash);
+  --border:var(--hair);
+  --border-strong:var(--hair-2);
+
+  --focus-ring:var(--blue);
+  --shadow-card:0 30px 60px rgba(0,0,0,.6);
+  --shadow-btn:0 10px 30px rgba(0,0,0,.55);
+  --shadow-btn-blue:0 12px 34px var(--blue-glow);
+}
+
+/* ---------- Schrift-Leiter ---------- */
+:root{
+  --font:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-narrow:'Archivo Narrow','Archivo',system-ui,sans-serif;
+  --t-hero:clamp(42px,7.4vw,86px);
+  --t-h1:clamp(28px,3.9vw,50px);
+  --t-h2:23px;
+  --t-h3:17px;
+  --t-lead:clamp(16.5px,1.4vw,18.5px);
+  --t-body:15px;
+  --t-ui:13.5px;
+  --t-small:12px;
+  --t-label:11.5px;
+  --t-micro:10px;
+  --w-regular:400;--w-medium:500;--w-semi:600;--w-bold:700;--w-heavy:800;--w-black:900;
+  --lh-tight:1.04;--lh-ui:1.35;--lh-body:1.55;
+  --ls-hero:-.052em;--ls-title:-.04em;--ls-ui:-.01em;--ls-label:.16em;--ls-kicker:.26em;
+}
+
+/* ---------- Mass: ein Radius fuer alles, 16px ---------- */
+:root{
+  --r:16px;
+  --r-s:10px;
+  --r-pill:999px;
+  --gut:22px;
+  --maxw:1240px;
+  --tap:44px;
+  --band:clamp(54px,7.4vw,108px);
+}
+
+/* ---------- Bewegung ---------- */
+:root{
+  --press:120ms cubic-bezier(.4,0,.2,1);
+  --ease:300ms cubic-bezier(.22,.61,.36,1);
+  --slow:620ms cubic-bezier(.22,.61,.36,1);
+  --flow:24s linear infinite;
+}
+@keyframes bit-flow{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes bit-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes bitBreathe{from{transform:scale(1.02) translateX(1.2%)}to{transform:scale(1.10) translateX(-1.2%)}}
+@keyframes bitOrbit{to{rotate:360deg}}
+@property --bit-ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes bitRing{to{--bit-ang:360deg}}
+
+/* ---------- Grundlage ---------- */
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);
+  font-family:var(--font);font-size:16px;line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+img{max-width:100%;display:block;height:auto}
+h1,h2,h3{margin:0;font-weight:var(--w-heavy);line-height:var(--lh-tight);
+  letter-spacing:var(--ls-title);color:var(--white);text-wrap:balance}
+p{margin:0}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--aare-2)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+input[type="range"]{accent-color:var(--blue)}
+
+/* ---------- Knopf ---------- */
+.bit-btn{appearance:none;border:0;cursor:pointer;font-family:inherit;
+  font-size:15px;font-weight:var(--w-bold);letter-spacing:-.012em;line-height:1;
+  padding:15px 24px;border-radius:var(--r);background:var(--white);color:var(--text-on-white);
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+  position:relative;z-index:0;overflow:hidden;touch-action:manipulation;min-height:var(--tap);
+  white-space:nowrap;
+  transition:transform var(--press),box-shadow var(--ease),filter var(--ease)}
+.bit-btn::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.30) 50%,transparent 62%);
+  transform:translateX(125%)}
+@media (prefers-reduced-motion:no-preference){
+  .bit-btn:hover::after{transition:transform 780ms cubic-bezier(.22,.61,.36,1);transform:translateX(-125%)}
+}
+.bit-btn:hover{filter:brightness(1.06);box-shadow:var(--shadow-btn);color:var(--text-on-white)}
+.bit-btn:active{transform:scale(.955);box-shadow:none;filter:brightness(.9)}
+.bit-btn:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px}
+.bit-btn--blue{background:linear-gradient(152deg,var(--blue),var(--blue-deep));color:#fff}
+.bit-btn--blue:hover{box-shadow:var(--shadow-btn-blue);color:#fff}
+.bit-btn--ghost{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1.5px var(--border-strong)}
+.bit-btn--ghost:hover{background:rgba(255,255,255,.07);color:var(--white);filter:none;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3)}
+.bit-btn--sm{padding:0 18px;font-size:14px;min-height:var(--tap)}
+.bit-btn--block{width:100%}
+.bit-btn[disabled],.bit-btn[aria-disabled="true"]{opacity:.42;pointer-events:none}
+/* Der drehende Rand beim Darueberfahren (Aare → Blau) */
+.bit-btn::before,.bit-chip::before{
+  content:"";position:absolute;inset:0;border-radius:var(--r);padding:2px;
+  background:conic-gradient(from var(--bit-ang),transparent 0 58%,var(--aare) 74%,var(--aare-2) 82%,var(--blue) 90%,transparent 98%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;pointer-events:none;
+  opacity:0;transition:opacity 420ms cubic-bezier(.22,.61,.36,1);
+  animation:bitRing 5.2s linear infinite}
+.bit-btn:hover::before,.bit-btn:focus-visible::before,
+.bit-chip:hover::before,.bit-chip:focus-visible::before{opacity:1}
+
+/* ---------- Chip ---------- */
+.bit-chip{appearance:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;
+  font-weight:var(--w-semi);padding:0 16px;border-radius:var(--r);min-height:var(--tap);
+  position:relative;z-index:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;
+  background:var(--surface-field);color:var(--text-muted);touch-action:manipulation;white-space:nowrap;
+  transition:transform var(--press),background var(--ease),color var(--ease)}
+.bit-chip:hover{background:var(--surface-field-hover);color:var(--white)}
+.bit-chip:active{transform:scale(.94)}
+.bit-chip[aria-pressed="true"]{background:var(--blue);color:#fff}
+
+/* ---------- Marke auf dem Foto ---------- */
+.bit-phototag{display:inline-flex;align-items:center;
+  background:rgba(8,9,10,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid var(--border-strong);color:var(--text-body);
+  font-size:11px;font-weight:var(--w-bold);letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 10px;border-radius:var(--r);line-height:1.2}
+.bit-phototag--mfk{color:#7CE0A8}
+.bit-phototag--accent{background:linear-gradient(150deg,var(--blue),var(--blue-deep));
+  border-color:transparent;color:#fff}
+.bit-phototag--muted{color:var(--amber)}
+
+/* ---------- Beschriftung ---------- */
+.bit-kicker{font-family:var(--font-narrow);font-size:12.5px;font-weight:var(--w-bold);
+  letter-spacing:var(--ls-kicker);text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.bit-label{font-family:var(--font-narrow);text-transform:uppercase;letter-spacing:.16em;
+  font-size:10.5px;font-weight:700;color:var(--text-3)}
+
+/* ---------- Stroemung: die Aare, rechts nach links ---------- */
+.bit-flow{height:3px;overflow:hidden;background:rgba(255,255,255,.06);border-radius:var(--r);
+  width:105%;margin-left:-2.5%}
+.bit-flow i{display:block;height:100%;width:300%;
+  background:linear-gradient(90deg,transparent 0%,var(--aare) 9%,var(--aare-2) 21%,var(--aare) 34%,transparent 49%,
+    transparent 53%,var(--aare) 66%,var(--aare-2) 78%,var(--aare) 90%,transparent 99%)}
+@media (prefers-reduced-motion:no-preference){.bit-flow i{animation:bit-flow 9s linear infinite}}
+
+/* ---------- Symbol ---------- */
+.bit-icon{flex:none;stroke:currentColor;stroke-width:1.75;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Logo ----------
+   Eine Maske (logo-alpha.png), die Farbe kommt aus CSS.
+   Korrigiert: kein Kreuz im i-Punkt; der Querbalken des «t» ist
+   rechts doppelt so lang wie links. */
+.bit-logo{position:relative;display:inline-block;line-height:0;width:157.5px;height:42px}
+.bit-logo .mark{display:block;width:100%;height:100%;
+  -webkit-mask:var(--logo-src) left center/contain no-repeat;
+  mask:var(--logo-src) left center/contain no-repeat;
+  background:var(--white);transition:background var(--ease)}
+a:hover > .bit-logo .mark{background:var(--accent)}
+.bit-logo--muted{width:150px;height:40.5px}
+
+/* ---------- Feld ---------- */
+.bit-field{display:flex;flex-direction:column;gap:7px;font-size:13px;
+  font-weight:var(--w-semi);color:var(--text-muted)}
+.bit-field > .ctl{font-family:inherit;font-size:var(--t-body);font-weight:var(--w-regular);
+  color:var(--white);background:var(--surface-field);border:1.5px solid var(--border);
+  border-radius:var(--r);padding:13px 15px;min-height:var(--tap);width:100%;
+  transition:border-color var(--ease),background var(--ease)}
+.bit-field > .ctl::placeholder{color:var(--text-label)}
+.bit-field > .ctl:focus{outline:0;border-color:var(--accent);background:var(--surface-field-hover)}
+.bit-field textarea.ctl{min-height:116px;resize:vertical}
+.bit-field select.ctl{appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--text-label) 50%),linear-gradient(135deg,var(--text-label) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 55%,calc(100% - 13px) 55%;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:38px}
+.bit-field--invalid > .ctl{border-color:var(--red)}
+
+/* ---------- Suche ---------- */
+.bit-search{position:relative;display:block}
+.bit-search input{width:100%;font-family:inherit;font-size:15.5px;color:var(--white);
+  background:var(--surface-field);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:14px 16px 14px 44px;min-height:var(--tap);
+  transition:border-color var(--ease),background var(--ease)}
+.bit-search input::placeholder{color:var(--text-label)}
+.bit-search input:focus{outline:0;border-color:var(--accent);background:var(--surface-field-hover)}
+.bit-search .bit-icon{position:absolute;left:15px;top:50%;translate:0 -50%;
+  width:18px;height:18px;stroke:var(--text-label);stroke-width:1.9;pointer-events:none}
+
+/* ---------- Schluessel und Wert ---------- */
+.bit-kv{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);
+  border-radius:var(--r);overflow:hidden;margin:0}
+.bit-kv > div{background:var(--surface-card);padding:10px 12px}
+.bit-kv .k{font-family:var(--font-narrow);font-size:var(--t-micro);font-weight:var(--w-semi);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--text-label);display:block;margin-bottom:2px}
+.bit-kv .v{font-size:var(--t-ui);font-weight:var(--w-semi);font-variant-numeric:tabular-nums}
+.bit-kv .wide{grid-column:1/-1}
+
+/* ---------- Fakten (Webseite) ---------- */
+.bit-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;
+  background:var(--border);border-radius:var(--r);overflow:hidden;margin:0}
+.bit-facts > div{background:var(--surface-card);padding:20px 20px 18px}
+.bit-facts dt{font-family:var(--font-narrow);font-size:var(--t-label);font-weight:var(--w-bold);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--text-label);margin:0}
+.bit-facts dd{margin:7px 0 0;font-size:16px;font-weight:var(--w-semi);letter-spacing:-.02em;
+  line-height:1.45;color:var(--white)}
+.bit-facts dd a{color:inherit}
+.bit-facts dd a:hover{color:var(--accent)}
+
+/* ---------- Rechnung ---------- */
+.bit-calc{display:flex;flex-direction:column}
+.bit-calc .ln{display:flex;align-items:baseline;gap:10px;padding:9px 0;
+  border-bottom:1px solid var(--border);font-size:var(--t-ui)}
+.bit-calc .ln:last-child{border-bottom:0}
+.bit-calc .ln span{color:var(--text-muted)}
+.bit-calc .ln b{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:var(--w-semi)}
+.bit-calc .ln--sum{border-top:1px solid var(--border-strong);margin-top:2px}
+.bit-calc .ln--sum span,.bit-calc .ln--sum b{font-weight:var(--w-heavy);font-size:var(--t-body);color:var(--text-body)}
+.bit-calc .ln--win b{color:var(--aare-2)}
+
+/* ---------- Fahrzeugkarte ---------- */
+.bit-veh{background:var(--surface-card);border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;border:1px solid var(--border);
+  transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+.bit-veh:hover{transform:translateY(-8px);box-shadow:var(--shadow-card);border-color:var(--border-strong)}
+.bit-veh:active{transform:translateY(-3px) scale(.99);transition:transform var(--press)}
+.bit-veh .shot{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#0C0E10}
+.bit-veh .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border-radius:0;transition:transform var(--slow)}
+.bit-veh:hover .shot img{transform:scale(1.06)}
+.bit-veh .shot::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 52%,rgba(8,9,10,.72) 100%)}
+.bit-veh .shot .bit-phototag{position:absolute;z-index:2;left:12px;top:12px}
+.bit-veh .shot .bit-phototag--accent{left:auto;right:12px}
+.bit-veh .shot .bit-phototag--demo{top:auto;bottom:12px}
+.bit-veh .body{padding:19px 20px 20px;display:flex;flex-direction:column;gap:15px;flex:1}
+.bit-veh .rowtop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.bit-veh h3{font-size:20px;letter-spacing:-.028em;font-weight:var(--w-bold)}
+.bit-veh h3 a{color:inherit}
+.bit-veh .sub{font-size:12.5px;color:var(--text-label);margin-top:4px;letter-spacing:.02em}
+.bit-veh .price{font-size:22px;font-weight:var(--w-heavy);letter-spacing:-.04em;color:var(--white);
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.bit-veh .specs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:9px 16px}
+.bit-veh .specs li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);
+  font-variant-numeric:tabular-nums}
+.bit-veh .specs .bit-icon{width:16px;height:16px;stroke:var(--accent);stroke-width:1.7}
+.bit-veh .bit-btn{margin-top:auto;justify-content:center}
+
+/* ---------- Kopf der Webseite ---------- */
+.bit-sitehead{position:sticky;top:0;z-index:60;background:rgba(8,9,10,.72);
+  -webkit-backdrop-filter:saturate(160%) blur(18px);backdrop-filter:saturate(160%) blur(18px);
+  border-bottom:1px solid var(--border)}
+.admin-bar .bit-sitehead{top:32px}
+@media (max-width:782px){.admin-bar .bit-sitehead{top:0}}
+.bit-sitehead .in{max-width:var(--maxw);margin-inline:auto;padding:10px var(--gut);
+  display:flex;align-items:center;gap:18px}
+.bit-sitehead .brand{display:inline-flex;flex:none}
+.bit-sitehead nav{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.bit-sitehead nav a{color:var(--text-muted);
+  position:relative;z-index:0;display:inline-flex;align-items:center;justify-content:center;
+  min-height:40px;padding:0 18px;border-radius:var(--r);
+  font-size:14px;font-weight:600;line-height:1;letter-spacing:-.01em;
+  transition:background var(--ease),color var(--ease),transform var(--press)}
+.bit-sitehead nav a::before{
+  content:"";position:absolute;inset:0;border-radius:var(--r);padding:2px;
+  background:conic-gradient(from var(--bit-ang),transparent 0 62%,var(--aare) 78%,var(--aare-2) 86%,var(--blue) 93%,transparent 99%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;pointer-events:none;
+  opacity:0;transition:opacity 420ms cubic-bezier(.22,.61,.36,1);
+  animation:bitRing 5.2s linear infinite}
+.bit-sitehead nav a:hover::before,.bit-sitehead nav a:focus-visible::before{opacity:1}
+.bit-sitehead nav a:hover{background:rgba(255,255,255,.07);color:var(--white)}
+.bit-sitehead nav a:active{transform:scale(.95)}
+.bit-sitehead nav a[aria-current="page"]{background:var(--blue-2);color:#fff;font-weight:700}
+.bit-sitehead nav a.bit-btn{color:var(--white);background:linear-gradient(152deg,var(--blue),var(--blue-deep))}
+.bit-sitehead nav a.bit-btn::after{display:none}
+@media(max-width:960px){.bit-sitehead nav a.tel{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  :root{--press:1ms linear;--ease:1ms linear;--slow:1ms linear}
+  *{animation:none!important}
+}

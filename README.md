@@ -1,7 +1,7 @@
 # BIT Automobile — Webseite und Infrastruktur
 
 Alles zum Schweizer Projekt: **BIT Automobile** (Handelsname der *ImmoBit AG*,
-Oberwangen b. Bern, Kontakt Sabit Kadriu). Die geplante Webseite, ihre Infrastruktur —
+Oberwangen b. Bern, Kontakt Sabit Kadriu). Die Webseite (WordPress-Theme), ihre Infrastruktur —
 Domain, DNS, Mail-Hosting — und die kaufmännische Seite dazu.
 
 **Dieses Repository enthält seit dem 18. September 2026 nur noch dieses eine Thema.** Was
@@ -19,6 +19,9 @@ verschwunden ist und wo es jetzt steht.
 | `BETRIEB-UND-HOSTING.md` | Das Betriebs- und Hostingmodell: was der Betrieb einer solchen Seite kostet, was verrechnet wird, wer wofür haftet |
 | `OFFERTE-VORLAGE.md` | Die Vorlage, aus der die Offerte entsteht |
 | `offerte/` | Die gerenderte Offerte für BIT Automobile |
+| `theme/bit-automobile/` | **Das WordPress-Theme** — siehe unten |
+| `design/` | Der Gestaltungsentwurf (offline-HTML) und der Logo-Vergleich |
+| `screenshots/bit-automobile/` | Bildschirmfotos aller Seiten aus dem End-to-End-Test |
 
 ---
 
@@ -38,20 +41,24 @@ nachprüfbar.
 
 ---
 
-## Was *nicht* hier liegt
+## Das Theme — `theme/bit-automobile/`
 
-**Der Gestaltungsentwurf für BIT Automobile ist in keinem Repository.** Er entstand in einer
-Claude-Design-Sitzung und existiert nur dort. Solange das so ist, beschreibt dieses
-Repository das Projekt, es enthält es nicht. Sobald der Entwurf als Dateien vorliegt, gehört
-er hierher — dann bekommt dieses README einen Abschnitt mehr.
+**Seit dem 26. September 2026 liegt das WordPress-Theme für BIT Automobile hier.** Es ist neu
+gebaut, ausschliesslich aus dem Entwurf `design/BIT_Automobile_Webseite_offline.html`
+(Farben, Schrift Archivo, Radius 16px, Linien, Knöpfe, Texte). Es hat **keinen Code und keine
+Verbindung** zu einem anderen Projekt.
 
-**Das WordPress-Theme ist nicht hier.** Es liegt in
-[`Tiff-Cardealer-Manager`](https://github.com/GianniTGT/Tiff-Cardealer-Manager) im Ordner
-`theme/`, und das ist die Quelle. Es ist ohnehin nicht das, was der Name dieses Repositories
-vermuten liess: der Code war der Theme von **Downtown Auto Sales, Anchorage, Alaska** —
-Prefix `das_`, Textdomain `das-v4`, `downtownautosale.com` in der `style.css`, das Logo des
-Händlers einkompiliert. An diesem Theme ist nichts schweizerisch ausser dem
-Repository-Namen.
+| Was | Wo |
+|---|---|
+| Theme (in WordPress unter `wp-content/themes/bit-automobile` hochladen) | `theme/bit-automobile/` |
+| Anleitung, Aufbau, Tests | `theme/bit-automobile/README.md` |
+| Der Entwurf, aus dem alles stammt | `design/BIT_Automobile_Webseite_offline.html` |
+| Logo vorher/nachher (Kreuz entfernt) | `design/logo-vorher-nachher.png` |
+| Bildschirmfotos aus dem End-to-End-Test | `screenshots/bit-automobile/` |
+
+**Logo:** Das rote Quadrat mit Schweizerkreuz, das im Entwurf über dem «t» schwebte, ist
+entfernt; der Querbalken des «t» ist rechts doppelt so lang wie links. Zusammen ergibt das
+kein Kreuz mehr (Wunsch von Sabit, 26. September 2026).
 
 ---
 
@@ -108,5 +115,6 @@ git show 956909d:business/SCHWEIZ-SAAS.md > SCHWEIZ-SAAS.md
 - **MX und NS von `immobit.ch`** — die zweite Domain löst auf dieselben Wix-IPs auf, ihre
   Mail-Einträge sind noch nicht gemessen.
 - **Die zwei kommerziellen AutoScout24-Fragen** — wie `client_id`/`client_secret` zu bekommen
-  sind, und was die VIN-Abfrage kostet. Die technische Seite steht in
-  `Tiff-Cardealer-Manager` → `AUTOSCOUT24-API.md`.
+  sind, und was die VIN-Abfrage kostet. Der Import auf der Webseite ist vorbereitet und mit
+  erfundenen Daten getestet: `theme/bit-automobile/inc/autoscout24.php`.
+- **MWST-Nummer bestätigen** — bis dahin zeigt das Impressum keine an (im Customizer eintragen).
