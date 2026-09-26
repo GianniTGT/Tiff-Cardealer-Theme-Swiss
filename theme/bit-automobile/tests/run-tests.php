@@ -30,7 +30,6 @@ $t( 'Kilometer', '1’234’567' === bit_num( 1234567 ) );
 $t( 'Telefon Festnetz', '+41315520002' === bit_tel( '031 552 00 02' ), bit_tel( '031 552 00 02' ) );
 $t( 'Telefon Mobil', '+41788688797' === bit_tel( '078 868 87 97' ) );
 $t( 'Telefon international', '+41315520002' === bit_tel( '+41 31 552 00 02' ), bit_tel( '+41 31 552 00 02' ) );
-$t( 'Leasing wie im Entwurf', 2119 === (int) round( bit_leasing_rate( 94500, 48, 10, 4.9 ) ), (string) round( bit_leasing_rate( 94500, 48, 10, 4.9 ) ) );
 $t( 'Keine MWST ohne Bestätigung', '' === do_shortcode( '[bit key="vat" before=", MWST-Nr. "]' ) );
 
 // --- Zuordnung ---

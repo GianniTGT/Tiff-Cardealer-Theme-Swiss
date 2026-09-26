@@ -22,6 +22,56 @@ function bit_seed_pages() {
 	);
 }
 
+/**
+ * Texte der vier Dienstleistungs-Seiten. Grundlage sind Sabits Texte auf der
+ * bisherigen bit-automobile.ch (Stand 26.09.2026), ergaenzt um die Ablaeufe aus dem Entwurf.
+ */
+function bit_seed_services() {
+	return array(
+		'an-und-verkauf'            => <<<'HTML'
+<p class="lead">Bei uns finden Sie sorgfältig geprüfte Occasionen in Top-Zustand. Egal, ob Sie Ihr Auto verkaufen oder ein Fahrzeug suchen – bei uns finden Sie die passende Lösung.</p>
+<p>Bei uns geht es nicht nur um den Verkauf von Autos. Wir bieten Ihnen auch die Möglichkeit, Ihr bisheriges Fahrzeug einzutauschen, und übernehmen alle Schritte für Sie, damit der Ablauf so bequem wie möglich ist.</p>
+<h2>So verkaufen Sie uns Ihr Auto</h2>
+<ol>
+<li><strong>Anrufen oder vorbeibringen.</strong> Ohne Inserat, ohne Besichtigungen am Sonntagabend.</li>
+<li><strong>Wir schauen es an</strong> und prüfen den Zustand.</li>
+<li><strong>Sie bekommen ein Angebot</strong> – Barzahlung und Abmeldung inbegriffen.</li>
+</ol>
+<h2>Eintausch</h2>
+<p>Sie nehmen ein Fahrzeug vom Platz und geben Ihres dafür. Wir rechnen den Eintausch direkt gegen den Kaufpreis – ein Termin, ein Vertrag.</p>
+HTML,
+		'fahrzeugaufbereitung'      => <<<'HTML'
+<p class="lead">Die professionelle Aussen- und Innenreinigung Ihres Fahrzeugs trägt massgeblich zur Werterhaltung bei.</p>
+<p>Autolacke, die nicht versiegelt sind, sind anfälliger für Witterungseinflüsse, Schmutz und Schadstoffe in der Luft. Ohne Versiegelung verliert der Lack an Glanz und Qualität. Investieren Sie rechtzeitig in die Pflege Ihres Fahrzeugs, um teure Aufbereitungsmassnahmen zu vermeiden.</p>
+<p>Gegen eine geringe Gebühr bieten wir Ihnen einen umfassenden Lack-Schutz für Ihr Fahrzeug an.</p>
+<h2>Was dazugehört</h2>
+<ul>
+<li>Aussenreinigung und Politur</li>
+<li>Lackaufbereitung und Lackversiegelung</li>
+<li>Innenreinigung</li>
+</ul>
+<p>Jedes Fahrzeug bei uns geht durch die Aufbereitung, bevor es auf den Platz kommt – auch Ihres, wenn Sie wollen.</p>
+HTML,
+		'carrosserie-und-werkstatt' => <<<'HTML'
+<p class="lead">Wir verfügen über eine moderne und grosse Werkstatt und führen alle Wartungs- und Reparaturarbeiten rund ums Auto für alle Marken durch.</p>
+<p>Unsere qualifizierten Werkstatt- und Kundendienstmitarbeiter haben grosse Markenerfahrung. Unterstützt durch modernste Diagnosegeräte und technische Einrichtungen sorgen wir für einen einwandfreien und fachgerechten Service.</p>
+<h2>MFK-Vorbereitung</h2>
+<p>Wir prüfen, was die MFK prüft, und machen es vorher. Was wir finden, sagen wir Ihnen mit Preis, bevor wir es anfassen.</p>
+HTML,
+		'fahrzeugbewertung'         => <<<'HTML'
+<p class="lead">Wir berechnen den Wert Ihres Occasionsfahrzeugs gegen eine kleine Gebühr. Am einfachsten geht es mit den Angaben aus dem Fahrzeugausweis.</p>
+<p>Fehlt der Fahrzeugausweis, ermitteln wir den Wert über die Typenliste – dafür brauchen wir die Fahrzeugart, die erste Inverkehrsetzung, die Marke und die Modellreihe.</p>
+<h2>Was wir brauchen</h2>
+<ul>
+<li>Fahrzeugausweis (Foto genügt)</li>
+<li>Kilometerstand</li>
+<li>Zustand und Besonderheiten, z.B. Schäden oder Service-Nachweise</li>
+</ul>
+<p>Schreiben Sie uns über das Formular oder rufen Sie an – wir sagen Ihnen, was realistisch ist.</p>
+HTML,
+	);
+}
+
 function bit_seed_impressum() {
 	return <<<'HTML'
 <h2>Verantwortlich für den Inhalt</h2>
@@ -84,6 +134,29 @@ function bit_setup_site() {
 			)
 		);
 		$log[] = "Seite «{$page[0]}» angelegt (#{$ids[ $slug ]}).";
+	}
+
+	// Dienstleistungen als Unterseiten von «Dienstleistungen».
+	$order = 0;
+	foreach ( bit_seed_services() as $slug => $content ) {
+		++$order;
+		$existing = get_page_by_path( 'dienstleistungen/' . $slug, OBJECT, 'page' );
+		if ( $existing ) {
+			$log[] = 'Dienstleistung «' . bit_services()[ $slug ][0] . '» besteht schon.';
+			continue;
+		}
+		wp_insert_post(
+			array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'   => bit_services()[ $slug ][0],
+				'post_name'    => $slug,
+				'post_parent'  => $ids['dienstleistungen'],
+				'menu_order'   => $order,
+				'post_content' => $content,
+			)
+		);
+		$log[] = 'Dienstleistung «' . bit_services()[ $slug ][0] . '» angelegt.';
 	}
 
 	update_option( 'show_on_front', 'page' );

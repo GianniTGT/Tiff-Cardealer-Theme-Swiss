@@ -1,7 +1,7 @@
 <?php
 /**
- * Ein Fahrzeug — Galerie, Preis, Anruf-Kasten, Daten, Leasing-Rechner,
- * drei aehnliche Fahrzeuge. Wie im Entwurf.
+ * Ein Fahrzeug — Galerie, Preis, Anruf-Kasten, Daten, Beschreibung,
+ * drei aehnliche Fahrzeuge. (Kein Leasing-Rechner: BIT bietet kein Leasing an.) Wie im Entwurf.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -92,37 +92,6 @@ $similar = array_slice( $similar, 0, 3 );
 		</div>
 	</div>
 </section>
-
-<?php if ( ! $sold && (int) $v['price'] > 0 ) : ?>
-<section class="sec sec--flat">
-	<div class="panel leasing" data-leasing data-price="<?php echo esc_attr( (int) $v['price'] ); ?>" data-rate="<?php echo esc_attr( (float) str_replace( ',', '.', bit_info( 'leasing_rate' ) ) ); ?>">
-		<div>
-			<?php bit_kicker( 'Leasing, gerechnet' ); ?>
-			<h2 class="t-sub">Was es pro Monat macht.</h2>
-			<p class="muted" style="margin-top:12px;max-width:44ch">Eine Rechnung, keine Offerte. Der Zinssatz ist mit <?php echo esc_html( str_replace( '.', ',', bit_info( 'leasing_rate' ) ) ); ?>% angenommen; die verbindliche Zahl kommt von der Leasinggesellschaft.</p>
-			<label class="range">
-				<span class="bit-label">Laufzeit</span>
-				<b data-out="months">48 Monate</b>
-				<input type="range" data-in="months" min="12" max="60" step="12" value="48">
-			</label>
-			<label class="range">
-				<span class="bit-label">Anzahlung</span>
-				<b data-out="down">10% · <?php echo esc_html( bit_chf( $v['price'] * 0.1 ) ); ?></b>
-				<input type="range" data-in="down" min="0" max="40" step="5" value="10">
-			</label>
-		</div>
-		<div>
-			<div class="bit-calc">
-				<div class="ln"><span>Fahrzeugpreis</span><b><?php echo esc_html( bit_chf( $v['price'] ) ); ?></b></div>
-				<div class="ln"><span>Anzahlung</span><b data-out="downchf">– <?php echo esc_html( bit_chf( $v['price'] * 0.1 ) ); ?></b></div>
-				<div class="ln ln--sum"><span>Finanziert</span><b data-out="principal"><?php echo esc_html( bit_chf( $v['price'] * 0.9 ) ); ?></b></div>
-				<div class="ln ln--win"><span>Rate pro Monat</span><b data-out="rate"><?php echo esc_html( bit_chf( round( bit_leasing_rate( (int) $v['price'] ) ) ) ); ?></b></div>
-			</div>
-			<p class="fine">Ohne Versicherung, Vollamortisation, Restwert nicht berücksichtigt. Beispielrechnung, unverbindlich.</p>
-		</div>
-	</div>
-</section>
-<?php endif; ?>
 
 <?php if ( $similar ) : ?>
 <section class="sec sec--flat">

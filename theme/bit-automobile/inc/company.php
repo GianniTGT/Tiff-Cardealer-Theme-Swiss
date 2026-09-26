@@ -34,7 +34,6 @@ function bit_info_defaults() {
 		'shares'     => '1’000 Namenaktien à CHF 100, vinkuliert',
 		'founded'    => '2022',
 		'maps_url'   => 'https://www.google.com/maps/search/?api=1&query=Herzwilstrasse+262+3173+Oberwangen',
-		'leasing_rate' => '4.9',
 	);
 }
 
@@ -84,7 +83,6 @@ add_action(
 			'uid'          => 'UID',
 			'vat'          => 'MWST-Nr. (leer = nicht anzeigen)',
 			'signatory'    => 'Zeichnungsberechtigt',
-			'leasing_rate' => 'Leasing-Rechner: Zinssatz in %',
 		);
 		$defaults = bit_info_defaults();
 		foreach ( $labels as $key => $label ) {

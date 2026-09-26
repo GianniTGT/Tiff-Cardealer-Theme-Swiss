@@ -44,11 +44,19 @@
              linear-gradient(180deg,rgba(6,7,8,.5) 0%,transparent 30%,rgba(6,7,8,.7) 100%)}
 .hero--about .in{padding-bottom:clamp(34px,4.6vw,58px)}
 .hero--about .t-hero{max-width:15ch}
+.hero--page{min-height:clamp(360px,48vw,520px)}
+.hero--page .shade{background:linear-gradient(90deg,rgba(6,7,8,.95) 0%,rgba(6,7,8,.8) 40%,rgba(6,7,8,.3) 100%),
+             linear-gradient(180deg,rgba(6,7,8,.5) 0%,transparent 30%,rgba(6,7,8,.75) 100%)}
+.hero--page .in{padding-bottom:clamp(34px,4.6vw,58px)}
+.hero .bit-kicker a{color:inherit}
+.hero .bit-kicker a:hover{color:var(--white)}
 
 /* ---------- Fahrzeug-Raster ---------- */
-.grid-veh{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.grid-veh{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.grid-veh > *{flex:0 1 100%;min-width:0}
+@media (min-width:700px){.grid-veh > *{flex-basis:calc((100% - 22px) / 2)}}
+@media (min-width:1000px){.grid-veh > *{flex-basis:calc((100% - 44px) / 3)}}
 .grid-veh--gap{margin-top:20px}
-@media (min-width:1000px){.grid-veh{grid-template-columns:repeat(3,1fr)}}
 
 /* ---------- Bild-Band mit Text (Ankauf) ---------- */
 .banner{position:relative;border-radius:var(--r);overflow:hidden;min-height:clamp(340px,46vw,520px);display:flex;align-items:flex-end}
@@ -71,19 +79,22 @@
 .platz .stick{position:sticky;top:0;height:100vh;overflow:hidden}
 .platz img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .platz .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,7,8,.92) 0%,rgba(6,7,8,.6) 42%,rgba(6,7,8,.2) 100%)}
-.platz .wipe{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-.platz .wipe .shade{background:linear-gradient(90deg,rgba(6,7,8,.9) 0%,rgba(6,7,8,.55) 44%,rgba(6,7,8,.18) 100%)}
-.platz .edge{position:absolute;left:0;right:0;top:0;height:3px;transform-origin:left center;
-  background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--aare-2));opacity:0}
 .platz .in{position:relative;z-index:2;height:100%;max-width:var(--maxw);margin-inline:auto;
   padding:86px var(--gut) 22px;display:flex;flex-direction:column;justify-content:center}
 .platz .count{font-size:clamp(88px,17vw,220px);font-weight:900;letter-spacing:-.06em;line-height:.88;
   font-variant-numeric:tabular-nums;margin-top:18px;color:var(--white)}
-.platz .t-sec{max-width:20ch;margin-top:18px}
+.platz .t-sec{max-width:20ch;margin-top:22px}
+.platz .meter{height:3px;width:min(420px,70%);background:rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden;margin-top:24px}
+.platz .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--aare-2));
+  transform-origin:left center;transform:scaleX(var(--p,1))}
 .platz .lead{max-width:46ch}
 
 /* ---------- Dienstleistungen ---------- */
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px}
+.svc-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.svc-grid > .svc{flex:0 1 100%;min-width:0}
+@media (min-width:640px){.svc-grid--4 > .svc{flex-basis:calc((100% - 16px) / 2)}}
+@media (min-width:1100px){.svc-grid--4 > .svc{flex-basis:calc((100% - 48px) / 4)}}
+@media (min-width:900px){.svc-grid--3 > .svc{flex-basis:calc((100% - 32px) / 3)}}
 .svc{position:relative;border-radius:var(--r);overflow:hidden;padding:2px;background:var(--hair)}
 .svc .glow{position:absolute;left:50%;top:50%;width:190%;aspect-ratio:1;translate:-50% -50%;pointer-events:none;
   background:conic-gradient(from 0deg,transparent 0 58%,var(--aare) 74%,var(--aare-2) 82%,var(--blue) 90%,transparent 98%);
@@ -92,8 +103,12 @@
 .svc .in{position:relative;z-index:2;background:var(--panel);border-radius:14px;padding:30px 24px 26px;height:100%;display:flex;flex-direction:column}
 .svc h3{font-size:21px;letter-spacing:-.028em;font-weight:700}
 .svc p{color:var(--text-3);font-size:14.5px;line-height:1.55;margin-top:10px;flex:1}
-.svc a{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:13.5px;font-weight:700;color:var(--blue);letter-spacing:.02em;align-self:flex-start}
-.svc a i{font-style:normal}
+.svc{cursor:pointer}
+.svc a.more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:13.5px;font-weight:700;color:var(--blue);letter-spacing:.02em;align-self:flex-start}
+.svc a.more::after{content:"";position:absolute;inset:0;z-index:3;border-radius:var(--r)}
+.svc a.more i{font-style:normal;display:inline-block;transition:transform var(--ease)}
+.svc:hover a.more i{transform:translateX(5px)}
+.svc:hover h3{color:var(--white)}
 
 /* ---------- Fahrzeuge: Suche und Filter ---------- */
 .find{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -132,11 +147,6 @@
 .status-sold{color:var(--amber)}
 
 .panel{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(24px,3vw,38px)}
-.leasing{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:34px}
-.leasing .t-sub{margin-top:6px}
-.leasing .range{margin-top:24px}
-.leasing .range + .range{margin-top:18px}
-.leasing .fine{color:var(--text-3);font-size:13px;line-height:1.55;margin-top:14px}
 
 /* ---------- Kontakt: Visitenkarte ---------- */
 .vcard{position:relative;border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.6)}
@@ -224,3 +234,108 @@
 .legal .text p.lead{font-size:var(--t-lead);color:var(--text-2);margin-top:0}
 .split .bit-facts{grid-template-columns:1fr 1fr}
 @media (max-width:760px){.aside{position:static}}
+
+/* =====================================================================
+   Symmetrie: ueberall dieselben Masse.
+   Knopf 48px hoch, klein 44px, im Kopf 40px. Felder 48px.
+   Knopfpaare gleich breit; auf dem Handy volle Breite, untereinander.
+   ===================================================================== */
+:root{--ctl:48px;--ctl-s:44px}
+.bit-btn{height:var(--ctl);min-height:var(--ctl);padding:0 24px}
+.bit-btn--sm{height:var(--ctl-s);min-height:var(--ctl-s);padding:0 18px}
+.bit-sitehead nav a.bit-btn{height:40px;min-height:40px}
+.bit-chip{height:var(--ctl-s);min-height:var(--ctl-s)}
+.bit-field > .ctl,.bit-search input{height:var(--ctl);min-height:var(--ctl);padding-block:0}
+.bit-field textarea.ctl{height:auto;min-height:132px;padding-block:13px}
+.find .bit-btn{flex:none}
+/* Knopfgruppen: alle Knoepfe einer Gruppe gleich breit (so breit wie der breiteste). */
+.actions{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:max-content;max-width:100%}
+.actions .bit-btn{min-width:228px}
+.actions--even,.aside .actions,.ask .actions{width:100%}
+.actions--even .bit-btn,.aside .actions .bit-btn,.ask .actions .bit-btn{min-width:0}
+.empty .actions{margin-inline:auto}
+@media (max-width:560px){
+  .actions{grid-auto-flow:row;width:100%}
+  .actions .bit-btn{min-width:0}
+}
+/* Fahrzeugkarten: Titelblock immer gleich hoch, damit Daten und Knopf auf einer Linie stehen. */
+.bit-veh .rowtop > div{min-height:68px}
+.bit-veh h3{line-height:1.12}
+/* Fakten neben einem Formular: 2 × 2 */
+.split .bit-facts{grid-template-columns:1fr 1fr}
+.split--even{align-items:start}
+.ask{position:sticky;top:96px}
+.ask .t-sub{margin-top:0;max-width:18ch}
+.ask .muted{margin-top:12px}
+@media (max-width:760px){.ask{position:static}}
+
+/* Fliesstext aus dem Admin (Dienstleistungen) */
+.prose{max-width:62ch}
+.prose > :first-child{margin-top:0}
+.prose p,.prose li{color:var(--text-2);font-size:16px;line-height:1.6}
+.prose p{margin-top:14px}
+.prose p.lead{font-size:var(--t-lead);max-width:none}
+.prose h2{font-size:23px;letter-spacing:-.04em;font-weight:800;margin-top:36px}
+.prose ul,.prose ol{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.prose li{position:relative;padding:14px 16px 14px 46px;background:var(--panel);border:1px solid var(--hair);border-radius:var(--r)}
+.prose ul li::before{content:"";position:absolute;left:18px;top:50%;width:12px;height:2px;margin-top:-1px;
+  background:linear-gradient(90deg,var(--aare),var(--aare-2));border-radius:2px}
+.prose ol{counter-reset:bit}
+.prose ol li{counter-increment:bit}
+.prose ol li::before{content:counter(bit,decimal-leading-zero);position:absolute;left:16px;top:15px;
+  font-family:var(--font-narrow);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--blue)}
+.prose strong{color:var(--white)}
+
+/* =====================================================================
+   Bewegung. Klein, ruhig, ueberall gleich:
+   1. Seitenwechsel: Inhalt blendet weich ueber (Kopf bleibt stehen).
+   2. Beim Klick: eine Aare-Linie laeuft oben ueber die Seite.
+   3. Beim Scrollen: Bloecke steigen 14px auf, gestaffelt.
+   4. Kicker: eine kurze Linie zeichnet sich vor dem Wort.
+   5. Links: Unterstrich waechst von links.
+   6. Maus: das «bit» aus dem Logo zieht hinter dem Zeiger her.
+   Wer «Bewegung reduzieren» eingestellt hat, sieht nichts davon.
+   ===================================================================== */
+@view-transition{navigation:auto}
+.bit-sitehead{view-transition-name:sitehead}
+::view-transition-old(root){animation:bit-vt-out 180ms cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:bit-vt-in 420ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes bit-vt-out{to{opacity:0;transform:translateY(-6px)}}
+@keyframes bit-vt-in{from{opacity:0;transform:translateY(10px)}}
+
+.navline{position:fixed;left:0;right:0;top:0;height:2px;z-index:100;pointer-events:none;
+  transform:scaleX(0);transform-origin:left center;opacity:0;
+  background:linear-gradient(90deg,var(--aare),var(--aare-2),var(--blue))}
+.admin-bar .navline{top:32px}
+.navline.go{opacity:1;transform:scaleX(.85);transition:transform 1400ms cubic-bezier(.1,.7,.2,1),opacity 120ms}
+
+.js-anim [data-rv]{opacity:0;transform:translateY(14px)}
+.js-anim [data-rv].is-in{opacity:1;transform:none;
+  transition:opacity var(--slow),transform var(--slow);transition-delay:var(--d,0ms)}
+
+.bit-kicker::before{content:"";display:inline-block;width:18px;height:2px;margin-right:10px;vertical-align:.3em;
+  border-radius:2px;background:linear-gradient(90deg,var(--aare),var(--aare-2));transform-origin:left center}
+.js-anim [data-rv] .bit-kicker::before,.js-anim .bit-kicker[data-rv]::before{transform:scaleX(0)}
+.js-anim [data-rv].is-in .bit-kicker::before,.js-anim .bit-kicker[data-rv].is-in::before{transform:scaleX(1);
+  transition:transform 700ms cubic-bezier(.22,.61,.36,1) calc(var(--d,0ms) + 180ms)}
+
+.sitefoot .links a,.sitefoot p a,.prose a,.legal .text a,.back,.legalline a{
+  background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;
+  transition:background-size var(--ease),color var(--ease)}
+.sitefoot .links a:hover,.sitefoot p a:hover,.prose a:hover,.legal .text a:hover,.back:hover,.legalline a:hover{background-size:100% 1px}
+.back{display:inline-flex;gap:6px}
+
+.bit-follow{position:fixed;left:0;top:0;z-index:90;width:46px;height:auto;pointer-events:none;opacity:0;
+  transition:opacity 280ms ease;will-change:transform;filter:drop-shadow(0 2px 6px rgba(0,0,0,.55))}
+.bit-follow.on{opacity:.92}
+@media (pointer:fine){
+  html,body,a,button,label,.bit-chip,.bit-btn,.svc{cursor:url(../icons/cursor.svg) 3 1,auto}
+}
+
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  .js-anim [data-rv]{opacity:1;transform:none}
+  .navline,.bit-follow{display:none}
+}
+.form .bit-btn{min-width:228px}
+@media (max-width:560px){.form .bit-btn{width:100%}}

@@ -1,7 +1,8 @@
 /* End-to-End-Test der BIT-Webseite mit Playwright.
  *   BASE=http://localhost:8080 OUT=./screenshots BIT_USER=… BIT_PASS=… node tests/e2e.js
  * Prueft jede Seite (Status, keine PHP-Fehler, Kopf/Fuss, aktiver Menuepunkt),
- * die Sofort-Suche, Galerie, Leasing-Rechner, Kontaktformular und Login,
+ * die Sofort-Suche, Galerie, Dienstleistungs-Seiten, Kontaktformular, Login,
+ * gleiche Masse (Knoepfe, Felder), keine doppelten Fotos und die Animationen,
  * und macht Bildschirmfotos (Desktop 1440 und Handy 390). */
 const path = require('path');
 const fs = require('fs');
@@ -24,6 +25,10 @@ const PAGES = [
   ['02-fahrzeuge', '/fahrzeuge/', 'Fahrzeuge'],
   ['03-fahrzeug-detail', '/fahrzeuge/mercedes-benz-amg-gt-c/', 'Fahrzeuge'],
   ['04-dienstleistungen', '/dienstleistungen/', 'Dienstleistungen'],
+  ['04a-an-und-verkauf', '/dienstleistungen/an-und-verkauf/', 'Dienstleistungen'],
+  ['04b-fahrzeugaufbereitung', '/dienstleistungen/fahrzeugaufbereitung/', 'Dienstleistungen'],
+  ['04c-carrosserie-und-werkstatt', '/dienstleistungen/carrosserie-und-werkstatt/', 'Dienstleistungen'],
+  ['04d-fahrzeugbewertung', '/dienstleistungen/fahrzeugbewertung/', 'Dienstleistungen'],
   ['05-kontakt', '/kontakt/', 'Kontakt'],
   ['06-ueber-uns', '/ueber-uns/', null],
   ['07-impressum', '/impressum/', null],
@@ -67,6 +72,38 @@ const PAGES = [
     const radius = await page.evaluate(() => [...document.querySelectorAll('.bit-btn,.bit-veh,.bit-facts,.banner,.panel,.bit-field .ctl,.vcard')]
       .map((e) => getComputedStyle(e).borderTopLeftRadius).filter((r) => r !== '16px'));
     t(name + ': Radius überall 16px', radius.length === 0, radius.slice(0, 5).join(','));
+    // Symmetrie: Knoepfe 48/44 px (Kopf 40), Felder 48 px, Knopfgruppen gleich breit.
+    const sym = await page.evaluate(() => {
+      const bad = [];
+      document.querySelectorAll('.bit-btn').forEach((b) => {
+        if (!b.offsetParent) return;
+        const h = Math.round(b.getBoundingClientRect().height);
+        const ok = b.closest('.bit-sitehead') ? h === 40 : (h === 48 || (b.classList.contains('bit-btn--sm') && h === 44));
+        if (!ok) bad.push('Knopf ' + b.textContent.trim() + ' ' + h + 'px');
+      });
+      document.querySelectorAll('.bit-field input.ctl, .bit-search input').forEach((f) => {
+        const h = Math.round(f.getBoundingClientRect().height);
+        if (f.offsetParent && h !== 48) bad.push('Feld ' + (f.name || f.placeholder) + ' ' + h + 'px');
+      });
+      document.querySelectorAll('.actions').forEach((g) => {
+        const w = [...g.querySelectorAll('.bit-btn')].filter((b) => b.offsetParent).map((b) => Math.round(b.getBoundingClientRect().width));
+        if (w.length > 1 && Math.max(...w) - Math.min(...w) > 1) bad.push('Gruppe ungleich ' + w.join('/'));
+      });
+      return bad;
+    });
+    t(name + ': gleiche Masse (Knöpfe, Felder, Gruppen)', sym.length === 0, sym.slice(0, 4).join(' | '));
+    // Kein Foto doppelt auf derselben Seite (ausser Fahrzeugliste/-detail mit Demo-Bildern).
+    if (!/^0[239]-|^09/.test(name)) {
+      const dup = await page.evaluate(() => {
+        const key = (src) => src.split('/').pop().replace(/\.(jpe?g|png|webp)$/i, '').replace(/-\d+x\d+$/, '');
+        const seen = {}; const d = [];
+        [...document.querySelectorAll('main img')].filter((i) => !i.closest('.thumbs') && !/logo/.test(i.src)).forEach((i) => {
+          const k = key(i.currentSrc || i.src); if (seen[k]) d.push(k); seen[k] = 1;
+        });
+        return d;
+      });
+      t(name + ': kein Foto doppelt', dup.length === 0, dup.join(', '));
+    }
     // Bis ans Ende scrollen, damit Lazy-Bilder laden.
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 40)); } window.scrollTo(0, 0); });
     await page.waitForTimeout(300);
@@ -86,6 +123,13 @@ const PAGES = [
   t('Start: drei Fahrzeuge', cards === 3, String(cards));
   const platzBtn = await page.locator('.platz .bit-btn').innerText();
   t('Start: «Alle 11 ansehen» (echte Zahl)', /Alle 11 ansehen/.test(platzBtn), platzBtn);
+  t('Start: vier Dienstleistungen', (await page.locator('.svc').count()) === 4);
+  await page.locator('.svc').first().click({ position: { x: 40, y: 40 } });
+  await page.waitForURL(/dienstleistungen\/an-und-verkauf\/$/);
+  t('Karte führt auf eigene Seite', /dienstleistungen\/an-und-verkauf\/$/.test(page.url()), page.url());
+  t('Dienstleistung: Text aus Admin', /Eintausch/.test(await page.locator('.prose').innerText()));
+  t('Dienstleistung: drei weitere Karten', (await page.locator('.svc').count()) === 3);
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
   t('Start: Telefon im Kopf', (await page.locator('.bit-sitehead a.tel').getAttribute('href')) === 'tel:+41315520002');
 
   /* ---------- Fahrzeuge: Sofort-Suche ---------- */
@@ -111,19 +155,14 @@ const PAGES = [
   await page.evaluate(() => window.scrollTo(0, 380));
   await page.screenshot({ path: path.join(OUT, '12-fahrzeuge-filter-porsche.jpg'), type: 'jpeg', quality: 78 });
 
-  /* ---------- Fahrzeug: Galerie und Leasing ---------- */
+  /* ---------- Fahrzeug: Galerie ---------- */
   await page.goto(BASE + '/fahrzeuge/mercedes-benz-amg-gt-c/', { waitUntil: 'networkidle' });
   const before = await page.locator('[data-main]').getAttribute('src');
   await page.locator('.thumbs button').nth(1).click();
   const after = await page.locator('[data-main]').getAttribute('src');
   t('Galerie: Bild wechselt', before !== after);
   t('Detail: Preis CHF 129’900', (await page.locator('.detail .price').innerText()) === 'CHF 129’900');
-  const rate1 = await page.locator('[data-out="rate"]').innerText();
-  t('Leasing: 48 Mt, 10% = CHF 2’913', rate1 === 'CHF 2’913', rate1);
-  await page.locator('[data-in="months"]').fill('60');
-  await page.locator('[data-in="down"]').fill('20');
-  const rate2 = await page.locator('[data-out="rate"]').innerText();
-  t('Leasing: 60 Mt, 20% = CHF 2’156', rate2 === 'CHF 2’156', rate2);
+  t('Detail: kein Leasing-Rechner', (await page.locator('[data-leasing], .leasing').count()) === 0 && !/Leasing/.test(await page.locator('main').innerText()));
   t('Detail: Daten-Tabelle', (await page.locator('.bit-kv > div').count()) >= 8);
   t('Detail: drei ähnliche', (await page.locator('.grid-veh .bit-veh').count()) === 3);
   const ld = await page.locator('script[type="application/ld+json"]').innerText();
@@ -147,6 +186,34 @@ const PAGES = [
   t('Formular: Danke-Meldung', /Danke/.test(note), note);
   await page.locator('#formular').scrollIntoViewIfNeeded();
   await page.screenshot({ path: path.join(OUT, '13-kontakt-gesendet.jpg'), type: 'jpeg', quality: 78 });
+
+  /* ---------- Bewegung (ohne «Bewegung reduzieren») ---------- */
+  const ac = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const ap = await ac.newPage();
+  await ap.goto(BASE + '/', { waitUntil: 'networkidle' });
+  t('Animation: eingeschaltet', await ap.evaluate(() => document.documentElement.classList.contains('js-anim')));
+  await ap.waitForTimeout(900);
+  t('Animation: Hero steigt auf', await ap.evaluate(() => document.querySelector('.hero h1').classList.contains('is-in')));
+  t('Animation: Kicker-Linie zeichnet sich', await ap.evaluate(() => getComputedStyle(document.querySelector('.hero .bit-kicker, .sec-head .bit-kicker'), '::before').width === '18px'));
+  t('Animation: Seitenwechsel (View Transition)', await ap.evaluate(() => [...document.styleSheets].some((sh) => { try { return [...sh.cssRules].some((r) => r.cssText.startsWith('@view-transition')); } catch (e) { return false; } })));
+  await ap.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } });
+  await ap.waitForTimeout(900);
+  const notIn = await ap.evaluate(() => [...document.querySelectorAll('[data-rv]')].filter((e) => e.offsetParent && !e.classList.contains('is-in')).length);
+  t('Animation: alle Blöcke nach dem Scrollen sichtbar', notIn === 0, notIn + ' nicht eingeblendet');
+  await ap.evaluate(() => window.scrollTo(0, 0));
+  await ap.waitForTimeout(400);
+  for (let i = 0; i < 24; i++) { await ap.mouse.move(500 + i * 18, 300 + i * 6); await ap.waitForTimeout(16); }
+  await ap.waitForTimeout(250);
+  const follow = await ap.evaluate(() => { const m = document.querySelector('.bit-follow'); return m ? { on: m.classList.contains('on'), t: m.style.transform, src: m.src } : null; });
+  t('Maus: «bit» folgt dem Zeiger', !!follow && follow.on && /bit-mark\.png/.test(follow.src) && follow.t.includes('translate3d'), JSON.stringify(follow));
+  await ap.screenshot({ path: path.join(OUT, '25-animation-maus-bit.jpg'), type: 'jpeg', quality: 80, clip: { x: 300, y: 150, width: 900, height: 420 } });
+  // Den Seitenwechsel fuer den Test anhalten (Listener nach dem der Seite), dann die Linie pruefen.
+  await ap.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('a')) e.preventDefault(); }));
+  await ap.locator('.bit-sitehead nav a', { hasText: 'Fahrzeuge' }).click();
+  await ap.waitForTimeout(450);
+  t('Klick: Linie läuft oben über die Seite', await ap.evaluate(() => document.querySelector('.navline').classList.contains('go')));
+  await ap.screenshot({ path: path.join(OUT, '26-animation-linie-klick.jpg'), type: 'jpeg', quality: 80, clip: { x: 0, y: 0, width: 1440, height: 120 } });
+  await ac.close();
 
   /* ---------- Handy ---------- */
   const mob = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });

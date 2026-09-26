@@ -14,6 +14,10 @@ if ( $car ) {
 	$prefill = 'Ich interessiere mich für: ' . get_the_title( $car ) . '. ';
 } elseif ( 'schaetzung' === $topic ) {
 	$prefill = 'Ich möchte mein Fahrzeug schätzen lassen: Marke, Modell, Jahrgang, Kilometer … ';
+} elseif ( 'fahrzeugaufbereitung' === $topic ) {
+	$prefill = 'Ich interessiere mich für eine Fahrzeugaufbereitung: Marke, Modell … ';
+} elseif ( 'carrosserie-und-werkstatt' === $topic ) {
+	$prefill = 'Ich brauche einen Termin in der Werkstatt: Marke, Modell, was ist zu tun … ';
 } elseif ( 'ankauf' === $topic ) {
 	$prefill = 'Ich möchte mein Fahrzeug verkaufen: Marke, Modell, Jahrgang, Kilometer … ';
 }

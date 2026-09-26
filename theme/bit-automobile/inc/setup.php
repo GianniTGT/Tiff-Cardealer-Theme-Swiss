@@ -49,6 +49,11 @@ add_action(
 			printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( BIT_URI . '/assets/fonts/' . $font . '.woff2' ) );
 		}
 		echo '<meta name="theme-color" content="#0C0E10">' . "\n";
+		// Bewegung nur mit JavaScript und nur, wenn niemand «Bewegung reduzieren» eingestellt hat.
+		printf(
+			'<script>window.BIT={mark:%s};if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>' . "\n",
+			wp_json_encode( bit_asset( 'logo/bit-mark.png' ) )
+		);
 	},
 	1
 );
@@ -87,9 +92,21 @@ add_action(
 		if ( is_singular( 'fahrzeug' ) ) {
 			$desc = bit_vehicle_summary( get_the_ID() );
 		} else {
-			$desc = 'BIT Automobile in Oberwangen b. Bern: Occasionen geprüft und ab MFK, Ankauf, Eintausch, Aufbereitung und Schätzung.';
+			$desc = 'BIT Automobile in Oberwangen b. Bern: Occasionen geprüft und ab MFK, An- und Verkauf, Fahrzeugaufbereitung, Carrosserie und Werkstatt, Fahrzeugbewertung.';
 		}
 		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $desc ) );
 	},
 	2
+);
+
+/** Unterseiten von «Dienstleistungen» nutzen die Dienstleistungs-Vorlage. */
+add_filter(
+	'template_include',
+	function ( $template ) {
+		if ( bit_current_service() && ! is_page_template() ) {
+			$t = locate_template( 'page-dienstleistung.php' );
+			return $t ? $t : $template;
+		}
+		return $template;
+	}
 );

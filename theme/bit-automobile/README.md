@@ -9,11 +9,12 @@ blaue Knöpfe, die Aare-Linie unter jedem Seitenkopf.
 
 | Adresse | Vorlage | Inhalt |
 |---|---|---|
-| `/` | `front-page.php` | Hero, Fakten, 3 neueste Fahrzeuge, Ankauf, Showroom, «Der Platz» (echte Anzahl), Dienstleistungen |
+| `/` | `front-page.php` | Hero, Fakten, 3 neueste Fahrzeuge, Ankauf, Showroom, «Der Platz» (echte Anzahl), Dienstleistungen — jedes Foto nur einmal |
 | `/fahrzeuge/` | `archive-fahrzeug.php` | Alle Fahrzeuge, Sofort-Suche, Marken-Chips, Regler Preis/Kilometer/Jahrgang |
-| `/fahrzeuge/<name>/` | `single-fahrzeug.php` | Galerie, Preis, Anruf-Kasten, Daten, Leasing-Rechner, 3 ähnliche |
+| `/fahrzeuge/<name>/` | `single-fahrzeug.php` | Galerie, Preis, Anruf-Kasten, Daten, Beschreibung, 3 ähnliche (kein Leasing — BIT bietet keins an) |
 | `/marke/<marke>/` | `taxonomy-marke.php` | Wie `/fahrzeuge/`, nur eine Marke |
-| `/dienstleistungen/` | `page-dienstleistungen.php` | Fünf Dienstleistungen, Band «Auto verkaufen, ohne Inserat» |
+| `/dienstleistungen/` | `page-dienstleistungen.php` | Vier Karten, jede führt auf ihre Seite; Band «Auto verkaufen, ohne Inserat» |
+| `/dienstleistungen/<name>/` | `page-dienstleistung.php` | An- und Verkauf, Fahrzeugaufbereitung, Carrosserie und Werkstatt, Fahrzeugbewertung — Texte von der bisherigen bit-automobile.ch, im Admin bearbeitbar |
 | `/kontakt/` | `page-kontakt.php` | Visitenkarte, Formular (speichert + E-Mail), Fakten |
 | `/ueber-uns/` | `page-ueber-uns.php` | Schild seit 2022, vier Auswahl-Kriterien |
 | `/impressum/` | `page-impressum.php` | Text im Admin bearbeitbar + Registerdaten |
@@ -22,6 +23,21 @@ blaue Knöpfe, die Aare-Linie unter jedem Seitenkopf.
 
 Beim Aktivieren legt das Theme alle Seiten, Menüs, Startseite, Datenschutz-Seite,
 Permalinks und Zeitzone selbst an (`inc/seed.php`). Bestehende Seiten werden nie überschrieben.
+
+## Bewegung
+
+Klein und überall gleich (`assets/css/site.css`, Abschnitt «Bewegung»; `assets/js/site.js`):
+Seitenwechsel blendet weich über (View Transitions, Kopf bleibt stehen) · beim Klick läuft
+eine Aare-Linie oben über die Seite · Blöcke steigen beim Scrollen 14px auf, gestaffelt ·
+vor jedem Kicker zeichnet sich eine kurze Linie · Unterstrich wächst bei Links ·
+«Der Platz»: Zahl und Linie zählen mit · Maus: das «bit» aus dem Logo zieht hinter dem
+Zeiger her, dazu der weisse Pfeil aus dem Entwurf. Mit «Bewegung reduzieren» ist alles aus.
+
+## Symmetrie
+
+Knöpfe 48px (klein 44, Kopf 40), Felder 48px, Radius 16px. Knöpfe einer Gruppe sind gleich
+breit, auf dem Handy volle Breite untereinander. Karten-Raster zentrieren die letzte Reihe.
+Der Browser-Test misst das auf jeder Seite nach.
 
 ## Für Sabit (Admin)
 
@@ -63,13 +79,14 @@ wp bit as24 sync                           # echter Abgleich (braucht Zugangsdat
 ## Tests
 
 ```
-wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 30 Tests: CHF, Telefon, Leasing, AS24-Zuordnung, Import
-BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 117 Prüfungen im Browser + Bildschirmfotos
+wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 29 Tests: CHF, Telefon, MWST, AS24-Zuordnung, Import
+BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 188 Prüfungen im Browser + Bildschirmfotos
 ```
 
 Der Browser-Test prüft jede Seite (HTTP-Status, keine PHP-Meldung, aktiver Menüpunkt,
-korrigiertes Logo, Radius 16px überall, alle Bilder laden, kein Entwurf-Hinweis, kein
-seitliches Scrollen auf dem Handy), dazu Suche/Filter, Galerie, Leasing-Rechner,
+korrigiertes Logo, Radius 16px überall, gleiche Masse, kein Foto doppelt, alle Bilder laden,
+kein Entwurf-Hinweis, kein seitliches Scrollen auf dem Handy), dazu Suche/Filter, Galerie,
+Dienstleistungs-Karten → eigene Seite, Animationen und Maus-«bit»,
 Kontaktformular bis in die Anfragen-Liste, und den Login.
 
 ## Auf hosttech installieren

@@ -1,6 +1,6 @@
 /* BIT Automobile — Verhalten wie im Entwurf:
    «Der Platz» (Zaehler + Bildwechsel beim Scrollen), Sofort-Suche auf
-   /fahrzeuge/, Galerie und Leasing-Rechner auf der Fahrzeugseite. */
+   /fahrzeuge/, Galerie auf der Fahrzeugseite. */
 (function () {
   'use strict';
 
@@ -9,12 +9,11 @@
   };
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Der Platz ---------- */
+  /* ---------- Der Platz: Zaehler und Linie laufen beim Scrollen mit ---------- */
   var platz = document.querySelector('[data-platz]');
-  if (platz) {
-    var wipe = platz.querySelector('[data-wipe]');
-    var edge = platz.querySelector('[data-edge]');
+  if (platz && !reduced) {
     var counter = platz.querySelector('[data-counter]');
+    var meter = platz.querySelector('[data-meter]');
     var total = parseInt(platz.getAttribute('data-count'), 10) || 0;
     var ticking = false;
     var update = function () {
@@ -22,26 +21,15 @@
       var r = platz.getBoundingClientRect();
       var span = r.height - window.innerHeight;
       var p = Math.max(0, Math.min(1, -r.top / (span || 1)));
-      var a = Math.max(0, 100 - p * 165);
-      var b = Math.max(0, 100 - p * 95);
-      if (wipe) wipe.style.clipPath = 'polygon(0 0,100% 0,100% ' + a + '%,0 ' + b + '%)';
-      if (edge) {
-        edge.style.transform = 'translateY(' + b + 'vh) rotate(' + ((b - a) * 0.0055 * -57.3) + 'deg)';
-        edge.style.opacity = p > 0.01 && p < 0.99 ? '0.9' : '0';
-      }
-      if (counter) {
-        var n = Math.min(total, Math.round(p * 3.2 * total));
-        if (counter.textContent !== String(n)) counter.textContent = String(n);
-      }
+      var n = Math.min(total, Math.round(p * 3.2 * total));
+      if (counter && counter.textContent !== String(n)) counter.textContent = String(n);
+      if (meter) meter.style.setProperty('--p', total ? String(n / total) : '1');
     };
-    if (!reduced) {
-      if (counter) counter.textContent = '0';
-      window.addEventListener('scroll', function () {
-        if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
-      }, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   }
 
   /* ---------- Fahrzeuge: Sofort-Suche ---------- */
@@ -126,28 +114,71 @@
     });
   }
 
-  /* ---------- Fahrzeug: Leasing-Rechner ---------- */
-  var lease = document.querySelector('[data-leasing]');
-  if (lease) {
-    var price = +lease.getAttribute('data-price');
-    var rate = (+lease.getAttribute('data-rate') || 4.9) / 100;
-    var months = lease.querySelector('[data-in="months"]');
-    var down = lease.querySelector('[data-in="down"]');
-    var o = {};
-    Array.prototype.forEach.call(lease.querySelectorAll('[data-out]'), function (el) { o[el.getAttribute('data-out')] = el; });
-    var calc = function () {
-      var m = +months.value, d = +down.value;
-      var downChf = price * d / 100;
-      var principal = price - downChf;
-      var perMonth = principal * (1 + rate * m / 12) / m;
-      o.months.textContent = m + ' Monate';
-      o.down.textContent = d + '% · CHF ' + CH(downChf);
-      o.downchf.textContent = '– CHF ' + CH(downChf);
-      o.principal.textContent = 'CHF ' + CH(principal);
-      o.rate.textContent = 'CHF ' + CH(perMonth);
+  /* =================================================================
+     Bewegung (nur mit html.js-anim, also ohne «Bewegung reduzieren")
+     ================================================================= */
+  var anim = document.documentElement.classList.contains('js-anim');
+
+  /* Linie oben beim Seitenwechsel */
+  var line = document.createElement('div');
+  line.className = 'navline';
+  line.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(line);
+  var go = function () { line.classList.remove('go'); void line.offsetWidth; line.classList.add('go'); };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target && a.target !== '_self') return;
+    var url;
+    try { url = new URL(a.href, location.href); } catch (err) { return; }
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.search === location.search && url.hash) return;
+    go();
+  });
+  document.addEventListener('submit', go);
+  window.addEventListener('pageshow', function () { line.classList.remove('go'); });
+
+  /* Bloecke steigen beim Scrollen auf, gestaffelt */
+  if (anim) {
+    var sel = '.intro > *, .hero .in > *, .sec-head, .bit-facts, .grid-veh > .bit-veh, .svc-grid > .svc, .banner, ' +
+      '.split > *, .criteria > div, .legal > *, .panel, .vcard, .find, .chips, .ranges, .detail > *, .prose > *, .platz .in > *, .sitefoot .cols > div';
+    var items = Array.prototype.slice.call(document.querySelectorAll(sel));
+    items.forEach(function (el) {
+      var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.setAttribute('data-rv', '');
+      el.style.setProperty('--d', Math.min(i, 5) * 70 + 'ms');
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+      items.forEach(function (el) { io.observe(el); });
+    } else {
+      items.forEach(function (el) { el.classList.add('is-in'); });
+    }
+  }
+
+  /* Maus: das «bit» aus dem Logo zieht hinter dem Zeiger her */
+  if (anim && window.BIT && window.BIT.mark && window.matchMedia('(pointer: fine)').matches) {
+    var mark = document.createElement('img');
+    mark.src = window.BIT.mark;
+    mark.alt = '';
+    mark.className = 'bit-follow';
+    mark.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(mark);
+    var tx = -200, ty = -200, x = -200, y = -200, last = 0, shown = false;
+    window.addEventListener('mousemove', function (e) { tx = e.clientX + 16; ty = e.clientY + 20; last = performance.now(); }, { passive: true });
+    document.addEventListener('mouseleave', function () { last = 0; });
+    var loop = function () {
+      x += (tx - x) * 0.085;
+      y += (ty - y) * 0.085;
+      mark.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+      var on = performance.now() - last < 700;
+      if (on !== shown) { shown = on; mark.classList.toggle('on', on); }
+      window.requestAnimationFrame(loop);
     };
-    months.addEventListener('input', calc);
-    down.addEventListener('input', calc);
-    calc();
+    window.requestAnimationFrame(loop);
   }
 })();

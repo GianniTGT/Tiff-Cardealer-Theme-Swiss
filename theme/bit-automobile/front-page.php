@@ -2,6 +2,7 @@
 /**
  * Start — wie im Entwurf: Hero, Fakten, drei Fahrzeuge, Ankauf,
  * Showroom, Der Platz (Zaehler), Dienstleistungen.
+ * Jedes Foto kommt auf dieser Seite nur einmal vor.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,7 +23,7 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 		<p class="lead lead--hero">Grüessech. Wir kaufen und verkaufen Occasionen in der ganzen Schweiz – vom sauberen Kombi bis zum AMG. Geprüft und aufbereitet, bevor sie auf den Platz kommen.</p>
 		<div class="actions">
 			<a class="bit-btn bit-btn--blue" href="<?php echo esc_url( bit_page_url( 'fahrzeuge' ) ); ?>">Fahrzeuge ansehen</a>
-			<a class="bit-btn bit-btn--ghost" href="<?php echo esc_url( add_query_arg( 'anliegen', 'schaetzung', bit_page_url( 'kontakt' ) ) ); ?>">Fahrzeug bewerten lassen</a>
+			<a class="bit-btn bit-btn--ghost" href="<?php echo esc_url( bit_service_url( 'fahrzeugbewertung' ) ); ?>">Fahrzeug bewerten lassen</a>
 		</div>
 	</div>
 </section>
@@ -51,7 +52,7 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 
 <section class="sec<?php echo $cars ? ' sec--flat' : ''; ?>">
 	<div class="banner">
-		<img src="<?php echo esc_url( bit_asset( 'img/amg-wide.jpg' ) ); ?>" alt="" loading="lazy">
+		<img src="<?php echo esc_url( bit_asset( 'img/amg-gt-43.jpg' ) ); ?>" alt="" loading="lazy">
 		<div class="shade"></div>
 		<div class="in">
 			<?php bit_kicker( 'Ankauf' ); ?>
@@ -59,7 +60,7 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 			<p class="lead">Bringen Sie das Fahrzeug vorbei oder rufen Sie an. Wir schauen es an, prüfen den Zustand und machen Ihnen ein Angebot – Barzahlung und Abmeldung inbegriffen.</p>
 			<div class="actions">
 				<a class="bit-btn" href="tel:<?php echo esc_attr( $tel1 ); ?>"><?php echo esc_html( bit_info( 'phone1' ) ); ?></a>
-				<a class="bit-btn bit-btn--ghost" href="<?php echo esc_url( add_query_arg( 'anliegen', 'ankauf', bit_page_url( 'kontakt' ) ) ); ?>">Termin anfragen</a>
+				<a class="bit-btn bit-btn--ghost" href="<?php echo esc_url( bit_service_url( 'an-und-verkauf' ) ); ?>">So läuft der Ankauf</a>
 			</div>
 		</div>
 	</div>
@@ -88,14 +89,10 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 	<div class="stick">
 		<img src="<?php echo esc_url( bit_asset( 'img/amg-detail.jpg' ) ); ?>" alt="" loading="lazy">
 		<div class="shade"></div>
-		<div class="wipe" data-wipe>
-			<img src="<?php echo esc_url( bit_asset( 'img/platz-herzwilstrasse.jpg' ) ); ?>" alt="Der Platz an der Herzwilstrasse" loading="lazy">
-			<div class="shade"></div>
-		</div>
-		<div class="edge" data-edge></div>
 		<div class="in">
 			<?php bit_kicker( 'Der Platz' ); ?>
 			<p class="count" data-counter aria-hidden="true"><?php echo esc_html( $count ); ?></p>
+			<div class="meter" aria-hidden="true"><i data-meter></i></div>
 			<h2 class="t-sec"><span class="sr-only"><?php echo esc_html( $count ); ?> </span><?php echo 1 === $count ? 'Fahrzeug steht gerade in Oberwangen.' : 'Fahrzeuge stehen gerade in Oberwangen.'; ?></h2>
 			<p class="lead">Jedes einzelne geprüft, aufbereitet und ab MFK. Kein Katalog, den wir nachbestellen – das ist der Platz, wie er heute aussieht.</p>
 			<div class="actions">

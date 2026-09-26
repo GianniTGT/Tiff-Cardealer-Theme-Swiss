@@ -70,10 +70,10 @@
    "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
    "images": [
     {
-     "url": "theme:img/porsche-911.jpg"
+     "url": "theme:img/platz-herzwilstrasse.jpg"
     },
     {
-     "url": "theme:img/platz-herzwilstrasse.jpg"
+     "url": "theme:img/porsche-911.jpg"
     },
     {
      "url": "theme:img/herzwilstrasse-262.jpg"
@@ -110,13 +110,13 @@
    "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
    "images": [
     {
+     "url": "theme:img/porsche-911.jpg"
+    },
+    {
      "url": "theme:img/amg-gt-43.jpg"
     },
     {
      "url": "theme:img/amg-wide.jpg"
-    },
-    {
-     "url": "theme:img/herzwilstrasse-262.jpg"
     }
    ],
    "_bitFlag": ""

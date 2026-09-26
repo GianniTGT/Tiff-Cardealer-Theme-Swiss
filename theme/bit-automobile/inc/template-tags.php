@@ -64,31 +64,50 @@ function bit_facts() {
 	<?php
 }
 
-/** Die fuenf Dienstleistungen: Titel, kurz, lang. */
+/**
+ * Die vier Dienstleistungen – dieselben wie auf der bisherigen bit-automobile.ch.
+ * Jede hat eine eigene Seite unter /dienstleistungen/<slug>/ (Text im Admin bearbeitbar).
+ */
 function bit_services() {
 	return apply_filters(
 		'bit_services',
 		array(
-			array( 'Ankauf', 'Wir kaufen Ihr Fahrzeug – Barzahlung und Abmeldung inbegriffen.', 'Bringen Sie das Fahrzeug vorbei oder rufen Sie an. Wir schauen es an, prüfen den Zustand und machen Ihnen ein Angebot. Barzahlung und Abmeldung sind inbegriffen.' ),
-			array( 'Eintausch', 'Ihr Auto als Teil des Preises, direkt an der Übergabe.', 'Sie nehmen ein Fahrzeug vom Platz und geben Ihres dafür. Wir rechnen den Eintausch direkt gegen den Kaufpreis – ein Termin, ein Vertrag.' ),
-			array( 'Aufbereitung', 'Innen und aussen, bis es so aussieht, wie es sich fährt.', 'Polieren, Lackaufbereitung, Innenreinigung. Jedes Fahrzeug bei uns geht durch die Aufbereitung, bevor es auf den Platz kommt – auch Ihres, wenn Sie wollen.' ),
-			array( 'Schätzung', 'Was ist Ihr Auto wert? Wir schauen es an und sagen es.', 'Kostenlos und ohne Verpflichtung. Wir sagen Ihnen, was realistisch ist – nicht, was Sie hören wollen.' ),
-			array( 'MFK-Vorbereitung', 'Vor der Prüfung durch die Werkstatt, nicht danach.', 'Wir prüfen, was die MFK prüft, und machen es vorher. Was wir finden, sagen wir mit Preis, bevor wir es anfassen.' ),
+			'an-und-verkauf'            => array( 'An- und Verkauf', 'Geprüfte Occasionen kaufen, Ihr Auto verkaufen oder eintauschen – Barzahlung und Abmeldung inbegriffen.', 'img/amg-wide.jpg' ),
+			'fahrzeugaufbereitung'      => array( 'Fahrzeugaufbereitung', 'Innen und aussen, bis es so aussieht, wie es sich fährt. Auf Wunsch mit Lack-Schutz.', 'img/amg-gt-c.jpg' ),
+			'carrosserie-und-werkstatt' => array( 'Carrosserie und Werkstatt', 'Wartung, Reparatur und MFK-Vorbereitung für alle Marken – mit moderner Diagnose.', 'img/platz-herzwilstrasse.jpg' ),
+			'fahrzeugbewertung'         => array( 'Fahrzeugbewertung', 'Was ist Ihr Auto wert? Mit den Angaben aus dem Fahrzeugausweis sagen wir es Ihnen.', 'img/porsche-911.jpg' ),
 		)
 	);
 }
 
-/** Dienstleistungs-Karten; $long = lange Texte (Seite Dienstleistungen). */
-function bit_service_cards( $long = false ) {
-	echo '<div class="svc-grid">';
-	foreach ( bit_services() as $s ) {
+/** Adresse einer Dienstleistungs-Seite. */
+function bit_service_url( $slug ) {
+	$page = get_page_by_path( 'dienstleistungen/' . $slug );
+	return $page ? get_permalink( $page ) : home_url( '/dienstleistungen/' . $slug . '/' );
+}
+
+/** Ist die aktuelle Seite eine Dienstleistung? Gibt den Slug zurueck oder ''. */
+function bit_current_service() {
+	if ( ! is_page() ) {
+		return '';
+	}
+	$page   = get_queried_object();
+	$parent = $page && $page->post_parent ? get_post( $page->post_parent ) : null;
+	return ( $parent && 'dienstleistungen' === $parent->post_name && isset( bit_services()[ $page->post_name ] ) ) ? $page->post_name : '';
+}
+
+/** Dienstleistungs-Karten; die ganze Karte fuehrt auf die eigene Seite. $except = Slug weglassen. */
+function bit_service_cards( $except = '' ) {
+	$items = array_filter( bit_services(), fn( $k ) => $k !== $except, ARRAY_FILTER_USE_KEY );
+	printf( '<div class="svc-grid svc-grid--%d">', count( $items ) );
+	foreach ( $items as $slug => $s ) {
 		?>
 		<article class="svc">
 			<span class="glow" aria-hidden="true"></span>
 			<div class="in">
 				<h3><?php echo esc_html( $s[0] ); ?></h3>
-				<p><?php echo esc_html( $long ? $s[2] : $s[1] ); ?></p>
-				<a href="tel:<?php echo esc_attr( bit_tel( bit_info( 'phone1' ) ) ); ?>">Anrufen <i aria-hidden="true">→</i></a>
+				<p><?php echo esc_html( $s[1] ); ?></p>
+				<a class="more" href="<?php echo esc_url( bit_service_url( $slug ) ); ?>">Mehr erfahren <i aria-hidden="true">→</i><span class="sr-only"> über <?php echo esc_html( $s[0] ); ?></span></a>
 			</div>
 		</article>
 		<?php
@@ -170,15 +189,10 @@ function bit_nav_is_current( $item ) {
 		return untrailingslashit( (string) get_post_type_archive_link( 'fahrzeug' ) ) === $url;
 	}
 	if ( is_page() && $item['id'] ) {
-		return get_queried_object_id() === $item['id'];
+		// Unterseiten (z.B. eine Dienstleistung) markieren ihre Elternseite.
+		$id = get_queried_object_id();
+		return $id === $item['id'] || in_array( $item['id'], get_post_ancestors( $id ), true );
 	}
 	global $wp;
 	return untrailingslashit( home_url( $wp->request ) ) === $url;
-}
-
-/** Leasing-Rate wie im Entwurf: (Preis − Anzahlung) × (1 + Zins × Jahre) / Monate. */
-function bit_leasing_rate( $price, $months = 48, $down_pct = 10, $rate_pct = null ) {
-	$rate_pct  = null === $rate_pct ? (float) str_replace( ',', '.', bit_info( 'leasing_rate' ) ) : $rate_pct;
-	$principal = $price * ( 1 - $down_pct / 100 );
-	return $principal * ( 1 + ( $rate_pct / 100 ) * $months / 12 ) / $months;
 }
