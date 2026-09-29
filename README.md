@@ -16,6 +16,7 @@ verschwunden ist und wo es jetzt steht.
 |---|---|
 | `BIT-AUTOMOBILE-DOSSIER.md` | **Die Hauptdatei.** Firma, Domain, DNS, Mail-Hosting, Logo, die Fragen an Sabit, die fehlenden Dateien und das Zugangsproblem mit dem früheren Entwickler |
 | `dossier/` | Dasselbe Dossier gestaltet — HTML mit abhakbarer Fragenliste, und als PDF zum Verschicken |
+| `CLAUDE-MIT-WORDPRESS-VERBINDEN.md` | **Anleitung:** Claude über den Novamira-Connector mit einer WordPress-Seite verbinden (in Chrome bestätigen), was nicht funktioniert, Fehlersuche |
 | `BETRIEB-UND-HOSTING.md` | Das Betriebs- und Hostingmodell: was der Betrieb einer solchen Seite kostet, was verrechnet wird, wer wofür haftet |
 | `OFFERTE-VORLAGE.md` | Die Vorlage, aus der die Offerte entsteht |
 | `offerte/` | Die gerenderte Offerte für BIT Automobile |
