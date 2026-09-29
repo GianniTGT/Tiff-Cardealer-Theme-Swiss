@@ -7,7 +7,7 @@
  * sie als Fahrzeuge auf der Webseite an bzw. aktualisiert sie. Anker ist die
  * AutoScout24-ID (Feld «as24_id»); was im Feed fehlt, wird auf «verkauft» gesetzt.
  *
- * STAND: vorbereitet und mit erfundenen Daten getestet (tests/fixtures/as24-demo.json).
+ * STAND: vorbereitet und mit erfundenen Daten getestet (demo/as24-demo.json).
  * Vor dem ersten echten Abgleich pruefen, sobald Zugangsdaten da sind:
  *   1. den Pfad der Inseratsliste (Standard unten) gegen die Spezifikation,
  *   2. die Feldnamen in bit_as24_map_listing() gegen eine echte Antwort,

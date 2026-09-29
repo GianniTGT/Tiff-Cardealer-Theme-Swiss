@@ -3,7 +3,7 @@
  * Attrappe von AutoScout24 – NUR fuer lokale Tests, nie auf dem echten Server.
  *
  * Faengt alle HTTP-Aufrufe an *.autoscout24.* ab und antwortet wie der echte
- * Server: Token-Anmeldung und Inseratsliste (aus tests/fixtures/as24-demo.json,
+ * Server: Token-Anmeldung und Inseratsliste (aus demo/as24-demo.json,
  * IDs mit «probe-» davor, damit sie nicht mit den Demo-Fahrzeugen kollidieren).
  * Es geht dabei keine einzige Anfrage ins Internet.
  */
@@ -34,7 +34,7 @@ function bit_as24_mock_response( $pre, $args, $url ) {
 		if ( ( $args['headers']['Authorization'] ?? '' ) !== 'Bearer mock-token' ) {
 			return $json( array( 'error' => 'unauthorized' ), 401 );
 		}
-		$items = bit_as24_extract_items( json_decode( (string) file_get_contents( BIT_DIR . '/tests/fixtures/as24-demo.json' ), true ) );
+		$items = bit_as24_extract_items( json_decode( (string) file_get_contents( BIT_DIR . '/demo/as24-demo.json' ), true ) );
 		foreach ( $items as &$it ) {
 			$it['id'] = 'probe-' . $it['id'];
 			unset( $it['_bitFlag'] );

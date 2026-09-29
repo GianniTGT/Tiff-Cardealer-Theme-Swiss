@@ -7,3 +7,4 @@ Thumbs.db
 
 # Die Regeln für Theme-Backups und die Teamfotos des Händlers sind mit dem Theme
 # weggezogen — sie stehen jetzt in Tiff-Cardealer-Manager, theme/.gitignore.
+dist/

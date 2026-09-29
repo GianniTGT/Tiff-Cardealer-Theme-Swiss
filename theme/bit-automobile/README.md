@@ -69,7 +69,7 @@ als Fahrzeuge an; Anker ist die AutoScout24-ID, was dort verschwindet, wird «ve
 Einstellungen unter *Werkzeuge → AutoScout24* (Seller-ID, Client-ID, Secret — nur in der
 Datenbank, nie im Code). Standard ist die **Preproduktion**.
 
-**Stand:** vorbereitet und mit **erfundenen Daten** getestet (`tests/fixtures/as24-demo.json`,
+**Stand:** vorbereitet und mit **erfundenen Daten** getestet (`demo/as24-demo.json`,
 11 Beispielfahrzeuge mit den echten Showroom-Fotos). Vor dem ersten echten Abgleich:
 Pfad der Inseratsliste und Feldnamen gegen eine echte Antwort prüfen.
 

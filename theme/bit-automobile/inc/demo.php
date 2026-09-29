@@ -3,7 +3,7 @@
  * Demo-Fahrzeuge (erfundene Testdaten) laden und wieder loeschen.
  *
  * Laeuft ueber denselben AutoScout24-Import wie spaeter die echten Daten,
- * nur mit der Datei tests/fixtures/as24-demo.json. Alles wird als «Demo»
+ * nur mit der Datei demo/as24-demo.json. Alles wird als «Demo»
  * markiert und auf der Seite sichtbar so beschriftet.
  * Werkzeuge → BIT Demo-Daten, oder «wp bit demo load|remove».
  */
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function bit_demo_file() {
-	return BIT_DIR . '/tests/fixtures/as24-demo.json';
+	return BIT_DIR . '/demo/as24-demo.json';
 }
 
 /** Testdaten aus der Datei lesen. */
