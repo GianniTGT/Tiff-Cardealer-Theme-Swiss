@@ -57,6 +57,10 @@ function bit_dashboard_widget() {
 		printf( '<a href="%s"><b>%s</b><span>%s</span></a>', esc_url( $t[0] ), esc_html( $t[1] ), esc_html( $t[2] ) );
 	}
 	echo '</div>';
+	printf(
+		'<p style="margin-top:14px;color:#646970">Bilder auf dem Server: <strong>%s</strong>. Fotos werden beim Hochladen automatisch auf 2000 px verkleinert.</p>',
+		esc_html( size_format( bit_uploads_size(), 1 ) )
+	);
 	if ( bit_has_demo_vehicles() ) {
 		echo '<p style="margin-top:14px;padding:8px 12px;background:#fcf0dc;border-left:4px solid #dba617">Es sind noch <strong>Demo-Fahrzeuge</strong> (Testdaten) online. Vor dem Livegang löschen: Werkzeuge → BIT Demo-Daten.</p>';
 	}

@@ -24,6 +24,16 @@ blaue Knöpfe, die Aare-Linie unter jedem Seitenkopf.
 Beim Aktivieren legt das Theme alle Seiten, Menüs, Startseite, Datenschutz-Seite,
 Permalinks und Zeitzone selbst an (`inc/seed.php`). Bestehende Seiten werden nie überschrieben.
 
+## Fotos klein halten (`inc/images.php`)
+
+Gilt für jedes hochgeladene Bild (Admin, Mediathek, AutoScout24-Import):
+Fotos über 2000 px werden auf 2000 px (lange Seite) verkleinert, das Handy-Original danach
+gelöscht, Bilder als WebP gespeichert (wenn der Server es kann, sonst JPEG), die Formate
+1536/2048 px nicht mehr erzeugt, Kamera-Daten (GPS) entfernt. Gemessen mit einem
+Handyfoto 4032×3024 (6,2 MB): vorher 10 Dateien / 8,3 MB auf dem Server, nachher
+7 Dateien / 0,8 MB (WebP) bzw. 1,0 MB (JPEG). Die Übersicht im Admin zeigt, wie viel
+Platz die Bilder belegen.
+
 ## Bewegung
 
 Klein und überall gleich (`assets/css/site.css`, Abschnitt «Bewegung»; `assets/js/site.js`):
@@ -89,7 +99,7 @@ wp bit as24 sync [--dry-run]               # echter Abgleich / Probelauf (brauch
 ## Tests
 
 ```
-wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 39 Tests: CHF, Telefon, MWST, AS24-Zuordnung, Import, Probelauf gegen Attrappe
+wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 45 Tests: CHF, Telefon, MWST, AS24-Zuordnung, Import, Probelauf, Foto-Verkleinerung
 BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 188 Prüfungen im Browser + Bildschirmfotos
 ADMIN_USER=… ADMIN_PASS=… AS24_MOCK=1 node tests/e2e.js                # + 7 Prüfungen Probelauf im Admin (mit Attrappe)
 ```

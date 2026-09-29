@@ -15,6 +15,7 @@ define( 'BIT_URI', get_template_directory_uri() );
 
 require BIT_DIR . '/inc/company.php';
 require BIT_DIR . '/inc/setup.php';
+require BIT_DIR . '/inc/images.php';
 require BIT_DIR . '/inc/vehicles.php';
 require BIT_DIR . '/inc/vehicle-admin.php';
 require BIT_DIR . '/inc/template-tags.php';

@@ -109,6 +109,31 @@ foreach ( $items as $it ) {
 	}
 }
 
+// --- Foto-Verkleinerung: grosses Foto hochladen, Ergebnis pruefen ---
+require_once ABSPATH . 'wp-admin/includes/file.php';
+require_once ABSPATH . 'wp-admin/includes/media.php';
+require_once ABSPATH . 'wp-admin/includes/image.php';
+$gd = imagecreatetruecolor( 3000, 2250 );
+for ( $i = 0; $i < 4000; $i++ ) { // Struktur, damit das Bild nicht trivial klein komprimiert
+	imagefilledrectangle( $gd, wp_rand( 0, 2999 ), wp_rand( 0, 2249 ), wp_rand( 0, 2999 ), wp_rand( 0, 2249 ), imagecolorallocate( $gd, wp_rand( 0, 255 ), wp_rand( 0, 255 ), wp_rand( 0, 255 ) ) );
+}
+$big = wp_tempnam( 'bit-grossfoto.jpg' );
+imagejpeg( $gd, $big, 95 );
+$upload_bytes = filesize( $big );
+$att  = media_handle_sideload( array( 'name' => 'bit-grossfoto.jpg', 'tmp_name' => $big ), 0 );
+$meta = wp_get_attachment_metadata( $att );
+$main = get_attached_file( $att );
+$dir  = dirname( $main );
+$left = glob( $dir . '/bit-grossfoto*' );
+$sum  = array_sum( array_map( 'filesize', $left ) );
+$t( 'Foto: auf 2000 px verkleinert', 2000 === (int) ( $meta['width'] ?? 0 ), ( $meta['width'] ?? '?' ) . ' px' );
+$t( 'Foto: Handy-Original gelöscht', empty( $meta['original_image'] ) && ! file_exists( $dir . '/bit-grossfoto.jpg' ) );
+$t( 'Foto: keine 1536/2048-Formate', ! isset( $meta['sizes']['1536x1536'] ) && ! isset( $meta['sizes']['2048x2048'] ) );
+$t( 'Foto: Karten- und Detailgrösse vorhanden', isset( $meta['sizes']['bit-card'], $meta['sizes']['bit-large'] ) );
+$t( 'Foto: alles zusammen kleiner als das Original', $sum < $upload_bytes, round( $sum / 1024 ) . ' KB von ' . round( $upload_bytes / 1024 ) . ' KB' );
+$t( 'Foto: WebP, wenn der Server es kann', ! bit_webp_supported() || str_ends_with( $main, '.webp' ), basename( $main ) );
+wp_delete_attachment( $att, true );
+
 // --- Probelauf gegen die AutoScout24-Attrappe (kein Internet, nichts wird gespeichert) ---
 require_once BIT_DIR . '/tests/as24-mock.php';
 $saved_settings = get_option( BIT_AS24_OPTION, null );
