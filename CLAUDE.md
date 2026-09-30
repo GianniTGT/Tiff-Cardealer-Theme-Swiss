@@ -1,5 +1,7 @@
 # Hinweise für Claude
 
+- **Zuerst `STAND.md` lesen:** was fertig ist, die nächsten Aufgaben, offene Fragen.
+
 - Zugriff auf eine WordPress-Seite: **immer über den Novamira-Connector in claude.ai**.
   In der Cloud-Sitzung scheitern `novamira auth login` und `claude mcp add` an der
   Netzwerk-Regel. Nicht erst versuchen, sondern direkt auf
