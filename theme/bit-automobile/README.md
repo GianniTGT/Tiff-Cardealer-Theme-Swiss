@@ -105,6 +105,9 @@ BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 195
 ADMIN_USER=… ADMIN_PASS=… AS24_MOCK=1 node tests/e2e.js                # + 7 Prüfungen Probelauf im Admin (mit Attrappe)
 ```
 
+Vor jedem erneuten Lauf lokal zurücksetzen: `wp transient delete --all` (Spam-Sperre 5/Stunde)
+und `wp option delete bit_as24_settings` (sonst ist der Probelauf-Knopf schon freigeschaltet).
+
 Der Browser-Test prüft jede Seite (HTTP-Status, keine PHP-Meldung, aktiver Menüpunkt,
 korrigiertes Logo, Radius 16px überall, gleiche Masse, kein Foto doppelt, alle Bilder laden,
 kein Entwurf-Hinweis, kein seitliches Scrollen auf dem Handy), dazu Suche/Filter, Galerie,
@@ -122,4 +125,4 @@ Tests – **nie** als mu-plugin auf den echten Server kopieren.
 3. Benutzer für Sabit anlegen, Rolle **Redakteur**.
 4. E-Mail-Versand prüfen (Formular) — ggf. SMTP über das hosttech-Postfach.
 5. Demo-Fahrzeuge löschen, echte Fahrzeuge erfassen oder AutoScout24 verbinden.
-6. MWST-Nr. erst eintragen, wenn bestätigt.
+6. MWST-Nr. `CHE-345.577.846 MWST` ist voreingestellt (UID-Register: MWST aktiv seit 01.01.2023).

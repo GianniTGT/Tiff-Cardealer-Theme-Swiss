@@ -16,7 +16,7 @@ function bit_info_defaults() {
 		'legal'      => 'ImmoBit AG',
 		'legal_form' => 'Aktiengesellschaft',
 		'uid'        => 'CHE-345.577.846',
-		'vat'        => '',
+		'vat'        => 'CHE-345.577.846 MWST', // UID-Register: MWST aktiv seit 01.01.2023 (geprueft 30.09.2026)
 		'seat'       => 'Köniz',
 		'street'     => 'Herzwilstrasse 262',
 		'zip'        => '3173',

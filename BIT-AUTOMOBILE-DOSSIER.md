@@ -21,6 +21,7 @@ Quelle: Handelsregister des Kantons Bern.
 | Firma | **ImmoBit AG** |
 | Rechtsform | Aktiengesellschaft |
 | UID | CHE-345.577.846 |
+| MWST-Nr. | **CHE-345.577.846 MWST** · im MWST-Register aktiv seit 01.01.2023 (Quelle: UID-Register des BFS, abgefragt 30.09.2026) |
 | Eingetragen | 5. Dezember 2022 · Statuten 1. Dezember 2022 |
 | Sitz | Köniz |
 | Domizil | Herzwilstrasse 262, 3173 Oberwangen b. Bern |
@@ -386,7 +387,7 @@ Webseite kommt, sieht zwei Marken. Das muss Sabit entscheiden.
       Agentur, gehört sie **vor** jedem Umzug auf die ImmoBit AG übertragen.
 - [ ] **Wo pflegt er seine Fahrzeuge heute wirklich?** Gemessen ist nur, dass auf `/fahrzeuge`
       serverseitig nichts steht.
-- [ ] **MWST-Nummer — ist die AG pflichtig?** Fehlt fürs Impressum.
+- [x] **MWST-Nummer — ist die AG pflichtig?** Ja: `CHE-345.577.846 MWST`, aktiv seit 01.01.2023 (UID-Register, 30.09.2026). Steht im Impressum.
 - [ ] **Ist ausser ihm jemand zeichnungsberechtigt?** Der übermittelte
       Handelsregister-Auszug brach vor dem Abschnitt *Personen* ab.
 

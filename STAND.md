@@ -21,8 +21,7 @@ Im neuen Chat genügt: **«Lies STAND.md und mach weiter.»**
   (Anleitung: `CLAUDE-MIT-WORDPRESS-VERBINDEN.md`).
 - **Kontaktformular:** Die Mails gehen auf der Testseite an **info@tiff-software-solutions.com**,
   nicht an Sabit. Dafür sorgt das mu-plugin `wp-content/mu-plugins/bit-testseite.php`, das nur
-  auf dieser Adresse wirkt. Eine Test-Mail wurde am 30.09. verschickt.
-  → **Tifeki: bitte im Postfach info@ nachsehen, auch im Spam.**
+  auf dieser Adresse wirkt. Die Test-Mail vom 30.09. ist angekommen.
 - Zuletzt geändert (Commit «Startseite: kein Info-Balken …»):
   - Maus-«bit» 22px in Blau
   - Kein Info-Balken unter dem Titelbild, die Fakten stehen beim Showroom
@@ -45,13 +44,17 @@ Danach jeweils:
 - Über den Connector auf die Testseite spielen, mit Prüfsumme vor und nach dem Ersetzen
 - Auf der Testseite prüfen und committen
 
+## Erledigt am 30.09.
+
+- **Test-Mail** der Testseite ist bei info@tiff-software-solutions.com angekommen: Das Formular und der Mailversand über hosttech funktionieren.
+- **Fahrzeugbewertung:** Der Text bleibt «gegen eine kleine Gebühr» (Entscheid Tifeki).
+- **MWST-Nr.:** `CHE-345.577.846 MWST`. Laut UID-Register ist ImmoBit AG seit 01.01.2023 im MWST-Register aktiv (abgefragt 30.09.2026). Die Nummer ist im Theme voreingestellt und steht im Impressum. Achtung: Die MWST-Nummer im Dossier (CHE-492.626.439) gehört der **Arca-IT AG**, nicht BIT.
+
 ## Fragen an Sabit (fragt Tifeki)
 
 | Frage | Worum es geht |
 |---|---|
-| **Kostet die Fahrzeugbewertung etwas?** | Auf der alten bit-automobile.ch stand «gegen eine kleine Gebühr», und so steht es jetzt auch auf der Seite *Dienstleistungen → Fahrzeugbewertung*. Ist das noch so? Wenn ja, wie viel (z. B. «CHF 50, wird beim Verkauf angerechnet»)? Wenn nein, schreiben wir «kostenlos». Das ist ein gutes Verkaufsargument. |
 | **AutoScout24-Zugang** | Für den automatischen Abgleich der Inserate braucht es von AutoScout24 für die **DMS-API**: *Seller-ID*, *Client-ID*, *Client-Secret*, am besten zuerst für die Testumgebung (Preproduktion). Das Secret nicht per Chat schicken, sondern selbst unter *Werkzeuge → AutoScout24* eintragen. |
-| **MWST-Nummer** | Nur eintragen, wenn Sabit sie bestätigt. Bis dahin bleibt sie leer. |
 | **Fotos** | Platz, Werkstatt, Sabit oder Team, Schild. Handyfotos reichen, die Seite verkleinert sie selbst. |
 
 ## Vor dem Livegang auf bit-automobile.ch (später)

@@ -118,4 +118,4 @@ git show 956909d:business/SCHWEIZ-SAAS.md > SCHWEIZ-SAAS.md
 - **Die zwei kommerziellen AutoScout24-Fragen** — wie `client_id`/`client_secret` zu bekommen
   sind, und was die VIN-Abfrage kostet. Der Import auf der Webseite ist vorbereitet und mit
   erfundenen Daten getestet: `theme/bit-automobile/inc/autoscout24.php`.
-- **MWST-Nummer bestätigen** — bis dahin zeigt das Impressum keine an (im Customizer eintragen).
+- ~~MWST-Nummer bestätigen~~ — erledigt: `CHE-345.577.846 MWST`, laut UID-Register aktiv seit 01.01.2023 (geprüft 30.09.2026).
