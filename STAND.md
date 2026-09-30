@@ -53,6 +53,15 @@ Danach jeweils:
 - **e2e gesamt auf der Testseite:** 1. Lauf 140 OK / 21 Fehler, 2. Lauf 178 OK / 12 Fehler, jeweils andere. Ursache: Der Server (hosttech) antwortet unter Last mit zufälligen 415-Fehlern auf Bilder, CSS und JS, dann fehlen Kopf/Fuss oder Filter. Einzelabrufe (65 von 65) sind immer 200. Nicht vom Theme. Vor dem Livegang klären (Hosting-Schutz gegen schnelle Abrufe?).
 - **Tipp für e2e aus der Cloud:** Chromium vertraut dem Proxy-Zertifikat nicht. Start mit `--ignore-certificate-errors-spki-list=<SPKI-Hash von /root/.ccr/agent-proxy-ca.crt>`, ohne die Prüfung abzuschalten. Außerdem in der Umgebung «Network access» auf Full oder die Domain erlauben (gilt nur für neue Sitzungen).
 
+## Änderungswünsche von Tifeki (30.09., abends) – erledigt und auf der Testseite
+
+- **Start, «Kommen Sie vorbei»:** Der zweite Telefon-Knopf ist weg, «Route anzeigen» steht mittig. Telefon steht nur noch einmal im Kasten.
+- **Start, «Der Platz»:** Zuerst kommt das Showroom-Foto (Herzwilstrasse 262), beim Wischen erscheint das bisherige Foto (AMG). Im Block «Kommen Sie vorbei» steht dafür `amg-detail.jpg`, damit kein Foto doppelt vorkommt (`platz-herzwilstrasse.jpg` nutzt eine Demo-Karte).
+- **Kontakt:** Die zweite Faktenbox neben dem Formular ist weg (Visitenkarte oben genügt), das Formular hat die volle Breite.
+- **Impressum:** Rechtsform, UID, MWST, Eintrag, Sitz, Statuten stehen nur noch im Kasten «Handelsregister», nicht mehr im Text. Der Text hat noch «Verantwortlich», «Zweck», «Kontakt», «Haftung», «Urheberrecht». Die Seite wurde auf der Testseite auch in der Datenbank angepasst (`inc/seed.php` gilt nur für neue Installationen).
+- **Fuss:** «Diese Seite wurde gestaltet von Tiff Software Solutions», verlinkt auf https://tiff-software-solutions.com.
+- **Ursache der zufälligen Fehler auf der Testseite:** hosttech hat einen Bot-Schutz («One moment, please…»). Bei schnellen Abrufen kommt eine Warteseite oder 415 statt CSS, Schriften und Bildern. Echte Besucher sind selten betroffen, automatische Tests schon. Vor dem Livegang bei hosttech nachfragen.
+
 ## Erledigt am 30.09.
 
 - **Test-Mail** der Testseite ist bei info@tiff-software-solutions.com angekommen: Das Formular und der Mailversand über hosttech funktionieren.

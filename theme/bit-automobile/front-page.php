@@ -65,7 +65,7 @@ $tel1  = bit_tel( bit_info( 'phone1' ) );
 <section class="sec sec--flat">
 	<div class="split">
 		<div class="slant">
-			<img src="<?php echo esc_url( bit_asset( 'img/platz-herzwilstrasse.jpg' ) ); ?>" alt="Im Showroom von BIT Automobile, Oberwangen" loading="lazy">
+			<img src="<?php echo esc_url( bit_asset( 'img/amg-detail.jpg' ) ); ?>" alt="Fahrzeuge im Showroom von BIT Automobile, Oberwangen" loading="lazy">
 			<span aria-hidden="true"></span>
 		</div>
 		<div>

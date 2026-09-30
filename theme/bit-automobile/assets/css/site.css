@@ -359,5 +359,4 @@
 
 /* Start: Route-Knopf in der Mitte; Kontakt: Formular allein; Fuss: Credit */
 .actions--center{margin-inline:auto;justify-content:center}
-.form-wrap{max-width:760px}
 .sitefoot .credit{margin-top:14px}

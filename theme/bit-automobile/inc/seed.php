@@ -78,7 +78,7 @@ function bit_seed_impressum() {
 <p>[bit key="legal"], handelnd unter [bit key="brand"], [bit key="street"], [bit key="zip"] [bit key="city_long"]. Die Registerdaten stehen im Kasten daneben.</p>
 
 <h2>Zweck</h2>
-<p>Zweck sind Immobilien sowie der Handel mit Neu- und Occasionswagen und der Betrieb einer Autowerkstätte.</p>
+<p>Immobilien sowie der Handel mit Neu- und Occasionswagen und der Betrieb einer Autowerkstätte.</p>
 
 <h2>Kontakt</h2>
 <p>Telefon [bit_tel key="phone1"] oder [bit_tel key="phone2"], E-Mail [bit_mail]. Wir antworten während der Öffnungszeiten, [bit key="hours_week"] und [bit key="hours_sat"].</p>
