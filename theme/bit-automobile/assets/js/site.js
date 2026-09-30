@@ -14,6 +14,8 @@
   if (platz && !reduced) {
     var counter = platz.querySelector('[data-counter]');
     var meter = platz.querySelector('[data-meter]');
+    var wipe = platz.querySelector('[data-wipe]');
+    var edge = platz.querySelector('[data-edge]');
     var total = parseInt(platz.getAttribute('data-count'), 10) || 0;
     var ticking = false;
     var update = function () {
@@ -24,6 +26,18 @@
       var n = Math.min(total, Math.round(p * 3.2 * total));
       if (counter && counter.textContent !== String(n)) counter.textContent = String(n);
       if (meter) meter.style.setProperty('--p', total ? String(n / total) : '1');
+      /* Oberes Foto wischt schraeg weg: rechts schneller als links (Werte aus dem Entwurf) */
+      var a = Math.max(0, 100 - p * 165);
+      var b = Math.max(0, 100 - p * 95);
+      if (wipe) wipe.style.clipPath = 'polygon(0 0,100% 0,100% ' + a + '%,0 ' + b + '%)';
+      if (edge) {
+        var st = platz.querySelector('.stick');
+        var h = st.offsetHeight / 100;
+        var w = st.offsetWidth || 1;
+        var ang = Math.atan2((a - b) * h, w) * 180 / Math.PI;
+        edge.style.transform = 'translateY(' + (b * h).toFixed(1) + 'px) rotate(' + ang.toFixed(2) + 'deg)';
+        edge.style.opacity = p > 0.01 && p < 0.99 && b > 0 ? '0.9' : '0';
+      }
     };
     window.addEventListener('scroll', function () {
       if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
@@ -162,14 +176,13 @@
 
   /* Maus: das «bit» aus dem Logo zieht hinter dem Zeiger her */
   if (anim && window.BIT && window.BIT.mark && window.matchMedia('(pointer: fine)').matches) {
-    var mark = document.createElement('img');
-    mark.src = window.BIT.mark;
-    mark.alt = '';
+    var mark = document.createElement('span');
     mark.className = 'bit-follow';
+    mark.style.setProperty('--mark', 'url("' + window.BIT.mark + '")');
     mark.setAttribute('aria-hidden', 'true');
     document.body.appendChild(mark);
     var tx = -200, ty = -200, x = -200, y = -200, last = 0, shown = false;
-    window.addEventListener('mousemove', function (e) { tx = e.clientX + 16; ty = e.clientY + 20; last = performance.now(); }, { passive: true });
+    window.addEventListener('mousemove', function (e) { tx = e.clientX + 14; ty = e.clientY + 18; last = performance.now(); }, { passive: true });
     document.addEventListener('mouseleave', function () { last = 0; });
     var loop = function () {
       x += (tx - x) * 0.085;

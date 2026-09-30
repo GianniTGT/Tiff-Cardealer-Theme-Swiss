@@ -200,12 +200,33 @@ const PAGES = [
   await ap.waitForTimeout(900);
   const notIn = await ap.evaluate(() => [...document.querySelectorAll('[data-rv]')].filter((e) => e.offsetParent && !e.classList.contains('is-in')).length);
   t('Animation: alle Blöcke nach dem Scrollen sichtbar', notIn === 0, notIn + ' nicht eingeblendet');
+  // Linie unter dem Titelbild: von Rand zu Rand
+  await ap.evaluate(() => window.scrollTo(0, 0));
+  const flowW = await ap.evaluate(() => { const f = document.querySelector('.flowwrap .bit-flow'); return f ? [Math.round(f.getBoundingClientRect().left), Math.round(f.getBoundingClientRect().width), document.documentElement.clientWidth] : null; });
+  t('Linie: geht über die ganze Breite', !!flowW && flowW[0] === 0 && flowW[1] === flowW[2], JSON.stringify(flowW));
+  // Kein Info-Balken direkt unter dem Titelbild; Adresse/Telefon/Zeiten stehen beim Showroom
+  t('Start: kein Balken unter dem Titelbild', await ap.evaluate(() => !document.querySelector('.hero + .flowwrap + .sec .bit-facts')));
+  t('Start: Adresse/Telefon/Zeiten beim Showroom', (await ap.locator('.split .visit-facts .bit-facts').count()) === 1);
+  t('Start: nur einmal «Showroom»-Fakten', (await ap.locator('main .bit-facts').count()) === 1);
+  // Der Platz: oberes Foto wischt beim Scrollen weg
+  const wipe = await ap.evaluate(async () => {
+    const sec = document.querySelector('.platz'); const top = sec.getBoundingClientRect().top + window.scrollY;
+    const span = sec.offsetHeight - window.innerHeight;
+    window.scrollTo(0, top + span * 0.35); await new Promise((r) => setTimeout(r, 300));
+    const w = document.querySelector('[data-wipe]'); const e = document.querySelector('[data-edge]');
+    return { clip: w.style.clipPath, edge: getComputedStyle(e).opacity };
+  });
+  t('Der Platz: Foto wischt beim Scrollen weg', /polygon/.test(wipe.clip) && !/100% 100%, 0(px)? 100%/.test(wipe.clip), wipe.clip);
+  await ap.waitForTimeout(300);
+  await ap.screenshot({ path: path.join(OUT, '28-der-platz-foto-wischt.jpg'), type: 'jpeg', quality: 80 });
   await ap.evaluate(() => window.scrollTo(0, 0));
   await ap.waitForTimeout(400);
   for (let i = 0; i < 24; i++) { await ap.mouse.move(500 + i * 18, 300 + i * 6); await ap.waitForTimeout(16); }
   await ap.waitForTimeout(250);
-  const follow = await ap.evaluate(() => { const m = document.querySelector('.bit-follow'); return m ? { on: m.classList.contains('on'), t: m.style.transform, src: m.src } : null; });
-  t('Maus: «bit» folgt dem Zeiger', !!follow && follow.on && /bit-mark\.png/.test(follow.src) && follow.t.includes('translate3d'), JSON.stringify(follow));
+  const follow = await ap.evaluate(() => { const m = document.querySelector('.bit-follow'); if (!m) return null; const cs = getComputedStyle(m); return { on: m.classList.contains('on'), t: m.style.transform, mark: m.style.getPropertyValue('--mark'), w: Math.round(m.getBoundingClientRect().width), bg: cs.backgroundColor }; });
+  t('Maus: «bit» folgt dem Zeiger', !!follow && follow.on && /bit-mark\.png/.test(follow.mark) && follow.t.includes('translate3d'), JSON.stringify(follow));
+  t('Maus: «bit» kleiner als der Zeiger (≤ 24px)', !!follow && follow.w > 0 && follow.w <= 24, follow && follow.w + 'px');
+  t('Maus: «bit» in BIT-Blau', !!follow && follow.bg === 'rgb(74, 143, 209)', follow && follow.bg);
   await ap.screenshot({ path: path.join(OUT, '25-animation-maus-bit.jpg'), type: 'jpeg', quality: 80, clip: { x: 300, y: 150, width: 900, height: 420 } });
   // Den Seitenwechsel fuer den Test anhalten (Listener nach dem der Seite), dann die Linie pruefen.
   await ap.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('a')) e.preventDefault(); }));

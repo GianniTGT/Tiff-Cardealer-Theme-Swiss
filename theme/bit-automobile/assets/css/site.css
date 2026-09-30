@@ -26,8 +26,13 @@
 .sec--top{padding-bottom:0}
 .sec--flat{padding-top:0}
 .intro{max-width:var(--maxw);margin-inline:auto;padding:clamp(46px,6vw,86px) var(--gut) 0}
-.flowwrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);margin-top:28px;overflow:hidden}
+/* Die Aare-Linie geht von Rand zu Rand, ohne Luecke; ein heller Schimmer fliesst darueber. */
+.flowwrap{margin-top:28px;overflow:hidden}
 .flowwrap--flush{margin-top:0}
+.flowwrap .bit-flow{width:100%;margin:0;border-radius:0;
+  background:linear-gradient(90deg,var(--aare),var(--aare-2) 50%,var(--aare))}
+.flowwrap .bit-flow i{background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.7) 8%,transparent 16%,
+  transparent 50%,rgba(255,255,255,.7) 58%,transparent 66%,transparent 100%)}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:34px;flex-wrap:wrap}
 .sec-head--stack{display:block;margin-bottom:34px}
 
@@ -68,6 +73,8 @@
 /* ---------- Bild + Text ---------- */
 .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:40px;align-items:center}
 .split--top{align-items:start}
+.visit-facts{margin-top:26px}
+@media (max-width:520px){.split .visit-facts .bit-facts{grid-template-columns:1fr}}
 .slant{position:relative;overflow:hidden;border-radius:var(--r)}
 .slant img{width:100%;display:block}
 .slant span{position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none;
@@ -79,6 +86,11 @@
 .platz .stick{position:sticky;top:0;height:100vh;overflow:hidden}
 .platz img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .platz .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,7,8,.92) 0%,rgba(6,7,8,.6) 42%,rgba(6,7,8,.2) 100%)}
+/* Oberes Foto wischt beim Scrollen schraeg weg (wie im Entwurf), die Linie laeuft an der Kante mit */
+.platz .wipe{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);will-change:clip-path}
+.platz .wipe .shade{background:linear-gradient(90deg,rgba(6,7,8,.9) 0%,rgba(6,7,8,.55) 44%,rgba(6,7,8,.18) 100%)}
+.platz .edge{position:absolute;left:0;right:-40%;top:0;height:3px;transform-origin:left center;opacity:0;z-index:1;
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--aare-2));transition:opacity 200ms}
 .platz .in{position:relative;z-index:2;height:100%;max-width:var(--maxw);margin-inline:auto;
   padding:86px var(--gut) 22px;display:flex;flex-direction:column;justify-content:center}
 .platz .count{font-size:clamp(88px,17vw,220px);font-weight:900;letter-spacing:-.06em;line-height:.88;
@@ -325,9 +337,11 @@
 .sitefoot .links a:hover,.sitefoot p a:hover,.prose a:hover,.legal .text a:hover,.back:hover,.legalline a:hover{background-size:100% 1px}
 .back{display:inline-flex;gap:6px}
 
-.bit-follow{position:fixed;left:0;top:0;z-index:90;width:46px;height:auto;pointer-events:none;opacity:0;
-  transition:opacity 280ms ease;will-change:transform;filter:drop-shadow(0 2px 6px rgba(0,0,0,.55))}
-.bit-follow.on{opacity:.92}
+/* Kleiner als der Zeiger (22px breit), in BIT-Blau; die Form kommt aus bit-mark.png als Maske */
+.bit-follow{position:fixed;left:0;top:0;z-index:90;width:22px;aspect-ratio:235/149;pointer-events:none;opacity:0;
+  background:var(--blue);-webkit-mask:var(--mark) center/contain no-repeat;mask:var(--mark) center/contain no-repeat;
+  transition:opacity 280ms ease;will-change:transform}
+.bit-follow.on{opacity:.95}
 @media (pointer:fine){
   html,body,a,button,label,.bit-chip,.bit-btn,.svc{cursor:url(../icons/cursor.svg) 3 1,auto}
 }

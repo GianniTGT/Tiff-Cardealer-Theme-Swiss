@@ -1,7 +1,8 @@
 <?php
 /**
- * Start — wie im Entwurf: Hero, Fakten, drei Fahrzeuge, Ankauf,
- * Showroom, Der Platz (Zaehler), Dienstleistungen.
+ * Start — wie im Entwurf: Hero, drei Fahrzeuge, Ankauf, Showroom
+ * (mit Adresse, Telefon, Zeiten), Der Platz (Zaehler, Foto wischt weg),
+ * Dienstleistungen.
  * Jedes Foto kommt auf dieser Seite nur einmal vor.
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -29,10 +30,6 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 </section>
 
 <?php bit_flow( true ); ?>
-
-<section class="sec sec--top">
-	<?php bit_facts(); ?>
-</section>
 
 <?php if ( $cars ) : ?>
 <section class="sec">
@@ -73,9 +70,10 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 			<span aria-hidden="true"></span>
 		</div>
 		<div>
-			<?php bit_kicker( 'Neuer Showroom' ); ?>
+			<?php bit_kicker( 'Showroom Oberwangen' ); ?>
 			<h2 class="t-sec">Kommen Sie vorbei.</h2>
-			<p class="lead">Unser Showroom in Oberwangen ist offen. Vor Ort stehen die Fahrzeuge, die Sie hier sehen – anschauen, Probe fahren, fragen. Ohne Termin geht auch.</p>
+			<p class="lead">Vor Ort stehen die Fahrzeuge, die Sie hier sehen – anschauen, Probe fahren, fragen. Ohne Termin geht auch.</p>
+			<div class="visit-facts"><?php bit_facts(); ?></div>
 			<div class="actions">
 				<a class="bit-btn bit-btn--blue" href="<?php echo esc_url( bit_info( 'maps_url' ) ); ?>" target="_blank" rel="noopener">Route anzeigen</a>
 				<a class="bit-btn bit-btn--ghost" href="tel:<?php echo esc_attr( $tel2 ); ?>"><?php echo esc_html( bit_info( 'phone2' ) ); ?></a>
@@ -87,8 +85,13 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 <?php if ( $count ) : ?>
 <section class="platz" data-platz data-count="<?php echo esc_attr( $count ); ?>">
 	<div class="stick">
-		<img src="<?php echo esc_url( bit_asset( 'img/amg-detail.jpg' ) ); ?>" alt="" loading="lazy">
+		<img src="<?php echo esc_url( bit_asset( 'img/amg-wide.jpg' ) ); ?>" alt="" loading="lazy">
 		<div class="shade"></div>
+		<div class="wipe" data-wipe>
+			<img src="<?php echo esc_url( bit_asset( 'img/amg-detail.jpg' ) ); ?>" alt="" loading="lazy">
+			<div class="shade"></div>
+		</div>
+		<div class="edge" data-edge aria-hidden="true"></div>
 		<div class="in">
 			<?php bit_kicker( 'Der Platz' ); ?>
 			<p class="count" data-counter aria-hidden="true"><?php echo esc_html( $count ); ?></p>

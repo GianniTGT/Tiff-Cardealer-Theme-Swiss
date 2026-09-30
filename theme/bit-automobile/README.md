@@ -9,7 +9,7 @@ blaue Knöpfe, die Aare-Linie unter jedem Seitenkopf.
 
 | Adresse | Vorlage | Inhalt |
 |---|---|---|
-| `/` | `front-page.php` | Hero, Fakten, 3 neueste Fahrzeuge, Ankauf, Showroom, «Der Platz» (echte Anzahl), Dienstleistungen — jedes Foto nur einmal |
+| `/` | `front-page.php` | Hero, 3 neueste Fahrzeuge, Ankauf, Showroom mit Adresse/Telefon/Zeiten, «Der Platz» (echte Anzahl, oberes Foto wischt beim Scrollen weg), Dienstleistungen — jedes Foto nur einmal |
 | `/fahrzeuge/` | `archive-fahrzeug.php` | Alle Fahrzeuge, Sofort-Suche, Marken-Chips, Regler Preis/Kilometer/Jahrgang |
 | `/fahrzeuge/<name>/` | `single-fahrzeug.php` | Galerie, Preis, Anruf-Kasten, Daten, Beschreibung, 3 ähnliche (kein Leasing — BIT bietet keins an) |
 | `/marke/<marke>/` | `taxonomy-marke.php` | Wie `/fahrzeuge/`, nur eine Marke |
@@ -38,10 +38,11 @@ Platz die Bilder belegen.
 
 Klein und überall gleich (`assets/css/site.css`, Abschnitt «Bewegung»; `assets/js/site.js`):
 Seitenwechsel blendet weich über (View Transitions, Kopf bleibt stehen) · beim Klick läuft
-eine Aare-Linie oben über die Seite · Blöcke steigen beim Scrollen 14px auf, gestaffelt ·
+eine Aare-Linie oben über die Seite · die Aare-Linie unter dem Titelbild geht von Rand zu Rand, ein heller Schimmer fliesst darüber · Blöcke steigen beim Scrollen 14px auf, gestaffelt ·
 vor jedem Kicker zeichnet sich eine kurze Linie · Unterstrich wächst bei Links ·
-«Der Platz»: Zahl und Linie zählen mit · Maus: das «bit» aus dem Logo zieht hinter dem
-Zeiger her, dazu der weisse Pfeil aus dem Entwurf. Mit «Bewegung reduzieren» ist alles aus.
+«Der Platz»: Zahl und Linie zählen mit, das obere Foto wischt schräg weg (wie im Entwurf) ·
+Maus: das «bit» aus dem Logo (22px, BIT-Blau, kleiner als der Zeiger) zieht hinter dem Zeiger
+her, dazu der weisse Pfeil aus dem Entwurf. Mit «Bewegung reduzieren» ist alles aus.
 
 ## Symmetrie
 
@@ -100,7 +101,7 @@ wp bit as24 sync [--dry-run]               # echter Abgleich / Probelauf (brauch
 
 ```
 wp eval-file wp-content/themes/bit-automobile/tests/run-tests.php     # 45 Tests: CHF, Telefon, MWST, AS24-Zuordnung, Import, Probelauf, Foto-Verkleinerung
-BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 188 Prüfungen im Browser + Bildschirmfotos
+BASE=http://localhost:8080 BIT_USER=… BIT_PASS=… node tests/e2e.js     # 195 Prüfungen im Browser + Bildschirmfotos
 ADMIN_USER=… ADMIN_PASS=… AS24_MOCK=1 node tests/e2e.js                # + 7 Prüfungen Probelauf im Admin (mit Attrappe)
 ```
 
