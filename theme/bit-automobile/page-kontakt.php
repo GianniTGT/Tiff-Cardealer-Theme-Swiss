@@ -1,5 +1,5 @@
 <?php
-/** Kontakt — Visitenkarte als Block, Formular, Fakten. */
+/** Kontakt — Visitenkarte als Block, Formular. */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -58,7 +58,7 @@ $notes = array(
 </section>
 
 <section class="sec" id="formular">
-	<div class="split split--top">
+	<div class="form-wrap">
 		<div>
 			<h2 class="t-sec">Schreiben Sie uns</h2>
 			<form class="form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
@@ -80,7 +80,6 @@ $notes = array(
 				<p class="form-note">Wir fragen nie nach AHV-Nummer, Geburtsdatum oder Bankdaten.</p>
 			<?php endif; ?>
 		</div>
-		<?php bit_facts(); ?>
 	</div>
 </section>
 <?php

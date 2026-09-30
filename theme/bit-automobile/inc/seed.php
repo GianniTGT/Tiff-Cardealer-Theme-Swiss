@@ -75,10 +75,10 @@ HTML,
 function bit_seed_impressum() {
 	return <<<'HTML'
 <h2>Verantwortlich für den Inhalt</h2>
-<p>[bit key="legal"], Aktiengesellschaft, handelnd unter [bit key="brand"]. Sitz [bit key="seat"], Domizil [bit key="street"], [bit key="zip"] [bit key="city_long"]. UID [bit key="uid"][bit key="vat" before=", MWST-Nr. "], eingetragen im Handelsregister des Kantons Bern am [bit key="hr_date"], Statuten vom [bit key="statutes"]. Zeichnungsberechtigt: [bit key="signatory"].</p>
+<p>[bit key="legal"], handelnd unter [bit key="brand"], [bit key="street"], [bit key="zip"] [bit key="city_long"]. Die Registerdaten stehen im Kasten daneben.</p>
 
-<h2>Kapital und Zweck</h2>
-<p>Aktienkapital CHF 100’000, voll liberiert, eingeteilt in 1’000 vinkulierte Namenaktien à CHF 100. Zweck sind Immobilien sowie der Handel mit Neu- und Occasionswagen und der Betrieb einer Autowerkstätte.</p>
+<h2>Zweck</h2>
+<p>Zweck sind Immobilien sowie der Handel mit Neu- und Occasionswagen und der Betrieb einer Autowerkstätte.</p>
 
 <h2>Kontakt</h2>
 <p>Telefon [bit_tel key="phone1"] oder [bit_tel key="phone2"], E-Mail [bit_mail]. Wir antworten während der Öffnungszeiten, [bit key="hours_week"] und [bit key="hours_sat"].</p>
