@@ -49,7 +49,9 @@ Danach jeweils:
 - **Fahrzeugkarten:** Foto-Zoom und Anheben gab es schon; neu leuchtet der Preis beim Darüberfahren blau auf (nur ohne «Bewegung reduzieren»).
 - **Zahlen auf «Über uns»:** Am Standort seit (Gründungsjahr) · Fahrzeuge auf dem Platz (echte Anzahl, fehlt bei 0) · 4 Dienstleistungen. Die Fahrzeug- und Dienstleistungs-Zahlen zählen hoch, die Jahreszahl nicht. Ohne JavaScript steht die echte Zahl direkt da.
 - Über den Connector eingespielt, Prüfsummen stimmen mit dem Repo überein. `/ueber-uns/` antwortet mit 200, ohne PHP-Fehler; die Zahlen 2022 · 11 · 4 stehen im HTML (11 sind die Demo-Fahrzeuge).
-- **Offen:** Browser-Prüfung (`tests/e2e.js`) und Ansehen von Hover und Hochzählen im Browser.
+- **Browser-Prüfung 30.09.** (`tests/e2e.js` gegen die Testseite, Chromium): Preis wird beim Darüberfahren blau (weiß → #4A8FD1); auf «Über uns» zählen Fahrzeuge und Dienstleistungen hoch (0 → 11, → 4), das Jahr bleibt 2022, keine JS-Fehler; bei «Bewegung reduzieren» stehen die Zahlen sofort da. Seite «Über uns» besteht alle e2e-Prüfungen.
+- **e2e gesamt auf der Testseite:** 1. Lauf 140 OK / 21 Fehler, 2. Lauf 178 OK / 12 Fehler, jeweils andere. Ursache: Der Server (hosttech) antwortet unter Last mit zufälligen 415-Fehlern auf Bilder, CSS und JS, dann fehlen Kopf/Fuss oder Filter. Einzelabrufe (65 von 65) sind immer 200. Nicht vom Theme. Vor dem Livegang klären (Hosting-Schutz gegen schnelle Abrufe?).
+- **Tipp für e2e aus der Cloud:** Chromium vertraut dem Proxy-Zertifikat nicht. Start mit `--ignore-certificate-errors-spki-list=<SPKI-Hash von /root/.ccr/agent-proxy-ca.crt>`, ohne die Prüfung abzuschalten. Außerdem in der Umgebung «Network access» auf Full oder die Domain erlauben (gilt nur für neue Sitzungen).
 
 ## Erledigt am 30.09.
 
