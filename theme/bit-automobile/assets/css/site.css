@@ -356,3 +356,7 @@
 }
 .form .bit-btn{min-width:228px}
 @media (max-width:560px){.form .bit-btn{width:100%}}
+
+/* Start: Route-Knopf in der Mitte; Kontakt: Formular allein; Fuss: Credit */
+.actions--center{margin-inline:auto;justify-content:center}
+.sitefoot .credit{margin-top:14px}

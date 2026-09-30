@@ -38,6 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			· <a class="staff" href="<?php echo esc_url( wp_login_url() ); ?>" rel="nofollow">Login</a>
 		<?php endif; ?>
 	</p>
+	<p class="credit">Diese Seite wurde gestaltet von <a href="https://tiff-software-solutions.com" target="_blank" rel="noopener">Tiff Software Solutions</a></p>
 </footer>
 <?php wp_footer(); ?>
 </body>

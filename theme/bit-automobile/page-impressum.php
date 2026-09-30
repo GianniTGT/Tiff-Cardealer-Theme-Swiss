@@ -9,7 +9,6 @@ the_post();
 $register = array(
 	array( 'UID', bit_info( 'uid' ) ),
 	array( 'MWST', bit_info( 'vat' ) ),
-	array( 'Rechtsform', bit_info( 'legal_form' ) ),
 	array( 'Eintrag', bit_info( 'hr_date' ) ),
 	array( 'Statuten', bit_info( 'statutes' ) ),
 	array( 'Sitz', bit_info( 'seat' ) ),

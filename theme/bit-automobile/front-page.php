@@ -13,7 +13,6 @@ get_header();
 $cars  = bit_get_vehicles( array( 'posts_per_page' => 3 ) );
 $count = bit_vehicle_count();
 $tel1  = bit_tel( bit_info( 'phone1' ) );
-$tel2  = bit_tel( bit_info( 'phone2' ) );
 ?>
 
 <section class="hero">
@@ -66,7 +65,7 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 <section class="sec sec--flat">
 	<div class="split">
 		<div class="slant">
-			<img src="<?php echo esc_url( bit_asset( 'img/herzwilstrasse-262.jpg' ) ); ?>" alt="Herzwilstrasse 262, Oberwangen" loading="lazy">
+			<img src="<?php echo esc_url( bit_asset( 'img/amg-detail.jpg' ) ); ?>" alt="Fahrzeuge im Showroom von BIT Automobile, Oberwangen" loading="lazy">
 			<span aria-hidden="true"></span>
 		</div>
 		<div>
@@ -74,9 +73,8 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 			<h2 class="t-sec">Kommen Sie vorbei.</h2>
 			<p class="lead">Vor Ort stehen die Fahrzeuge, die Sie hier sehen – anschauen, Probe fahren, fragen. Ohne Termin geht auch.</p>
 			<div class="visit-facts"><?php bit_facts(); ?></div>
-			<div class="actions">
+			<div class="actions actions--center">
 				<a class="bit-btn bit-btn--blue" href="<?php echo esc_url( bit_info( 'maps_url' ) ); ?>" target="_blank" rel="noopener">Route anzeigen</a>
-				<a class="bit-btn bit-btn--ghost" href="tel:<?php echo esc_attr( $tel2 ); ?>"><?php echo esc_html( bit_info( 'phone2' ) ); ?></a>
 			</div>
 		</div>
 	</div>
@@ -88,7 +86,7 @@ $tel2  = bit_tel( bit_info( 'phone2' ) );
 		<img src="<?php echo esc_url( bit_asset( 'img/amg-wide.jpg' ) ); ?>" alt="" loading="lazy">
 		<div class="shade"></div>
 		<div class="wipe" data-wipe>
-			<img src="<?php echo esc_url( bit_asset( 'img/amg-detail.jpg' ) ); ?>" alt="" loading="lazy">
+			<img src="<?php echo esc_url( bit_asset( 'img/herzwilstrasse-262.jpg' ) ); ?>" alt="Der Showroom von BIT Automobile an der Herzwilstrasse 262 in Oberwangen" loading="lazy">
 			<div class="shade"></div>
 		</div>
 		<div class="edge" data-edge aria-hidden="true"></div>
