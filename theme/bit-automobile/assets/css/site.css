@@ -193,6 +193,9 @@
 .criteria > div{background:var(--panel);padding:28px 24px}
 .criteria h3{font-size:19px;letter-spacing:-.028em;font-weight:700;margin-top:12px}
 .criteria p.muted{margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
+.stats > div{background:var(--panel);padding:28px 24px}
+.stats .num{font-size:clamp(38px,5vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--blue);font-variant-numeric:tabular-nums;margin-bottom:12px}
 
 /* ---------- Rechtstexte (Impressum, Datenschutz) ---------- */
 .legal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:40px;align-items:start}

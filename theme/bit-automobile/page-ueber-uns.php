@@ -32,6 +32,24 @@ get_header();
 </section>
 
 <?php
+$bit_stats = array( array( (int) bit_info( 'founded' ), 'Am Standort seit', false ) );
+if ( bit_vehicle_count() > 0 ) {
+	$bit_stats[] = array( bit_vehicle_count(), 'Fahrzeuge auf dem Platz', true );
+}
+$bit_stats[] = array( count( bit_services() ), 'Dienstleistungen', true );
+?>
+<section class="sec sec--flat">
+	<div class="stats">
+		<?php foreach ( $bit_stats as $st ) : ?>
+			<div>
+				<p class="num" <?php echo $st[2] ? 'data-countup="' . (int) $st[0] . '"' : ''; ?>><?php echo esc_html( $st[0] ); ?></p>
+				<p class="bit-label"><?php echo esc_html( $st[1] ); ?></p>
+			</div>
+		<?php endforeach; ?>
+	</div>
+</section>
+
+<?php
 while ( have_posts() ) {
 	the_post();
 	if ( trim( get_the_content() ) ) {

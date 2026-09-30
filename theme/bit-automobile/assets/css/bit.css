@@ -301,6 +301,10 @@ a:hover > .bit-logo .mark{background:var(--accent)}
 .bit-veh .sub{font-size:12.5px;color:var(--text-label);margin-top:4px;letter-spacing:.02em}
 .bit-veh .price{font-size:22px;font-weight:var(--w-heavy);letter-spacing:-.04em;color:var(--white);
   white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){
+  .bit-veh .price{transition:color var(--slow),text-shadow var(--slow)}
+  .bit-veh:hover .price,.bit-veh:focus-within .price{color:var(--blue);text-shadow:0 0 18px rgba(74,143,209,.45)}
+}
 .bit-veh .specs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:9px 16px}
 .bit-veh .specs li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);
   font-variant-numeric:tabular-nums}

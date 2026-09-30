@@ -32,9 +32,9 @@ Im neuen Chat genügt: **«Lies STAND.md und mach weiter.»**
 
 ## Nächste Aufgaben (vom Nutzer freigegeben)
 
-1. **Fahrzeugkarten beleben:** Beim Darüberfahren zoomt das Foto leicht, der Preis leuchtet
+1. ~~**Fahrzeugkarten beleben:**~~ (im Code erledigt) Beim Darüberfahren zoomt das Foto leicht, der Preis leuchtet
    blau auf. Klein und ruhig wie die übrigen Animationen, aus bei «Bewegung reduzieren».
-2. **Zahlen, die hochzählen:** z. B. auf «Über uns»: seit 2022 · Anzahl Fahrzeuge (echte Zahl) ·
+2. ~~**Zahlen, die hochzählen:**~~ (im Code erledigt) z. B. auf «Über uns»: seit 2022 · Anzahl Fahrzeuge (echte Zahl) ·
    4 Dienstleistungen. Nur Zahlen, die stimmen, nichts erfinden.
 3. **Echte Fotos einbauen**, sobald Sabit sie liefert: Platz, Werkstatt, Team. Jedes Foto
    nur einmal pro Seite.
@@ -43,6 +43,12 @@ Danach jeweils:
 - Lokal testen (`tests/e2e.js`, `tests/run-tests.php`)
 - Über den Connector auf die Testseite spielen, mit Prüfsumme vor und nach dem Ersetzen
 - Auf der Testseite prüfen und committen
+
+## Im Code erledigt, noch nicht auf der Testseite (30.09.)
+
+- **Fahrzeugkarten:** Foto-Zoom und Anheben gab es schon; neu leuchtet der Preis beim Darüberfahren blau auf (nur ohne «Bewegung reduzieren»).
+- **Zahlen auf «Über uns»:** Am Standort seit (Gründungsjahr) · Fahrzeuge auf dem Platz (echte Anzahl, fehlt bei 0) · 4 Dienstleistungen. Die Fahrzeug- und Dienstleistungs-Zahlen zählen hoch, die Jahreszahl nicht. Ohne JavaScript steht die echte Zahl direkt da.
+- **Offen:** lokal `tests/e2e.js` laufen lassen, über den Connector auf die Testseite spielen (mit Prüfsumme) und dort ansehen.
 
 ## Erledigt am 30.09.
 
