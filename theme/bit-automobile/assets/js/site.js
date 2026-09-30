@@ -46,6 +46,27 @@
     update();
   }
 
+  /* ---------- Zahlen zaehlen hoch, sobald sie sichtbar werden (echte Zahl steht schon im HTML) ---------- */
+  var ups = document.querySelectorAll('[data-countup]');
+  if (ups.length && !reduced && 'IntersectionObserver' in window) {
+    var run = function (el) {
+      var to = parseInt(el.getAttribute('data-countup'), 10) || 0;
+      var t0 = null;
+      var step = function (t) {
+        if (t0 === null) t0 = t;
+        var k = Math.min(1, (t - t0) / 1100);
+        el.textContent = CH(to * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) window.requestAnimationFrame(step);
+      };
+      el.textContent = '0';
+      window.requestAnimationFrame(step);
+    };
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); run(e.target); } });
+    }, { threshold: 0.6 });
+    Array.prototype.forEach.call(ups, function (el) { io.observe(el); });
+  }
+
   /* ---------- Fahrzeuge: Sofort-Suche ---------- */
   var finder = document.querySelector('[data-finder]');
   if (finder) {

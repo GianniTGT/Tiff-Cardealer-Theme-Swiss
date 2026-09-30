@@ -32,9 +32,9 @@ Im neuen Chat genügt: **«Lies STAND.md und mach weiter.»**
 
 ## Nächste Aufgaben (vom Nutzer freigegeben)
 
-1. **Fahrzeugkarten beleben:** Beim Darüberfahren zoomt das Foto leicht, der Preis leuchtet
+1. ~~**Fahrzeugkarten beleben:**~~ (im Code erledigt) Beim Darüberfahren zoomt das Foto leicht, der Preis leuchtet
    blau auf. Klein und ruhig wie die übrigen Animationen, aus bei «Bewegung reduzieren».
-2. **Zahlen, die hochzählen:** z. B. auf «Über uns»: seit 2022 · Anzahl Fahrzeuge (echte Zahl) ·
+2. ~~**Zahlen, die hochzählen:**~~ (im Code erledigt) z. B. auf «Über uns»: seit 2022 · Anzahl Fahrzeuge (echte Zahl) ·
    4 Dienstleistungen. Nur Zahlen, die stimmen, nichts erfinden.
 3. **Echte Fotos einbauen**, sobald Sabit sie liefert: Platz, Werkstatt, Team. Jedes Foto
    nur einmal pro Seite.
@@ -43,6 +43,15 @@ Danach jeweils:
 - Lokal testen (`tests/e2e.js`, `tests/run-tests.php`)
 - Über den Connector auf die Testseite spielen, mit Prüfsumme vor und nach dem Ersetzen
 - Auf der Testseite prüfen und committen
+
+## Auf der Testseite (30.09.)
+
+- **Fahrzeugkarten:** Foto-Zoom und Anheben gab es schon; neu leuchtet der Preis beim Darüberfahren blau auf (nur ohne «Bewegung reduzieren»).
+- **Zahlen auf «Über uns»:** Am Standort seit (Gründungsjahr) · Fahrzeuge auf dem Platz (echte Anzahl, fehlt bei 0) · 4 Dienstleistungen. Die Fahrzeug- und Dienstleistungs-Zahlen zählen hoch, die Jahreszahl nicht. Ohne JavaScript steht die echte Zahl direkt da.
+- Über den Connector eingespielt, Prüfsummen stimmen mit dem Repo überein. `/ueber-uns/` antwortet mit 200, ohne PHP-Fehler; die Zahlen 2022 · 11 · 4 stehen im HTML (11 sind die Demo-Fahrzeuge).
+- **Browser-Prüfung 30.09.** (`tests/e2e.js` gegen die Testseite, Chromium): Preis wird beim Darüberfahren blau (weiß → #4A8FD1); auf «Über uns» zählen Fahrzeuge und Dienstleistungen hoch (0 → 11, → 4), das Jahr bleibt 2022, keine JS-Fehler; bei «Bewegung reduzieren» stehen die Zahlen sofort da. Seite «Über uns» besteht alle e2e-Prüfungen.
+- **e2e gesamt auf der Testseite:** 1. Lauf 140 OK / 21 Fehler, 2. Lauf 178 OK / 12 Fehler, jeweils andere. Ursache: Der Server (hosttech) antwortet unter Last mit zufälligen 415-Fehlern auf Bilder, CSS und JS, dann fehlen Kopf/Fuss oder Filter. Einzelabrufe (65 von 65) sind immer 200. Nicht vom Theme. Vor dem Livegang klären (Hosting-Schutz gegen schnelle Abrufe?).
+- **Tipp für e2e aus der Cloud:** Chromium vertraut dem Proxy-Zertifikat nicht. Start mit `--ignore-certificate-errors-spki-list=<SPKI-Hash von /root/.ccr/agent-proxy-ca.crt>`, ohne die Prüfung abzuschalten. Außerdem in der Umgebung «Network access» auf Full oder die Domain erlauben (gilt nur für neue Sitzungen).
 
 ## Erledigt am 30.09.
 
