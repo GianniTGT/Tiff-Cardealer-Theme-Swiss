@@ -44,11 +44,12 @@ Danach jeweils:
 - Über den Connector auf die Testseite spielen, mit Prüfsumme vor und nach dem Ersetzen
 - Auf der Testseite prüfen und committen
 
-## Im Code erledigt, noch nicht auf der Testseite (30.09.)
+## Auf der Testseite (30.09.)
 
 - **Fahrzeugkarten:** Foto-Zoom und Anheben gab es schon; neu leuchtet der Preis beim Darüberfahren blau auf (nur ohne «Bewegung reduzieren»).
 - **Zahlen auf «Über uns»:** Am Standort seit (Gründungsjahr) · Fahrzeuge auf dem Platz (echte Anzahl, fehlt bei 0) · 4 Dienstleistungen. Die Fahrzeug- und Dienstleistungs-Zahlen zählen hoch, die Jahreszahl nicht. Ohne JavaScript steht die echte Zahl direkt da.
-- **Offen:** lokal `tests/e2e.js` laufen lassen, über den Connector auf die Testseite spielen (mit Prüfsumme) und dort ansehen.
+- Über den Connector eingespielt, Prüfsummen stimmen mit dem Repo überein. `/ueber-uns/` antwortet mit 200, ohne PHP-Fehler; die Zahlen 2022 · 11 · 4 stehen im HTML (11 sind die Demo-Fahrzeuge).
+- **Offen:** Browser-Prüfung (`tests/e2e.js`) und Ansehen von Hover und Hochzählen im Browser.
 
 ## Erledigt am 30.09.
 
