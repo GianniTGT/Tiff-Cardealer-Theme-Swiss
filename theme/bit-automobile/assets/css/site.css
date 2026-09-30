@@ -1,0 +1,355 @@
+/* BIT Automobile — Seitenaufbau.
+   Jede Regel hier entspricht einem Abschnitt aus dem Entwurf; die Werte
+   (Abstaende, Groessen, Verlaeufe) sind dieselben wie dort. */
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--white);color:var(--text-on-white);padding:10px 14px;border-radius:var(--r)}
+.skip:focus{left:12px;top:12px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Typo-Bausteine ---------- */
+.t-hero{font-size:var(--t-hero);letter-spacing:var(--ls-hero);font-weight:900;line-height:1.04;max-width:13ch}
+.t-hero--wide{max-width:17ch}
+.t-page{font-size:clamp(34px,5vw,62px);letter-spacing:-.05em;font-weight:900;line-height:1.05;max-width:20ch}
+.t-sec{font-size:var(--t-h1);letter-spacing:-.04em;font-weight:800;line-height:1.06}
+.t-sub{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;font-weight:800;line-height:1.1}
+.t-h2{font-size:23px;letter-spacing:-.04em;font-weight:800}
+.lead{color:var(--text-2);font-size:var(--t-lead);line-height:1.55;max-width:52ch;margin-top:16px}
+.lead--hero{max-width:40ch;margin-top:20px}
+.lead--intro{margin-top:20px}
+.lead--tight{margin-top:13px}
+.muted{color:var(--text-3);font-size:14.5px;line-height:1.55}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+/* ---------- Abschnitte ---------- */
+.sec{max-width:var(--maxw);margin-inline:auto;padding:var(--band) var(--gut)}
+.sec--top{padding-bottom:0}
+.sec--flat{padding-top:0}
+.intro{max-width:var(--maxw);margin-inline:auto;padding:clamp(46px,6vw,86px) var(--gut) 0}
+/* Die Aare-Linie geht von Rand zu Rand, ohne Luecke; ein heller Schimmer fliesst darueber. */
+.flowwrap{margin-top:28px;overflow:hidden}
+.flowwrap--flush{margin-top:0}
+.flowwrap .bit-flow{width:100%;margin:0;border-radius:0;
+  background:linear-gradient(90deg,var(--aare),var(--aare-2) 50%,var(--aare))}
+.flowwrap .bit-flow i{background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.7) 8%,transparent 16%,
+  transparent 50%,rgba(255,255,255,.7) 58%,transparent 66%,transparent 100%)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:34px;flex-wrap:wrap}
+.sec-head--stack{display:block;margin-bottom:34px}
+
+/* ---------- Start: Hero ---------- */
+.hero{position:relative;min-height:clamp(460px,76vh,760px);display:flex;align-items:flex-end;overflow:hidden}
+.hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion:no-preference){.hero > img.breathe{animation:bitBreathe 34s ease-in-out infinite alternate}}
+.hero .shade{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(6,7,8,.95) 0%,rgba(6,7,8,.82) 34%,rgba(6,7,8,.28) 68%,rgba(6,7,8,.55) 100%),
+             linear-gradient(180deg,rgba(6,7,8,.6) 0%,transparent 26%,rgba(6,7,8,.72) 100%)}
+.hero .in{position:relative;z-index:2;max-width:var(--maxw);margin-inline:auto;width:100%;padding:0 var(--gut) clamp(38px,5.4vw,72px)}
+.hero--about{min-height:clamp(320px,42vw,460px)}
+.hero--about .shade{background:linear-gradient(90deg,rgba(6,7,8,.95) 0%,rgba(6,7,8,.78) 38%,rgba(6,7,8,.3) 100%),
+             linear-gradient(180deg,rgba(6,7,8,.5) 0%,transparent 30%,rgba(6,7,8,.7) 100%)}
+.hero--about .in{padding-bottom:clamp(34px,4.6vw,58px)}
+.hero--about .t-hero{max-width:15ch}
+.hero--page{min-height:clamp(360px,48vw,520px)}
+.hero--page .shade{background:linear-gradient(90deg,rgba(6,7,8,.95) 0%,rgba(6,7,8,.8) 40%,rgba(6,7,8,.3) 100%),
+             linear-gradient(180deg,rgba(6,7,8,.5) 0%,transparent 30%,rgba(6,7,8,.75) 100%)}
+.hero--page .in{padding-bottom:clamp(34px,4.6vw,58px)}
+.hero .bit-kicker a{color:inherit}
+.hero .bit-kicker a:hover{color:var(--white)}
+
+/* ---------- Fahrzeug-Raster ---------- */
+.grid-veh{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.grid-veh > *{flex:0 1 100%;min-width:0}
+@media (min-width:700px){.grid-veh > *{flex-basis:calc((100% - 22px) / 2)}}
+@media (min-width:1000px){.grid-veh > *{flex-basis:calc((100% - 44px) / 3)}}
+.grid-veh--gap{margin-top:20px}
+
+/* ---------- Bild-Band mit Text (Ankauf) ---------- */
+.banner{position:relative;border-radius:var(--r);overflow:hidden;min-height:clamp(340px,46vw,520px);display:flex;align-items:flex-end}
+.banner > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.banner .shade{position:absolute;inset:0;background:linear-gradient(78deg,rgba(6,7,8,.92) 8%,rgba(6,7,8,.45) 48%,rgba(6,7,8,.1) 100%)}
+.banner .in{position:relative;z-index:2;padding:clamp(26px,3.6vw,46px);max-width:62ch}
+.banner .t-sec{max-width:17ch}
+
+/* ---------- Bild + Text ---------- */
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:40px;align-items:center}
+.split--top{align-items:start}
+.visit-facts{margin-top:26px}
+@media (max-width:520px){.split .visit-facts .bit-facts{grid-template-columns:1fr}}
+.slant{position:relative;overflow:hidden;border-radius:var(--r)}
+.slant img{width:100%;display:block}
+.slant span{position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none;
+  background:linear-gradient(96deg,rgba(43,86,114,.96),rgba(74,143,209,.92));
+  clip-path:polygon(0 66%,100% 14%,100% 100%,0 100%)}
+
+/* ---------- Der Platz (Zaehler beim Scrollen) ---------- */
+.platz{position:relative;height:200vh;margin-bottom:var(--band)}
+.platz .stick{position:sticky;top:0;height:100vh;overflow:hidden}
+.platz img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.platz .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,7,8,.92) 0%,rgba(6,7,8,.6) 42%,rgba(6,7,8,.2) 100%)}
+/* Oberes Foto wischt beim Scrollen schraeg weg (wie im Entwurf), die Linie laeuft an der Kante mit */
+.platz .wipe{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);will-change:clip-path}
+.platz .wipe .shade{background:linear-gradient(90deg,rgba(6,7,8,.9) 0%,rgba(6,7,8,.55) 44%,rgba(6,7,8,.18) 100%)}
+.platz .edge{position:absolute;left:0;right:-40%;top:0;height:3px;transform-origin:left center;opacity:0;z-index:1;
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--aare-2));transition:opacity 200ms}
+.platz .in{position:relative;z-index:2;height:100%;max-width:var(--maxw);margin-inline:auto;
+  padding:86px var(--gut) 22px;display:flex;flex-direction:column;justify-content:center}
+.platz .count{font-size:clamp(88px,17vw,220px);font-weight:900;letter-spacing:-.06em;line-height:.88;
+  font-variant-numeric:tabular-nums;margin-top:18px;color:var(--white)}
+.platz .t-sec{max-width:20ch;margin-top:22px}
+.platz .meter{height:3px;width:min(420px,70%);background:rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden;margin-top:24px}
+.platz .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--aare-2));
+  transform-origin:left center;transform:scaleX(var(--p,1))}
+.platz .lead{max-width:46ch}
+
+/* ---------- Dienstleistungen ---------- */
+.svc-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.svc-grid > .svc{flex:0 1 100%;min-width:0}
+@media (min-width:640px){.svc-grid--4 > .svc{flex-basis:calc((100% - 16px) / 2)}}
+@media (min-width:1100px){.svc-grid--4 > .svc{flex-basis:calc((100% - 48px) / 4)}}
+@media (min-width:900px){.svc-grid--3 > .svc{flex-basis:calc((100% - 32px) / 3)}}
+.svc{position:relative;border-radius:var(--r);overflow:hidden;padding:2px;background:var(--hair)}
+.svc .glow{position:absolute;left:50%;top:50%;width:190%;aspect-ratio:1;translate:-50% -50%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0 58%,var(--aare) 74%,var(--aare-2) 82%,var(--blue) 90%,transparent 98%);
+  animation:bitOrbit 2.8s linear infinite;transition:opacity 260ms ease;opacity:0}
+.svc:hover .glow,.svc:focus-within .glow{opacity:1}
+.svc .in{position:relative;z-index:2;background:var(--panel);border-radius:14px;padding:30px 24px 26px;height:100%;display:flex;flex-direction:column}
+.svc h3{font-size:21px;letter-spacing:-.028em;font-weight:700}
+.svc p{color:var(--text-3);font-size:14.5px;line-height:1.55;margin-top:10px;flex:1}
+.svc{cursor:pointer}
+.svc a.more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:13.5px;font-weight:700;color:var(--blue);letter-spacing:.02em;align-self:flex-start}
+.svc a.more::after{content:"";position:absolute;inset:0;z-index:3;border-radius:var(--r)}
+.svc a.more i{font-style:normal;display:inline-block;transition:transform var(--ease)}
+.svc:hover a.more i{transform:translateX(5px)}
+.svc:hover h3{color:var(--white)}
+
+/* ---------- Fahrzeuge: Suche und Filter ---------- */
+.find{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.find .bit-search{flex:1;min-width:230px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.ranges{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:22px;
+  background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:22px 24px}
+.range{display:block}
+.range b{display:block;font-size:17px;font-weight:700;margin:6px 0 10px;font-variant-numeric:tabular-nums;color:var(--text)}
+.range input{width:100%}
+.count-label{color:var(--text-3);font-size:13.5px;margin-top:16px}
+.empty{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:30px 26px;text-align:center;color:var(--text-2);margin-top:20px}
+.empty .actions{justify-content:center;margin-top:18px}
+.demo-note{background:var(--panel);border:1px solid rgba(224,163,60,.34);border-radius:var(--r);padding:14px 18px;
+  color:var(--text-2);font-size:13.5px;line-height:1.5;margin-top:22px}
+.demo-note b{color:var(--amber);font-family:var(--font-narrow);letter-spacing:.14em;text-transform:uppercase;font-size:11px;margin-right:8px}
+
+/* ---------- Fahrzeug: Detail ---------- */
+.back{font-size:13.5px;color:var(--text-2)}
+.detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:34px;align-items:start}
+.detail .main-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);display:block;background:var(--panel)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.thumbs button{padding:0;border:1px solid var(--hair);background:none;border-radius:var(--r-s);overflow:hidden;cursor:pointer;opacity:.5;transition:opacity var(--ease)}
+.thumbs button[aria-pressed="true"],.thumbs button:hover{opacity:1}
+.thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.t-detail{font-size:clamp(30px,4.4vw,54px);letter-spacing:-.045em;font-weight:900;line-height:1.05}
+.detail .sub{color:var(--text-2);font-size:var(--t-lead);line-height:1.55;margin-top:10px}
+.detail .price{font-size:clamp(26px,3vw,38px);font-weight:800;letter-spacing:-.04em;margin-top:22px;font-variant-numeric:tabular-nums;color:var(--white)}
+.aside{position:sticky;top:86px;background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:22px 24px;margin-top:24px}
+.aside p{font-size:14.5px;color:var(--text-2);line-height:1.55}
+.aside .actions{margin-top:18px}
+.detail .t-h2{margin-top:34px}
+.detail .bit-kv{margin-top:14px}
+.detail .desc{color:var(--text-2);font-size:16px;line-height:1.6;margin-top:14px}
+.detail .desc p + p{margin-top:12px}
+.status-sold{color:var(--amber)}
+
+.panel{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(24px,3vw,38px)}
+
+/* ---------- Kontakt: Visitenkarte ---------- */
+.vcard{position:relative;border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.vcard .cut{position:absolute;inset:0;left:44%;background:linear-gradient(118deg,var(--blue-deep),var(--blue));clip-path:polygon(9% 0,100% 0,100% 100%,0 100%)}
+.vcard .cols{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));min-height:310px}
+.vcard .l{padding:36px 26px 34px;display:flex;flex-direction:column;justify-content:flex-end;color:#101315}
+.vcard .l img{width:186px;max-width:100%;display:block}
+.vcard .l p{font-size:15.5px;color:#3C454C;margin-top:8px;line-height:1.5}
+.vcard .r{padding:36px 26px 34px 54px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+.vcard .r .ttl{font-size:23px;font-weight:700;letter-spacing:-.035em}
+.vcard .r .hrs{font-size:15px;opacity:.86;margin-top:3px}
+.vcard .r .ways{font-size:15.5px;line-height:1.64}
+.vcard .r a{color:#fff;font-variant-numeric:tabular-nums}
+.vcard .r a:hover{color:#fff;text-decoration:underline}
+@media (max-width:600px){
+  .vcard .cut{left:0;top:44%;clip-path:polygon(0 12%,100% 0,100% 100%,0 100%)}
+  .vcard .r{padding:48px 26px 34px}
+}
+
+/* ---------- Formular ---------- */
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:24px}
+.form .full{grid-column:1/-1}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form .consent{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text-3);line-height:1.5;font-weight:400}
+.form .consent input{margin-top:3px;accent-color:var(--blue);width:18px;height:18px;flex:none}
+.form-note{font-size:13.5px;margin-top:16px;color:var(--text-3)}
+.form-note--ok{color:var(--aare-2)}
+.form-note--err{color:var(--red)}
+
+/* ---------- Ueber uns: Kriterien ---------- */
+.criteria{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
+.criteria > div{background:var(--panel);padding:28px 24px}
+.criteria h3{font-size:19px;letter-spacing:-.028em;font-weight:700;margin-top:12px}
+.criteria p.muted{margin-top:10px}
+
+/* ---------- Rechtstexte (Impressum, Datenschutz) ---------- */
+.legal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:40px;align-items:start}
+.legal .text{max-width:60ch}
+.legal .text > p:first-child.lead{margin-top:0;max-width:none}
+.legal .text h2{font-size:23px;letter-spacing:-.04em;font-weight:800;margin-top:34px}
+.legal .text h2:first-child{margin-top:0}
+.legal .text p,.legal .text li{color:var(--text-2);font-size:16px;line-height:1.55}
+.legal .text p{margin-top:12px}
+.legal .text ul{margin:12px 0 0;padding-left:20px}
+.legal .side{background:var(--panel);border:1px solid var(--hair);border-radius:var(--r);padding:26px 24px}
+.legal .side h3{font-size:19px;letter-spacing:-.03em;font-weight:700;margin-top:8px}
+.legal .side p{color:var(--text-3);font-size:14.5px;line-height:1.55;margin-top:12px}
+.legal .side .bit-kv{margin-top:16px}
+.legal .side .bit-kicker{margin-bottom:0}
+
+/* ---------- Fuss ---------- */
+.sitefoot{max-width:var(--maxw);margin-inline:auto;padding:38px var(--gut) 52px;border-top:1px solid var(--hair);color:var(--text-3);font-size:13.5px}
+.sitefoot .logo{margin-bottom:26px;display:inline-block}
+.sitefoot .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:34px;border-top:1px solid var(--hair);padding-top:30px;margin-bottom:26px}
+.sitefoot h3{font-size:15px;letter-spacing:-.01em;color:var(--text)}
+.sitefoot p{margin-top:9px;line-height:1.6}
+.sitefoot a{color:var(--text-2)}
+.sitefoot a:hover{color:var(--white)}
+.sitefoot .links{display:flex;flex-direction:column;gap:7px;margin-top:9px}
+.sitefoot .legalline b{color:var(--text)}
+.sitefoot .staff{margin-left:6px}
+
+/* ---------- Generische Seite ---------- */
+.content{max-width:60ch}
+.content p,.content li{color:var(--text-2);font-size:16px;line-height:1.6}
+.content p + p{margin-top:12px}
+.content h2{font-size:23px;letter-spacing:-.04em;font-weight:800;margin-top:34px}
+.content h3{font-size:19px;margin-top:24px}
+
+/* ---------- Handy ---------- */
+@media (max-width:640px){
+  .bit-sitehead .in{flex-wrap:wrap;gap:8px 12px;padding-block:10px 8px}
+  .bit-sitehead nav{margin-left:0;width:100%;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;
+    scrollbar-width:none;gap:2px;margin-inline:-6px;padding:2px 0}
+  .bit-sitehead nav a:first-child{margin-left:6px}
+  .bit-sitehead nav::-webkit-scrollbar{display:none}
+  .bit-sitehead nav a{padding:0 10px;min-height:38px;flex:none;font-size:13.5px}
+  .bit-logo{width:135px;height:36px}
+  .platz{height:170vh}
+}
+@media (max-width:370px){.bit-sitehead nav a{padding:0 7px;font-size:13px}}
+
+/* ---------- Kleinigkeiten ---------- */
+[hidden]{display:none!important}
+.legal .text p.lead{font-size:var(--t-lead);color:var(--text-2);margin-top:0}
+.split .bit-facts{grid-template-columns:1fr 1fr}
+@media (max-width:760px){.aside{position:static}}
+
+/* =====================================================================
+   Symmetrie: ueberall dieselben Masse.
+   Knopf 48px hoch, klein 44px, im Kopf 40px. Felder 48px.
+   Knopfpaare gleich breit; auf dem Handy volle Breite, untereinander.
+   ===================================================================== */
+:root{--ctl:48px;--ctl-s:44px}
+.bit-btn{height:var(--ctl);min-height:var(--ctl);padding:0 24px}
+.bit-btn--sm{height:var(--ctl-s);min-height:var(--ctl-s);padding:0 18px}
+.bit-sitehead nav a.bit-btn{height:40px;min-height:40px}
+.bit-chip{height:var(--ctl-s);min-height:var(--ctl-s)}
+.bit-field > .ctl,.bit-search input{height:var(--ctl);min-height:var(--ctl);padding-block:0}
+.bit-field textarea.ctl{height:auto;min-height:132px;padding-block:13px}
+.find .bit-btn{flex:none}
+/* Knopfgruppen: alle Knoepfe einer Gruppe gleich breit (so breit wie der breiteste). */
+.actions{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:max-content;max-width:100%}
+.actions .bit-btn{min-width:228px}
+.actions--even,.aside .actions,.ask .actions{width:100%}
+.actions--even .bit-btn,.aside .actions .bit-btn,.ask .actions .bit-btn{min-width:0}
+.empty .actions{margin-inline:auto}
+@media (max-width:560px){
+  .actions{grid-auto-flow:row;width:100%}
+  .actions .bit-btn{min-width:0}
+}
+/* Fahrzeugkarten: Titelblock immer gleich hoch, damit Daten und Knopf auf einer Linie stehen. */
+.bit-veh .rowtop > div{min-height:68px}
+.bit-veh h3{line-height:1.12}
+/* Fakten neben einem Formular: 2 × 2 */
+.split .bit-facts{grid-template-columns:1fr 1fr}
+.split--even{align-items:start}
+.ask{position:sticky;top:96px}
+.ask .t-sub{margin-top:0;max-width:18ch}
+.ask .muted{margin-top:12px}
+@media (max-width:760px){.ask{position:static}}
+
+/* Fliesstext aus dem Admin (Dienstleistungen) */
+.prose{max-width:62ch}
+.prose > :first-child{margin-top:0}
+.prose p,.prose li{color:var(--text-2);font-size:16px;line-height:1.6}
+.prose p{margin-top:14px}
+.prose p.lead{font-size:var(--t-lead);max-width:none}
+.prose h2{font-size:23px;letter-spacing:-.04em;font-weight:800;margin-top:36px}
+.prose ul,.prose ol{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.prose li{position:relative;padding:14px 16px 14px 46px;background:var(--panel);border:1px solid var(--hair);border-radius:var(--r)}
+.prose ul li::before{content:"";position:absolute;left:18px;top:50%;width:12px;height:2px;margin-top:-1px;
+  background:linear-gradient(90deg,var(--aare),var(--aare-2));border-radius:2px}
+.prose ol{counter-reset:bit}
+.prose ol li{counter-increment:bit}
+.prose ol li::before{content:counter(bit,decimal-leading-zero);position:absolute;left:16px;top:15px;
+  font-family:var(--font-narrow);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--blue)}
+.prose strong{color:var(--white)}
+
+/* =====================================================================
+   Bewegung. Klein, ruhig, ueberall gleich:
+   1. Seitenwechsel: Inhalt blendet weich ueber (Kopf bleibt stehen).
+   2. Beim Klick: eine Aare-Linie laeuft oben ueber die Seite.
+   3. Beim Scrollen: Bloecke steigen 14px auf, gestaffelt.
+   4. Kicker: eine kurze Linie zeichnet sich vor dem Wort.
+   5. Links: Unterstrich waechst von links.
+   6. Maus: das «bit» aus dem Logo zieht hinter dem Zeiger her.
+   Wer «Bewegung reduzieren» eingestellt hat, sieht nichts davon.
+   ===================================================================== */
+@view-transition{navigation:auto}
+.bit-sitehead{view-transition-name:sitehead}
+::view-transition-old(root){animation:bit-vt-out 180ms cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:bit-vt-in 420ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes bit-vt-out{to{opacity:0;transform:translateY(-6px)}}
+@keyframes bit-vt-in{from{opacity:0;transform:translateY(10px)}}
+
+.navline{position:fixed;left:0;right:0;top:0;height:2px;z-index:100;pointer-events:none;
+  transform:scaleX(0);transform-origin:left center;opacity:0;
+  background:linear-gradient(90deg,var(--aare),var(--aare-2),var(--blue))}
+.admin-bar .navline{top:32px}
+.navline.go{opacity:1;transform:scaleX(.85);transition:transform 1400ms cubic-bezier(.1,.7,.2,1),opacity 120ms}
+
+.js-anim [data-rv]{opacity:0;transform:translateY(14px)}
+.js-anim [data-rv].is-in{opacity:1;transform:none;
+  transition:opacity var(--slow),transform var(--slow);transition-delay:var(--d,0ms)}
+
+.bit-kicker::before{content:"";display:inline-block;width:18px;height:2px;margin-right:10px;vertical-align:.3em;
+  border-radius:2px;background:linear-gradient(90deg,var(--aare),var(--aare-2));transform-origin:left center}
+.js-anim [data-rv] .bit-kicker::before,.js-anim .bit-kicker[data-rv]::before{transform:scaleX(0)}
+.js-anim [data-rv].is-in .bit-kicker::before,.js-anim .bit-kicker[data-rv].is-in::before{transform:scaleX(1);
+  transition:transform 700ms cubic-bezier(.22,.61,.36,1) calc(var(--d,0ms) + 180ms)}
+
+.sitefoot .links a,.sitefoot p a,.prose a,.legal .text a,.back,.legalline a{
+  background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;
+  transition:background-size var(--ease),color var(--ease)}
+.sitefoot .links a:hover,.sitefoot p a:hover,.prose a:hover,.legal .text a:hover,.back:hover,.legalline a:hover{background-size:100% 1px}
+.back{display:inline-flex;gap:6px}
+
+/* Kleiner als der Zeiger (22px breit), in BIT-Blau; die Form kommt aus bit-mark.png als Maske */
+.bit-follow{position:fixed;left:0;top:0;z-index:90;width:22px;aspect-ratio:235/149;pointer-events:none;opacity:0;
+  background:var(--blue);-webkit-mask:var(--mark) center/contain no-repeat;mask:var(--mark) center/contain no-repeat;
+  transition:opacity 280ms ease;will-change:transform}
+.bit-follow.on{opacity:.95}
+@media (pointer:fine){
+  html,body,a,button,label,.bit-chip,.bit-btn,.svc{cursor:url(../icons/cursor.svg) 3 1,auto}
+}
+
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  .js-anim [data-rv]{opacity:1;transform:none}
+  .navline,.bit-follow{display:none}
+}
+.form .bit-btn{min-width:228px}
+@media (max-width:560px){.form .bit-btn{width:100%}}

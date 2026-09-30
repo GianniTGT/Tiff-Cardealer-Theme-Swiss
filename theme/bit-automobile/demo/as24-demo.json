@@ -1,0 +1,445 @@
+{
+ "_hinweis": "ERFUNDENE TESTDATEN. Aufbau wie eine AutoScout24-Antwort (DMS API, Feldnamen laut OpenAPI 1.0.1). Keine echten Fahrzeuge, keine echten Preise. Bilder: Fotos aus dem Showroom (theme:img/...).",
+ "content": [
+  {
+   "id": "demo-1001",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "mercedes-benz",
+   "modelName": "AMG GT C",
+   "versionFullName": "Roadster · V8 Biturbo",
+   "bodyType": "cabriolet",
+   "price": 129900,
+   "mileage": 31500,
+   "firstRegistrationDate": "2018-04-12",
+   "firstRegistrationYear": 2018,
+   "horsePower": 557,
+   "transmissionType": "automatic",
+   "transmissionText": "AMG Speedshift",
+   "fuelType": "petrol",
+   "driveType": "rear",
+   "doors": 2,
+   "seats": 2,
+   "bodyColor": "gray",
+   "bodyColorText": "Selenitgrau metallic",
+   "consumptionCombined": 11.4,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-gt-c.jpg"
+    },
+    {
+     "url": "theme:img/amg-detail.jpg"
+    },
+    {
+     "url": "theme:img/amg-wide.jpg"
+    }
+   ],
+   "_bitFlag": "Neu"
+  },
+  {
+   "id": "demo-1002",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "porsche",
+   "modelName": "911 Turbo",
+   "versionFullName": "Cabriolet · Folierung mattschwarz",
+   "bodyType": "cabriolet",
+   "price": 79900,
+   "mileage": 98200,
+   "firstRegistrationDate": "2010-07-02",
+   "firstRegistrationYear": 2010,
+   "horsePower": 500,
+   "transmissionType": "automatic",
+   "transmissionText": "PDK",
+   "fuelType": "petrol",
+   "driveType": "all",
+   "doors": 2,
+   "seats": 4,
+   "bodyColor": "black",
+   "bodyColorText": "Mattschwarz foliert",
+   "consumptionCombined": 11.7,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/platz-herzwilstrasse.jpg"
+    },
+    {
+     "url": "theme:img/porsche-911.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1003",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "mercedes-benz",
+   "modelName": "AMG GT 43",
+   "versionFullName": "4-Türer Coupé",
+   "bodyType": "coupe",
+   "price": 94500,
+   "mileage": 64800,
+   "firstRegistrationDate": "2019-02-15",
+   "firstRegistrationYear": 2019,
+   "horsePower": 435,
+   "transmissionType": "automatic",
+   "transmissionText": "9G-Tronic",
+   "fuelType": "mhev-petrol",
+   "driveType": "all",
+   "doors": 4,
+   "seats": 5,
+   "bodyColor": "black",
+   "bodyColorText": "Obsidianschwarz",
+   "consumptionCombined": 9.8,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/porsche-911.jpg"
+    },
+    {
+     "url": "theme:img/amg-gt-43.jpg"
+    },
+    {
+     "url": "theme:img/amg-wide.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1004",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "bmw",
+   "modelName": "540i xDrive",
+   "versionFullName": "Touring · M Sport",
+   "bodyType": "estate",
+   "price": 44800,
+   "mileage": 78400,
+   "firstRegistrationDate": "2019-05-20",
+   "firstRegistrationYear": 2019,
+   "horsePower": 340,
+   "transmissionType": "automatic",
+   "transmissionText": "Steptronic",
+   "fuelType": "petrol",
+   "driveType": "all",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "gray",
+   "bodyColorText": "Sophistograu",
+   "consumptionCombined": 8.4,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-wide.jpg"
+    },
+    {
+     "url": "theme:img/amg-detail.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1005",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "audi",
+   "modelName": "S4 Avant",
+   "versionFullName": "3.0 TFSI quattro",
+   "bodyType": "estate",
+   "price": 38900,
+   "mileage": 96100,
+   "firstRegistrationDate": "2018-09-03",
+   "firstRegistrationYear": 2018,
+   "horsePower": 354,
+   "transmissionType": "automatic",
+   "transmissionText": "Tiptronic",
+   "fuelType": "petrol",
+   "driveType": "all",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "gray",
+   "bodyColorText": "Daytonagrau",
+   "consumptionCombined": 8.9,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-detail.jpg"
+    },
+    {
+     "url": "theme:img/amg-gt-c.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1006",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "porsche",
+   "modelName": "Macan S",
+   "versionFullName": "SUV · Luftfederung",
+   "bodyType": "suv",
+   "price": 52900,
+   "mileage": 71600,
+   "firstRegistrationDate": "2019-03-11",
+   "firstRegistrationYear": 2019,
+   "horsePower": 354,
+   "transmissionType": "automatic",
+   "transmissionText": "PDK",
+   "fuelType": "petrol",
+   "driveType": "all",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "gray",
+   "bodyColorText": "Vulkangraumetallic",
+   "consumptionCombined": 9.6,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/platz-herzwilstrasse.jpg"
+    },
+    {
+     "url": "theme:img/porsche-911.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1007",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "mercedes-benz",
+   "modelName": "C 300 d",
+   "versionFullName": "T-Modell · AMG Line",
+   "bodyType": "estate",
+   "price": 33500,
+   "mileage": 88900,
+   "firstRegistrationDate": "2020-06-08",
+   "firstRegistrationYear": 2020,
+   "horsePower": 245,
+   "transmissionType": "automatic",
+   "transmissionText": "9G-Tronic",
+   "fuelType": "diesel",
+   "driveType": "rear",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "gray",
+   "bodyColorText": "Graphitgrau",
+   "consumptionCombined": 5.6,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-gt-43.jpg"
+    },
+    {
+     "url": "theme:img/amg-gt-c.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1008",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "bmw",
+   "modelName": "M240i xDrive",
+   "versionFullName": "Coupé",
+   "bodyType": "coupe",
+   "price": 49900,
+   "mileage": 34200,
+   "firstRegistrationDate": "2022-01-17",
+   "firstRegistrationYear": 2022,
+   "horsePower": 374,
+   "transmissionType": "automatic",
+   "transmissionText": "Steptronic",
+   "fuelType": "petrol",
+   "driveType": "all",
+   "doors": 2,
+   "seats": 4,
+   "bodyColor": "blue",
+   "bodyColorText": "Thundernight metallic",
+   "consumptionCombined": 8.1,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-gt-c.jpg"
+    },
+    {
+     "url": "theme:img/amg-wide.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": "Neu"
+  },
+  {
+   "id": "demo-1009",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "audi",
+   "modelName": "Q5 45 TFSI",
+   "versionFullName": "quattro · S line",
+   "bodyType": "suv",
+   "price": 36900,
+   "mileage": 104500,
+   "firstRegistrationDate": "2018-11-22",
+   "firstRegistrationYear": 2018,
+   "horsePower": 245,
+   "transmissionType": "automatic",
+   "transmissionText": "S tronic",
+   "fuelType": "petrol",
+   "driveType": "all",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "gray",
+   "bodyColorText": "Manhattangrau",
+   "consumptionCombined": 7.8,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-wide.jpg"
+    },
+    {
+     "url": "theme:img/amg-gt-43.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1010",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "vw",
+   "modelName": "Golf 8 GTI",
+   "versionFullName": "2.0 TSI",
+   "bodyType": "small-car",
+   "price": 28500,
+   "mileage": 54300,
+   "firstRegistrationDate": "2021-08-30",
+   "firstRegistrationYear": 2021,
+   "horsePower": 245,
+   "transmissionType": "automatic",
+   "transmissionText": "DSG",
+   "fuelType": "petrol",
+   "driveType": "front",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "gray",
+   "bodyColorText": "Moonstone grey",
+   "consumptionCombined": 7.0,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/platz-herzwilstrasse.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    },
+    {
+     "url": "theme:img/amg-detail.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  },
+  {
+   "id": "demo-1011",
+   "state": "active",
+   "vehicleCategory": "car",
+   "conditionType": "used",
+   "makeKey": "vw",
+   "modelName": "Passat Variant",
+   "versionFullName": "2.0 TDI 4Motion",
+   "bodyType": "estate",
+   "price": 21900,
+   "mileage": 132800,
+   "firstRegistrationDate": "2019-04-05",
+   "firstRegistrationYear": 2019,
+   "horsePower": 190,
+   "transmissionType": "automatic",
+   "transmissionText": "DSG",
+   "fuelType": "diesel",
+   "driveType": "all",
+   "doors": 5,
+   "seats": 5,
+   "bodyColor": "silver",
+   "bodyColorText": "Reflexsilber",
+   "consumptionCombined": 5.9,
+   "inspected": true,
+   "warrantyType": "from-delivery",
+   "warrantyDuration": 12,
+   "description": "Testdaten – erfundenes Beispielfahrzeug, um die AutoScout24-Anbindung zu prüfen. Kein echtes Angebot.",
+   "images": [
+    {
+     "url": "theme:img/amg-detail.jpg"
+    },
+    {
+     "url": "theme:img/herzwilstrasse-262.jpg"
+    },
+    {
+     "url": "theme:img/amg-gt-43.jpg"
+    }
+   ],
+   "_bitFlag": ""
+  }
+ ]
+}
