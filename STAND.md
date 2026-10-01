@@ -2,6 +2,7 @@
 
 Übergabe für den nächsten Chat. Stand: 30.09.2026.
 Im neuen Chat genügt: **«Lies STAND.md und mach weiter.»**
+Lokal statt Cloud arbeiten (eigener Ordner, eigene Browser): siehe `LOKAL-ARBEITEN.md`.
 
 ---
 
